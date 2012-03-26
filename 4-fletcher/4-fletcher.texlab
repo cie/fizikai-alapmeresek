@@ -1,0 +1,166 @@
+% # encoding: utf-8
+% documentHeader :usePackages => {:inputenc=>"utf8", :babel=>"magyar"}
+
+
+\title{Dinamika alaptörvényének vizsgálata Fletcher-kocsival}
+\author{Mérést végezte: Kalló Bernát. Mérőpár neve: Magony Miklós.}
+\date{Mérés dátuma: 2012. 03. 21. Leadás dátuma: 2012. 03. 28.}
+
+% env :document do
+
+\maketitle
+
+<%
+
+  macro(
+    :Mi => 'M_i',
+    :muj => '\mu_j',
+    :aij => 'a_{ij}',
+    :me => 'm_e',
+    :mij => 'm_{ij}',
+    :Fi => 'F_i'
+
+  )
+
+
+%>
+
+\paragraph*{A mérés célja} 
+Newton második törvényét ($\Sigma F = m a$) szeretnénk igazolni egy két tömegpontból álló pontrendszerben: a vízszintesen mozgó kocsi (tömege \Mi) és a lógó súly (tömege \muj) egy csigán át egy kötéllel van összekötve. Ekkor ha felírjuk a törvényt a két testre, a következő mozgásegyenletek lesznek, ha figyelembe vesszük, hogy az őket összekötő kötél nyújthatatlan:
+
+\[
+\begin{array}{rcl}
+\muj g - K & = & \muj \aij \\
+             K & = & \Mi \aij
+  \end{array}
+\]
+
+Ebből
+
+\[ \muj g = \aij(\muj+\Mi). \]
+
+A $\muj + \Mi$ összeget még korrigálnunk kell a kerekek tehetetlenségi nyomatékából adódó fiktív $\me$ tömeggel, ami 18 g. Az így kapott három tömeg összege $\muj + \Mi + \me =: \mij$.
+Az \[ \mij a = \muj g \] összefüggést szeretnénk kísérletileg igazolni.
+
+
+
+\paragraph*{Mérőeszközök} Egy fénykapuból és egy lyukas csigából álló jeladónk van egy számítógépre kötve. A számítógépen lévő programmal megmérjük a kocsi sebességét, és erre egyenest illesztve megkapjuk a gyorsulását. Minden $i,j$ párra háromszor mértünk, az átlagból kapott gyorsulás értékeket tartalmazza a következő táblázat:
+
+<%
+  adat = {
+    0 => {
+      11 => [0.1677, 0.1724, 0.1716],
+      21 => [0.3483, 0.3523, 0.3539],
+      31 => [0.5140, 0.5246, 0.5210],
+      41 => [0.6392, 0.6917, 0.6875],
+      51 => [0.8439, 0.8502, 0.8530],
+      61 => [0.9997, 1.0025, 1.0090]
+    },
+    1 => {
+      11 => [0.0669, 0.0661, 0.0678],
+      21 => [0.1661, 0.1635, 0.1641],
+      31 => [0.2574, 0.2475, 0.2586],
+      41 => [0.3485, 0.3451, 0.3455],
+      51 => [0.4370, 0.4345, 0.4331],
+      61 => [0.5230, 0.5251, 0.5223]
+    },
+    2 => {
+      11 => [0.0377, 0.0384, 0.0354],
+      21 => [0.1000, 0.1006, 0.1005],
+      31 => [0.1631, 0.1642, 0.1643],
+      41 => [0.2261, 0.2262, 0.2263],
+      51 => [0.2882, 0.2877, 0.2893],
+      61 => [0.3478, 0.3483, 0.3482]
+    }
+  }
+  teher = {
+    0 => "terhelés nélkül",
+    1 => "1 nehezékkel terhelve",
+    2 => "2 nehezékkel terhelve"
+  }
+  g = 9.81.pm(0.005)
+  me = 0.018.pm(0.0005)
+
+  def M(i)
+    (i+1) * 0.500.pm(0.0005)
+  end
+
+  adat.each do |terheles, b|
+    b.mash! do |mu, a|
+      [(mu*0.001).pm(0.0005), a.map{|x|x.pm 0.00005}]
+    end
+  end
+
+  table "A kocsi gyorsulása", :rowTitle => :muj+" (g)", placement: :H do
+    adat.each do |i, b|
+      b.each do |mu, a|
+        row(mu) do
+          column(teher[i]) do
+            column(:Mi+' (\unit{kg})'){ "#{M(i)}" }
+            column(:aij+' (\unitfrac{m}{s^2})'){ a.average.pm(0.00005) }
+          end
+        end
+      end
+    end
+  end
+
+%>
+
+
+\paragraph*{Kiértékelés}
+A következő grafikonon ábrázoltuk az $\mij\aij = (\muj + \me + \Mi)\aij$ értékeket a $\muj g$ függvényében. Itt mindhárom mért értéket feltüntettük. 
+
+Az ábrán jól látszik, hogy a mérési pontok három, egymás alatti $45^\circ$-os egyenesen helyezkednek el, a terhelés mértéke szerint. Tehát az \[\mij\aij=\muj g\] összefüggés helyett inkább egy \[\mij\aij = \muj g - \Fi\] összefüggés érvényes, ahol $\Fi>0$ a terhelés mértékétől ($i$-től) függ. 
+
+Ez valóban így van, $\Fi$ a súrlódásnak megfelelő tag, és a sebességgel ellentétes nagyságú, tehát az előjele stimmel. Az ábrán az is látszik, hogy nagyon jó közelítéssel egyenesen arányos a kocsi súlyával (egyenlő terhelés-különbségek mellett egyenlő távolságokkal kerül lejjebb a vonal).jjjjjjjjjjjj
+
+
+
+<%
+
+  # egyenes illesztés
+  egyenesek = adat.mash do |i, b|
+    m,n = fit "m*x+n", via: "m,n" do
+      b.each do |mu, a|
+        a.each do |aj|
+          y = (mu+me+M(i))*aj
+          datastring [mu*g, y]
+        end
+      end
+    end
+    [i,"#{m}*x+#{n}"]
+  end
+
+  # rajzolás
+  plot "A tömeg és gyorsulás szorzata a húzóerő függvényében",
+    xlabel: '\\\\mu_ig',
+    ylabel: 'm_{ij}a_{ij}',
+    height:  "17cm",
+    width: "17cm",
+    key: "left",
+    xrange: "[0:]",
+    yrange: "[0:]"   do
+
+    # mérőpontok
+    adat.each do |i, b|
+      dataset with: "points pt #{i+1}", title: teher[i] do
+        b.each do |mu, a|
+          a.each do |aj|
+            y = (mu+me+M(i))*aj
+            datastring [mu*g, y]
+          end
+        end
+      end
+    end
+
+    # 45 fokos egyenes
+    dataset "x", title: "x=y egyenes"
+
+    # illesztett egyenesek
+    egyenesek.each do |i, e|
+      dataset e, notitle: true, with: "lines lt 1", title: ("illesztett egyenes" if i == egyenesek.keys.first)
+    end
+  end
+%>
+
+% end
