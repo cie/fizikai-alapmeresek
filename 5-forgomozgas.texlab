@@ -1,0 +1,338 @@
+<%
+  documentHeader usePackages: { babel: :magyar, inputenc: :utf8 }
+  tikz :scopes
+  Plusminus.sep!(',')#.sci_digits!(:eng)
+%>
+
+\title{Forgómozgás vizsgálata}
+\author{Mérést végezte: Kalló Bernát $\diamondsuit$ Mérőtárs: Magony Miklós}
+\date{Mérés dátuma: 2012. 03. 28. Leadás dátuma: 2012. 04. 11.}
+\begin{document}
+\maketitle
+
+<%
+  macro(
+    Ms:'M_s',
+    rho: '\varrho',
+    Thetamert: '\\Theta_{\text{mért}}',
+    Thetaszam: '\\Theta_{\text{szám}}',
+  )
+  macro DeltaThetamert: "\\Delta#$Thetamert"
+  macro DeltaThetaszam: "\\Delta#$Thetaszam"
+  macro deltaThetamert: "\\delta#$Thetamert"
+  macro deltaThetaszam: "\\delta#$Thetaszam"
+
+  text_macro korong: "korong", rud: "rúd", fonal: "fonaltárcsa"
+
+  macro(
+    Thetarud: "#$Theta _{#$rud}",
+    Thetakorong: "#{$Theta}_{#$korong}",
+    mfonal: "m_{#$fonal}"
+  )
+
+  unit(
+    a: 'm/s^2',
+    m: 'kg',
+    [:r, :rho, :h, :l, :R]=>'m',
+    [:Thetamert, :DeltaThetamert, :Thetaszam, :DeltaThetaszam] => "kg\\, m^2",
+    Ms: "kg\\, m^2/s^2",
+    x:'s^{-2}',
+    y:'kg\\, m^2/s^2'
+  )
+  unit deltaThetamert: nil
+  unit deltaThetaszam: nil
+
+%>
+
+<%
+  sulyok = 0.0005/2
+  tolomero = 0.00005/2
+  meretek = {
+    korong: {
+      m: 1.5085.pm(sulyok),
+      R: 0.11115.pm(tolomero) - 0.00305.pm(tolomero)/2,
+      h: 0.0149.pm(tolomero),
+    },
+    rud: {
+      m: 0.8455.pm(sulyok),
+      l: 2*(0.12675.pm(tolomero)-0.0030.pm(tolomero)/2),
+      rho: 0.02200.pm(tolomero)/2
+    }
+  }
+  gyorsulasok = {
+    rud: {
+      150 => [0.0019]*3,
+      200 => [0.0026]*3,
+      250 => [0.0034]*3,
+      300 => [0.0041]*3,
+      350 => [0.0048, 0.0047, 0.0046],
+      400 => [0.0053]*3,
+    },
+    korong: {
+      150 => [0.0007, 0.0007, 0.0006],
+      200 => [0.0009]*3,
+      250 => [0.0012, 0.0011, 0.0012],
+      300 => [0.0016]*3,
+      350 => [0.0020, 0.0020, 0.0019],
+      400 => [0.0025, 0.0024, 0.0025],
+    }
+  }
+  gyorsulasok.mash! do |k,v|
+    [k, v.mash do |m,as|
+      [m.pm(0.5)/1000, as.map{|a|a.pm(0.00005).sci_digits!(-1)}]
+    end]
+  end
+  r = 0.0049.pm(tolomero) / 2 #+ 0.00012
+  g = 9.81.pm(0.005)
+  m_fonal = 0.0085.pm(0.00025)
+
+  eredmenyek = {}
+  eredmenyek.korong!.Thetaszam = meretek.korong.m * meretek.korong.R**2 / 2
+  eredmenyek.rud!.Thetaszam = meretek.rud.m * meretek.rud.rho**2 / 4 + meretek.rud.m * meretek.rud.l**2 / 12
+%>
+
+
+\paragraph*{A mérés célja}
+Két, rögzített tengely körül forgó merev test (egy függőleges tengelyű alumínium korong és egy vízszintes tengelyű rézhenger) mozgását vizsgáljuk külső forgatónyomaték hatására. Megmérjük a szöggyorsulását, ebből kiszámoljuk tehetetlenségi nyomatékukat, és összevetjük a geometriájuk alapján számítottal.
+
+\paragraph*{A mérés leírása}
+A függőleges tengely körül szabadon forgó próbatestet egy orsóra tekert fonálon keresztül egy csigán lelógó súly húzza.
+Két különböző próbatestet vizsgálunk 6-6 különböző húzósúllyal, és megmérjük a kötél gyorsulását.
+
+\begin{figure}[H]
+\begin{center}
+\begin{tikzpicture}
+
+\draw[fill=black] (-.05,1) -- (-.05,0) -- (0,-.05) -- (.05,0) -- (.05,1);
+\draw[fill=white] (-1,0.2) rectangle (1,0.5);
+\path (-1,0.35) node[left]{$\Theta$};
+\draw[fill=white] (-0.1,0.6) rectangle (0.1,0.8);
+\path (-0.1,0.7) node[left]{$r$};
+\draw (-0.1,0.7) -- (2,0.7) arc (90:0:0.25) -- ++(0,-1) node[draw,fill=white]{$m$};
+\draw (2,0.7)++(0,-0.25) circle (.25);
+
+
+
+\end{tikzpicture}
+\end{center}
+\caption{A mérési összeállítás}
+\end{figure}
+
+A két testre felírt mozgásegyenletek:
+
+\[
+\Theta\beta=Kr-\Ms \\
+\]
+\[
+ma=mg-K
+\]
+\[
+a=r\beta,
+\]
+
+ahol $r$ a fonaltárcsa sugara, $\Theta$ a tehetetlenségi nyomaték, $m$ a húzósúly tömege, $\beta$ a szöggyorsulás, $K$ a kötélerő, $\Ms$ pedig a súrlódásból eredő fékezőnyomaték.
+Innen:
+
+\[
+\begin{equation}
+\Theta\beta + \Ms = mr(g-r\beta)
+\label{eq:egyenes}
+\end{equation}
+\]
+\[
+\beta=\frac ar
+\]
+
+
+\paragraph*{Mérési adatok}
+
+\Aref{tab:kiserlet}. táblázatban látható a kísérletek eredménye. \Aref{tab:meres}. táblázatban a próbatestek méreteit ill.\ tömegét láthatjuk. A korong sugarát $R$-rel, magasságát $h$-val jelöltük, a rúd sugarát $\rho$-val, hosszát pedig $l$-lel.
+
+<%
+  table "A kísérletek eredményei", rowTitle: :m.with_unit, label: 'kiserlet' do
+    gyorsulasok.each do |k,v|
+      v.each do |m,as|
+        row m do
+          column k do
+            column :a.with_unit do
+              as
+            end
+          end
+        end
+      end
+    end
+  end
+%>
+
+
+<%
+  table "Próbatestek adatai", label: :meres do
+    meretek.each do |k,v|
+      row k do
+        column :m.with_unit
+        column :r.with_unit do
+          r
+        end
+        v.each do |x,y|
+          column x.with_unit do
+            y
+          end
+        end
+      end
+    end
+    row "fonaltárcsa" do
+      column :m.with_unit do
+        m_fonal
+      end
+    end
+  end
+%>
+
+\paragraph*{Kiértékelés}
+
+Ábrázoljuk az $y=mr(g-r\beta)$ mennyiséget a $x=\beta$ függvényében, így (1) alapján az egyenes meredeksége $\Theta$ lesz, y-tengelymetszete pedig $\Ms$
+
+
+<%
+  grafikon = {}
+  gyorsulasok.each do |k,v|
+    grafikon[k] = []
+
+    v.each do |m, as|
+      as.each do |a|
+        grafikon[k] << [a/r, m*r*(g-a)]
+      end
+    end
+
+    theta, ms = fit "a*x+b", via: "a,b" do
+      v.each do |m, as|
+        as.each do |a|
+          grafikon[k].each do |x,y|
+            data x,y
+          end
+        end
+      end
+    end
+
+    eredmenyek[k].update(Thetamert: theta, Ms: ms)
+
+    plot "A #{k.to_latex} szöggyorsulása", xrange: "[0:]", yrange: "[0:]", xlabel: :x.with_unit, ylabel: :y.with_unit do
+      dataset do
+        v.each do |m, as|
+          grafikon[k].each do |x,y|
+            data x,y
+          end
+        end
+      end
+      dataset "#{theta}*x+#{ms}", title: nil
+    end
+
+    
+  end
+%>
+
+Az adatokra a GNUPLOT programmal illesztettünk egyenest. A kapott meredekségek ($\Thetamert$) \aref{tab:eredm}. táblázatban találhatók.
+
+<%
+  grafikon.each do |k,v|
+    theta = eredmenyek[k].Thetamert
+    ms = eredmenyek[k].Ms
+    eredmenyek[k].DeltaThetamert = v.map{|x,y|(y-(x*theta + ms)).abs}.max*2 / (v.map{|x,_|x}.max - v.map{|x,_|x}.min)
+  end
+%>
+
+Az illesztett egyenes meredekségének hibaszámítását a téglalap módszerrel végezzük: az egyenestől való függőleges maximális abszolút eltérés kétszeresét elosztjuk a legnagyobb és a legkisebb vízszintes értékek különbségével:
+\[\DeltaThetamert = \frac{2\max_{i}\left|y_i - (x\Thetamert + \Ms)\right|}{x_{max}-x_{min}},\]
+az így kapott eredmény lesz a meredekség bizonytalansága. Az így kapott $\DeltaThetamert$ szintén \aref{tab:eredm}. táblázatban van.
+
+
+Ha a tárgyak méretei alapján is kiszámítjuk a tehetetlenségi nyomatékokat a $\Thetarud=\frac14m\rho^2+\frac1{12}ml^2$ ill.\ $\Thetakorong=\frac12mR^2$ képletek alapján, akkor \aref{tab:eredm}. táblázatban a $\Thetaszam$ oszlopban található eredményeket kapjuk.
+
+Tekintsük úgy, hogy a tárgyak tehetetlenségi nyomatékának számításánál az egyetlen hibaforrás a tömegmérés volt, és a tömegmérés relatív hibája egyezik a $\Thetaszam$ relatív hibájával, vagyis \[\DeltaThetaszam = \Thetaszam \cdot \frac{\Delta m}{m}\] A tömegmérés hibakorlátját pedig tekintsük az orsó tömegével egyezőnek. Ekkor \aref{tab:eredm}. táblázat $\DeltaThetaszam$ oszlopában található értékeket kapjuk.
+<%
+  eredmenyek.each do |k,v|
+    v.DeltaThetaszam = v.Thetaszam * m_fonal / meretek[k].m
+  end
+%>
+
+
+\paragraph*{Eredmények}
+Az eredmények az abszolút és relatív hibákkal együtt az alábbi táblázatban vannak:
+
+<%
+  eredmenyek.each do |k,v|
+    v.deltaThetamert = v.DeltaThetamert / v.Thetamert
+    v.deltaThetaszam = v.DeltaThetaszam / v.Thetaszam
+  end
+%>
+
+
+
+
+<%
+
+  table "Az eredmények", label: :eredm, placement: :H do
+    eredmenyek.each do |k,v|
+      v.each do |var,val|
+        case var
+        when :Ms then next
+        when :Thetaszam then val = val.pm(v.DeltaThetaszam/10)
+        when :Thetamert then val = val.pm(v.DeltaThetamert/10)
+        when :deltaThetaszam then val.percent!
+        when :deltaThetamert then val.percent!
+        end
+
+        row k do
+          column :Thetamert.with_unit
+          column :DeltaThetamert.with_unit
+          column :deltaThetamert.with_unit
+          column :Thetaszam.with_unit
+          column :DeltaThetaszam.with_unit
+          column :deltaThetaszam.with_unit
+
+          column var.with_unit do
+            val
+          end
+        end
+
+      end
+    end
+  end
+%>
+
+Grafikusan ábrázolva, a hibákkal együtt:
+
+<%
+  plot "Az eredmények grafikusan", yrange: "[0:]", xrange: "[0:4]", boxwidth: "0.8", xtics: false, debug: false, height: "7cm" do
+    dataset with: :boxerrorbars do
+      i = -0.5
+      for k,v in eredmenyek
+        data (i+=1), v.Thetamert, v.DeltaThetamert
+        data (i+=1), v.Thetaszam, v.DeltaThetaszam
+      end
+    end
+    dataset with: :labels do
+      i = -0.5
+      for k,v in eredmenyek
+        data (i+=1), 0.002, "#{k.to_latex}\\\\#$Thetamert"
+        data (i+=1), 0.002, "#{k.to_latex}\\\\#$Thetaszam"
+      end
+    end
+  end
+%>
+
+
+\paragraph*{Diszkusszió}
+A grafikonon jól látszik, hogy a számított értékek hibája jóval kisebb, mint a mért értékeké, de a mért értékek hibahatárán belül van a számított érték. Tehát feltehetőleg jól mértünk és számoltunk.
+
+Mindkét esetben a mért érték kisebb a számítottnál. Ez lehet akár véletlen is (pl. a szoftver kerekítései miatt), de lehet, hogy valamilyen szisztematikus hibát nem vettünk figyelembe. A kísérletben talán a legérzékenyebb mennyiség a fonaltárcsa sugara volt. Úgy vettük, hogy a fonaltárcsa sugarával megegyező a kötélerő erőkarja, de valójában a fonalnak is van egy vastagsága, néhány tized milliméter, és ennek a felét még hozzá kellene adni $r$-hez, hogy pontosabb eredményt kapjunk. Újraszámoltam az eredményeket úgy, hogy $r$-hez 1 ill.\ 2 tized millimétert hozzáadtam, így első esetben a rúd, második esetben pedig mindkét test $\Thetamert$-je nagyobb lett a $\Thetaszam$-nál, tehát ez okozhatta a szisztematikus hibát.
+
+\texttt{:) s.D.g}
+
+
+
+
+
+
+
+\end{document}
