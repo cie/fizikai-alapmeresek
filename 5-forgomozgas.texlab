@@ -1,11 +1,11 @@
 <%
-  documentHeader usePackages: { babel: :magyar, inputenc: :utf8 }
+  documentHeader usePackages: { babel: :magyar, inputenc: :utf8 }, fontsize: "12pt"
   tikz :scopes
   Plusminus.sep!(',')#.sci_digits!(:eng)
 %>
 
 \title{Forgómozgás vizsgálata}
-\author{Mérést végezte: Kalló Bernát $\diamondsuit$ Mérőtárs: Magony Miklós}
+\author{Mérést végezte: Kalló Bernát $\diamondsuit$ Mérőtárs: Magony Miklós $\diamondsuit$ 1.\ mérőpár}
 \date{Mérés dátuma: 2012. 03. 28. Leadás dátuma: 2012. 04. 11.}
 \begin{document}
 \maketitle
@@ -303,7 +303,7 @@ Az eredmények az abszolút és relatív hibákkal együtt az alábbi táblázat
 Grafikusan ábrázolva, a hibákkal együtt:
 
 <%
-  plot "Az eredmények grafikusan", yrange: "[0:]", xrange: "[0:4]", boxwidth: "0.8", xtics: false, debug: false, height: "7cm" do
+  plot "Az eredmények grafikusan", yrange: "[0:]", xrange: "[0:4]", boxwidth: "0.8", xtics: false, debug: false, height: "9cm" do
     dataset with: :boxerrorbars do
       i = -0.5
       for k,v in eredmenyek
