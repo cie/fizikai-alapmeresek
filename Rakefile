@@ -1,3 +1,3 @@
 require "texlab"
 
-task default: "5-forgomozgas.pdf"
+task default: "6-suruseg.pdf"

@@ -1,0 +1,221 @@
+<%
+  documentHeader usePackages: {
+    babel: "magyar",
+    inputenc: "utf8",
+    geometry: "margin=2cm",
+    rmpage: true
+  }
+
+
+  macro(
+    Vv: %q{V_{\text{v}}},
+    Va: %q{V_{\text{a}}},
+    VaVv: %q{V_{\text{a}}:V_{\text{v}}},
+    Deltarho: %q{\Delta\rho},
+    DeltarhoU: %q{\Delta\rho_{\text{U}}},
+    DeltarhoMW: %q{\Delta\rho_{\text{MW}}},
+    rhoid: %q{\rho_{\text{id}}},
+    rhoidU: %q{\rho_{\text{id U}}},
+    rhoidMW: %q{\rho_{\text{id MW}}},
+    rhoa: %q{\rho_{\text{a}}},
+    rhov: %q{\rho_{\text{v}}},
+    hv: %q{h_{\text{v}}},
+    rho: %q{\varrho},
+    rhoMW: %q{\rho_{\text{MW}}},
+    rhoU: %q{\rho_{\text{U}}},
+    sigmaMW: %q{\sigma_{\text{MW}}},
+    sigmaU: %q{\sigma_{\text{U}}},
+  )
+
+  unit(
+    [:Vv,:Va]=> %q{m^3},
+    [:Deltarho, :DeltarhoU, :DeltarhoMW]=> %q{\nicefrac{kg}{m^3}},
+    [:rho,:rhoid,:rhoa,:rhov,:rhoMW,:rhoU]=> %q{\nicefrac{kg}{m^3}},
+    [:h,:hv]=> %q{m},
+    [:VaVv, :x, :sigma, :sigmaU, :sigmaMW] => nil
+  )
+
+  text_macro Ucso: "U alakú cső"
+  text_macro MW: "Mohr--Westphal mérleg"
+
+  tikz :shapes, :patterns
+
+%>
+
+\title{\textbf{Folyadékok sűrűségének mérése}}
+\author{\textbf{Kalló Bernát}}
+\date{
+A mérés dátuma: \textbf{2012.\ 04.\ 11.}\\
+Leadás dátuma: \textbf{2012.\ 04.\ 18.}\\
+Mérőtárs neve: \textbf{Magony Miklós}\\
+Mérőpár száma: \textbf{1.}\\
+}
+\begin{document}
+\maketitle
+
+\paragraph{A mérés célja} Ha két különböző anyagú folyadékot összekeverünk, bizonyos esetekben a keverék térfogata ($V$) eltér a két anyag térfogatának összegétől ($V \ne V_1+V_2$). Ezt a jelenséget kontrakciónak vagy dilatációnak nevezzük aszerint, hogy nagyobb vagy kisebb a keverék térfogata. Ha egyenlőség áll fenn, a keveréket ideális elegynek tekintjük.
+
+A víz és alkohol keverékében kontrakció lép fel, a kísérletünkben ennek mértékét vizsgáljuk. A kontrakció jellemzésére a $\Deltarho=\rho-\rhoid$ mennyiséget használjuk, ahol $\rho$ a keverék, $\rhoid$ pedig az ideális elegy sűrűsége. A keverékeket az \[ x=\frac{\Va}{\Va+\Vv} \] névleges térfogati hányaddal jellemezzük, ebből az ideális keverék térfogata
+
+\[ \rhoid = \rhoa x + \rhov (1-x). \]
+
+
+
+\paragraph{A mérés leírása} Kétféle módszerrel mérjük az elegyek sűrűségét. Először egy \Ucso segítségével meghatározzuk az egyes elegyek sűrűségének arányát a vízéhez képest. Az \Ucso két végét vízbe ill.\ a mérendő keverékbe merítjük, és a közepén lévő csapon keresztül felszívunk valamennyi folyadékot mindkettőből. A két folyadékoszlop egyensúlyt tart a külső és a belső légnyomás között, ezért \[\rhov g \hv = \rho g h\] \[\frac{\rho}{\rhov} = \frac{\hv}{h}\]
+
+A másik módszer a \MW gel történik. A mérleghez tartozó üveg nehezékkel kiegyensúlyozzuk a mérleget, majd a nehezéket a vizsgált folyadékba merítjük. Ekkor a mérlegkarra még a nehezékre ható felhajtóerő forgatónyomatéka is fog hatni, ezt ki kell egyensúlyozzuk a mérlegkarra akasztott súlyokkal, az ún.\ lovasokkal. A lovasok helyzete megadja helyiértékenként a folyadék sűrűségét.
+
+<%
+  class Numeric #x
+    def mm
+      self * 0.001
+    end
+    def g_mol
+      self * 1000.0
+    end
+  end
+
+  class Fixnum
+    def / other
+      to_f / other
+    end
+  end
+  class Bignum
+    def / other
+      to_f / other
+    end
+  end
+
+  public :table, :row, :column, :dataset, :plot, :data
+
+  $_global = self
+
+  class Hash
+    def table title, attrs
+      headId = attrs.shift
+
+      $_global.table title, rowTitle: headId.with_unit do
+        each do |key, item|
+          $_global.row item[headId] do
+            attrs.each do |a|
+              $_global.column a.with_unit do
+                item[a]
+              end
+            end
+          end
+        end
+      end
+    end
+
+    def dataset title, attrs, *args
+      opts = args.extract_options!
+
+      opts[:title] = title
+
+      $_global.dataset *args, opts do
+        each do |key, item|
+          $_global.data *attrs.map{|a|a.to_proc[item]}
+        end
+      end
+    end
+  end
+
+  def oldatok
+    @oldatok ||= {} #x
+  end
+
+  [
+    [0,1,1],
+    [1,4,0.982],
+    [2,3,0.963], #?
+    [1,1,0.942],
+    [3,2,0.922],
+    [4,1,0.873],
+    [1,0,0.825]
+  ].each do |va,vv,rho|
+    oldatok[[va,vv]] ||= {} #x
+    oldatok[[va,vv]].x = va / (va+vv)
+    oldatok[[va,vv]].rhoMW = rho.pm(0.0005).g_mol
+  end
+
+  [
+    [0,1,nil,nil],
+    [1,4,469,479],
+    [2,3,467,484],
+    [1,1,467,496],
+    [3,2,468,504],
+    [4,1,470,544],
+    [1,0,473,576]
+  ].each do |va,vv,hv,h|
+    oldatok[[va,vv]] ||= {} #x
+    oldatok[[va,vv]].hv=hv ? hv.mm.pm(0.5.mm) : hv
+    oldatok[[va,vv]].h =h ? h.pm(0.5).mm : h
+    oldatok[[va,vv]].VaVv = "#{va}:#{vv}"
+    oldatok[[va,vv]].rhoU = oldatok[[0,1]].rhoMW * (hv||1) / (h||1)
+  end
+%>
+
+\paragraph{A mért adatok} A mért adatokat az alábbi két táblázat tartalmazza. A \MW gel megmért víz sűrűségét használtuk fel, hogy az \Ucso vel mért arányokból konkrét értékeket kapjunk.
+
+<%
+  oldatok.table("A #{$MW}gel végzett mérés",    [:VaVv, :rhoMW])
+  oldatok.table("Az #{$Ucso}vel végzett mérés", [:VaVv, :hv, :h, :rhoU])
+%>
+
+\paragraph{Kiértékelés}
+
+Az alkohol sűrűsége $\rhoMW = <%= oldatok[[1,0]].rhoMW.to_latex %>$ ill.\ $\rhoU = <%= oldatok[[1,0]].rhoU.to_latex %>$ $\unitfrac{kg}{m^3}$ lett. A $\rhoid(x)$ függvény 
+ 
+\[ \rhoid = \rhoa x + \rhov (1-x) \]
+
+ alapján
+
+ \[ \rhoidMW(x) = <%= oldatok[[1,0]].rhoMW.to_latex %> x +  <%= oldatok[[0,1]].rhoMW.to_latex %> (1-x) = 
+   <%= (@rhovMW = oldatok[[0,1]].rhoMW).to_latex %> - <%= (@mMW = oldatok[[0,1]].rhoMW - oldatok[[1,0]].rhoMW).to_latex %> x
+   \]
+
+ill.
+
+ \[ \rhoidU(x) = <%= oldatok[[1,0]].rhoU.to_latex %> x +  <%= oldatok[[0,1]].rhoU.to_latex %> (1-x) = 
+   <%= (@rhovU = oldatok[[0,1]].rhoU).to_latex %> - <%= (@mU = oldatok[[0,1]].rhoU - oldatok[[1,0]].rhoU).to_latex %> x
+ \]
+
+<%
+  def rhoidMW(x)
+    - @mMW * x + @rhovMW
+  end
+  def rhoidU(x)
+    - @mU * x + @rhovU
+  end
+
+  oldatok.each do |k,oldat|
+    oldat.DeltarhoMW = oldat.rhoMW - rhoidMW(oldat.x)
+    oldat.DeltarhoU = oldat.rhoU - rhoidU(oldat.x)
+    oldat.sigmaMW =(oldat.DeltarhoMW / rhoidMW(oldat.x)).percent!
+    oldat.sigmaU =(oldat.DeltarhoU / rhoidU(oldat.x)).percent!()
+  end
+%>
+
+Ábrázoltuk a két mérés alapján kiszámolt $\Deltarho$ értékeket a következő grafikonon. A két méréshez a nekik megfelelő mérésből számított alkoholsűrűséget használtuk fel.
+
+<%
+  plot "A kontrakció mértéke", xlabel: (:x.with_unit ), ylabel: :Deltarho.with_unit, do
+    oldatok.dataset "#$Ucso", [:x,:DeltarhoU]
+    oldatok.dataset "#$MW", [:x,:DeltarhoMW]
+  end
+%>
+
+<%
+  oldatok.table("Eredménytáblázat", [:VaVv, :DeltarhoU, :sigmaU, :DeltarhoMW, :sigmaMW])
+%>
+
+\paragraph{Diszkusszió}
+Az eredménytáblázatban $\sigma$-val jelöltük a kontrakciós együtthatót.
+Azt kaptuk, hogy maximum <%= (@Deltarhomax = oldatok.values.map{|k|[k.DeltarhoU, k.DeltarhoMW]}.flatten.max).to_latex %> $\unitfrac{kg}{m^3}$ eltérés volt az ideális oldattól (a 2:3 és a 3:2 esetben), ez <%= (@Deltarhomax/rhoidMW(0.5)).percent!.to_latex %>-os kontrakciós együtthatót jelent. Az irodalmi érték az 1:1 térfogatarányú keverékre $4\%$, tehát a 2:3 és 3:2 esetben jól mértünk. Az 1:1 arányú keveréknél viszont ennél kevesebbet mértünk, holott az irodalom szerint a kontrakció grafikonja egy konvex görbe kellene legyen. Úgyhogy lehet, hogy ennél a lépésnél mindkét mérésnél tévedtünk, vagy valószínűbb, hogy az 1:1 oldat nem volt pontos.
+
+\paragraph{A jelenség magyarázata}
+Az etanolban és a hidrogénben is hasonló molekulák közötti hidrogénkötések lépnek fel, ezért a keverékükben is jól ki tudnak alakulni a hidrogénkötések a víz- és etanolmolekulák között is, tehát nagyjából ugyanolyanok lesznek a molekulák közötti kötéstávolságok. A víz- és etanolmolekulák különböző méretűek, ezért el tudnak úgy rendeződni, hogy jobban kitöltik a teret, mint az egyes anyagok külön-külön. Ezt úgy lehetne modellezni, mintha kosárlabdákkal és teniszlabdákkal szeretnénk kitölteni a teret: a különböző méretek miatt nagyobb arányú kitöltést lehet elérni, mint azonos méretű gömbökkel. Ezért csökken tehát a keverék térfogata és lesz nagyobb a sűrűsége.
+
+
+
+\end{document}

@@ -1,0 +1,443 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[final]{graphics}
+\usepackage[pdftex]{graphicx}
+\usepackage[dvips]{color}
+\usepackage{amsfonts}
+\usepackage{subfigure}
+\usepackage{lscape}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{units}
+\usepackage{float}
+\usepackage[table]{xcolor}
+\usepackage{rmpage}
+\usepackage[magyar]{babel}
+\usepackage[margin=2cm]{geometry}
+\newcommand{\hide}[1]{}
+\DeclareGraphicsExtensions{.jpg,.pdf,.mps,.png}
+\def\Vv{\ensuremath{V_{\text{v}}}}\def\Va{\ensuremath{V_{\text{a}}}}\def\VaVv{\ensuremath{V_{\text{a}}:V_{\text{v}}}}\def\Deltarho{\ensuremath{\Delta\rho}}\def\DeltarhoU{\ensuremath{\Delta\rho_{\text{U}}}}\def\DeltarhoMW{\ensuremath{\Delta\rho_{\text{MW}}}}\def\rhoid{\ensuremath{\rho_{\text{id}}}}\def\rhoidU{\ensuremath{\rho_{\text{id U}}}}\def\rhoidMW{\ensuremath{\rho_{\text{id MW}}}}\def\rhoa{\ensuremath{\rho_{\text{a}}}}\def\rhov{\ensuremath{\rho_{\text{v}}}}\def\hv{\ensuremath{h_{\text{v}}}}\def\rho{\ensuremath{\varrho}}\def\rhoMW{\ensuremath{\rho_{\text{MW}}}}\def\rhoU{\ensuremath{\rho_{\text{U}}}}\def\sigmaMW{\ensuremath{\sigma_{\text{MW}}}}\def\sigmaU{\ensuremath{\sigma_{\text{U}}}}\def\Ucso{\text{U alakú cső}}\def\MW{\text{Mohr--Westphal mérleg}}\usepackage{tikz}
+\usetikzlibrary{shapes,patterns}
+
+\title{\textbf{Folyadékok sűrűségének mérése}}
+\author{\textbf{Kalló Bernát}}
+\date{
+A mérés dátuma: \textbf{2012.\ 04.\ 11.}\\
+Leadás dátuma: \textbf{2012.\ 04.\ 18.}\\
+Mérőtárs neve: \textbf{Magony Miklós}\\
+Mérőpár száma: \textbf{1.}\\
+}
+\begin{document}
+\maketitle
+
+\paragraph{A mérés célja} Ha két különböző anyagú folyadékot összekeverünk, bizonyos esetekben a keverék térfogata ($V$) eltér a két anyag térfogatának összegétől ($V \ne V_1+V_2$). Ezt a jelenséget kontrakciónak vagy dilatációnak nevezzük aszerint, hogy nagyobb vagy kisebb a keverék térfogata. Ha egyenlőség áll fenn, a keveréket ideális elegynek tekintjük.
+
+A víz és alkohol keverékében kontrakció lép fel, a kísérletünkben ennek mértékét vizsgáljuk. A kontrakció jellemzésére a $\Deltarho=\rho-\rhoid$ mennyiséget használjuk, ahol $\rho$ a keverék, $\rhoid$ pedig az ideális elegy sűrűsége. A keverékeket az \[ x=\frac{\Va}{\Va+\Vv} \] névleges térfogati hányaddal jellemezzük, ebből az ideális keverék térfogata
+
+\[ \rhoid = \rhoa x + \rhov (1-x). \]
+
+
+
+\paragraph{A mérés leírása} Kétféle módszerrel mérjük az elegyek sűrűségét. Először egy \Ucso segítségével meghatározzuk az egyes elegyek sűrűségének arányát a vízéhez képest. Az \Ucso két végét vízbe ill.\ a mérendő keverékbe merítjük, és a közepén lévő csapon keresztül felszívunk valamennyi folyadékot mindkettőből. A két folyadékoszlop egyensúlyt tart a külső és a belső légnyomás között, ezért \[\rhov g \hv = \rho g h\] \[\frac{\rho}{\rhov} = \frac{\hv}{h}\]
+
+A másik módszer a \MW gel történik. A mérleghez tartozó üveg nehezékkel kiegyensúlyozzuk a mérleget, majd a nehezéket a vizsgált folyadékba merítjük. Ekkor a mérlegkarra még a nehezékre ható felhajtóerő forgatónyomatéka is fog hatni, ezt ki kell egyensúlyozzuk a mérlegkarra akasztott súlyokkal, az ún.\ lovasokkal. A lovasok helyzete megadja helyiértékenként a folyadék sűrűségét.
+
+
+\paragraph{A mért adatok} A mért adatokat az alábbi két táblázat tartalmazza. A \MW gel megmért víz sűrűségét használtuk fel, hogy az \Ucso vel mért arányokból konkrét értékeket kapjunk.
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|
+c|
+c|
+}
+      \hline
+      
+\ensuremath{V_{\text{a}}:V_{\text{v}}} & 
+\ensuremath{\unit[\text{\ensuremath{\rho_{\text{MW}}}}]{(\nicefrac{kg}{m^3})}}
+\\
+      \hline\hline
+      
+0:1
+ & 1000
+\\
+      \hline
+      
+1:4
+ & 982
+\\
+      \hline
+      
+2:3
+ & 963
+\\
+      \hline
+      
+1:1
+ & 942
+\\
+      \hline
+      
+3:2
+ & 922
+\\
+      \hline
+      
+4:1
+ & 873
+\\
+      \hline
+      
+1:0
+ & 825
+\\
+      \hline
+    \end{tabular}
+    \caption{A \text{Mohr--Westphal mérleg}gel végzett mérés}
+    \label{tab:}
+  \end{center}
+\end{table}
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|
+c|
+c|
+c|
+c|
+}
+      \hline
+      
+\ensuremath{V_{\text{a}}:V_{\text{v}}} & 
+\ensuremath{\unit[\text{\ensuremath{h_{\text{v}}}}]{(m)}} & \ensuremath{\unit[\text{\ensuremath{h}}]{(m)}} & \ensuremath{\unit[\text{\ensuremath{\rho_{\text{U}}}}]{(\nicefrac{kg}{m^3})}}
+\\
+      \hline\hline
+      
+0:1
+ & \raisebox{-1\totalheight}[1ex][1ex]{---}
+ & \raisebox{-1\totalheight}[1ex][1ex]{---}
+ & 1000
+\\
+      \hline
+      
+1:4
+ & 0.469
+ & 0.479
+ & 979.1
+\\
+      \hline
+      
+2:3
+ & 0.467
+ & 0.484
+ & 964.9
+\\
+      \hline
+      
+1:1
+ & 0.467
+ & 0.496
+ & 941.5
+\\
+      \hline
+      
+3:2
+ & 0.468
+ & 0.504
+ & 928.6
+\\
+      \hline
+      
+4:1
+ & 0.470
+ & 0.544
+ & 864.0
+\\
+      \hline
+      
+1:0
+ & 0.473
+ & 0.576
+ & 821.2
+\\
+      \hline
+    \end{tabular}
+    \caption{Az \text{U alakú cső}vel végzett mérés}
+    \label{tab:}
+  \end{center}
+\end{table}
+
+\paragraph{Kiértékelés}
+
+Az alkohol sűrűsége $\rhoMW = 825$ ill.\ $\rhoU = 821.2$ $\unitfrac{kg}{m^3}$ lett. A $\rhoid(x)$ függvény 
+ 
+\[ \rhoid = \rhoa x + \rhov (1-x) \]
+
+ alapján
+
+ \[ \rhoidMW(x) = 825 x +  1000 (1-x) = 
+   1000 - 175 x
+   \]
+
+ill.
+
+ \[ \rhoidU(x) = 821.2 x +  1000 (1-x) = 
+   1000 - 179 x
+ \]
+
+
+Ábrázoltuk a két mérés alapján kiszámolt $\Deltarho$ értékeket a következő grafikonon. A két méréshez a nekik megfelelő mérésből számított alkoholsűrűséget használtuk fel.
+
+\begin{figure}[H]
+  \begin{center}
+% GNUPLOT: LaTeX picture
+
+\setlength{\unitlength}{0.240900pt}
+
+\ifx\plotpoint\undefined\newsavebox{\plotpoint}\fi
+
+\sbox{\plotpoint}{\rule[-0.200pt]{0.400pt}{0.400pt}}%
+
+\begin{picture}(2007,1181)(0,0)
+
+\sbox{\plotpoint}{\rule[-0.200pt]{0.400pt}{0.400pt}}%
+
+\put(191.0,131.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(171,131){\makebox(0,0)[r]{ 0}}
+
+\put(1937.0,131.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191.0,257.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(171,257){\makebox(0,0)[r]{ 5}}
+
+\put(1937.0,257.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191.0,384.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(171,384){\makebox(0,0)[r]{ 10}}
+
+\put(1937.0,384.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191.0,510.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(171,510){\makebox(0,0)[r]{ 15}}
+
+\put(1937.0,510.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191.0,636.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(171,636){\makebox(0,0)[r]{ 20}}
+
+\put(1937.0,636.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191.0,762.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(171,762){\makebox(0,0)[r]{ 25}}
+
+\put(1937.0,762.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191.0,889.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(171,889){\makebox(0,0)[r]{ 30}}
+
+\put(1937.0,889.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191.0,1015.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(171,1015){\makebox(0,0)[r]{ 35}}
+
+\put(1937.0,1015.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191.0,1141.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(171,1141){\makebox(0,0)[r]{ 40}}
+
+\put(1937.0,1141.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(191,90){\makebox(0,0){ 0}}
+
+\put(191.0,1121.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(544.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(544,90){\makebox(0,0){ 0.2}}
+
+\put(544.0,1121.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(897.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(897,90){\makebox(0,0){ 0.4}}
+
+\put(897.0,1121.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1251.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1251,90){\makebox(0,0){ 0.6}}
+
+\put(1251.0,1121.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1604.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1604,90){\makebox(0,0){ 0.8}}
+
+\put(1604.0,1121.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1957.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1957,90){\makebox(0,0){ 1}}
+
+\put(1957.0,1121.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(191.0,131.0){\rule[-0.200pt]{0.400pt}{243.309pt}}
+
+\put(191.0,131.0){\rule[-0.200pt]{425.429pt}{0.400pt}}
+
+\put(1957.0,131.0){\rule[-0.200pt]{0.400pt}{243.309pt}}
+
+\put(191.0,1141.0){\rule[-0.200pt]{425.429pt}{0.400pt}}
+
+\put(70,636){\makebox(0,0){\ensuremath{\unit[\text{\ensuremath{\Delta\rho}}]{(\nicefrac{kg}{m^3})}}}}
+
+\put(1074,29){\makebox(0,0){\ensuremath{x}}}
+
+\put(1797,1101){\makebox(0,0)[r]{\text{U alakú cső}}}
+
+\put(191,131){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(544,507){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(897,1050){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1074,912){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1251,1037){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1604,308){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1957,131){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1867,1101){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1797,1060){\makebox(0,0)[r]{\text{Mohr--Westphal mérleg}}}
+
+\put(191,131){\makebox(0,0){$+$}}
+
+\put(544,560){\makebox(0,0){$+$}}
+
+\put(897,964){\makebox(0,0){$+$}}
+
+\put(1074,876){\makebox(0,0){$+$}}
+
+\put(1251,813){\makebox(0,0){$+$}}
+
+\put(1604,459){\makebox(0,0){$+$}}
+
+\put(1957,131){\makebox(0,0){$+$}}
+
+\put(1867,1060){\makebox(0,0){$+$}}
+
+\put(191.0,131.0){\rule[-0.200pt]{0.400pt}{243.309pt}}
+
+\put(191.0,131.0){\rule[-0.200pt]{425.429pt}{0.400pt}}
+
+\put(1957.0,131.0){\rule[-0.200pt]{0.400pt}{243.309pt}}
+
+\put(191.0,1141.0){\rule[-0.200pt]{425.429pt}{0.400pt}}
+
+\end{picture}
+  \end{center}
+\caption{A kontrakció mértéke}\end{figure}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|
+c|
+c|
+c|
+c|
+c|
+}
+      \hline
+      
+\ensuremath{V_{\text{a}}:V_{\text{v}}} & 
+\ensuremath{\unit[\text{\ensuremath{\Delta\rho_{\text{U}}}}]{(\nicefrac{kg}{m^3})}} & \ensuremath{\sigma_{\text{U}}} & \ensuremath{\unit[\text{\ensuremath{\Delta\rho_{\text{MW}}}}]{(\nicefrac{kg}{m^3})}} & \ensuremath{\sigma_{\text{MW}}}
+\\
+      \hline\hline
+      
+0:1
+ & 0
+ & 0\%
+ & 0
+ & 0\%
+\\
+      \hline
+      
+1:4
+ & 15
+ & 1.5\%
+ & 17
+ & 1.8\%
+\\
+      \hline
+      
+2:3
+ & 36
+ & 3.9\%
+ & 33
+ & 3.5\%
+\\
+      \hline
+      
+1:1
+ & 31
+ & 3.4\%
+ & 30
+ & 3.2\%
+\\
+      \hline
+      
+3:2
+ & 36
+ & 4.0\%
+ & 27
+ & 3.0\%
+\\
+      \hline
+      
+4:1
+ & 7
+ & 0.8\%
+ & 13
+ & 1.5\%
+\\
+      \hline
+      
+1:0
+ & 0
+ & 0\%
+ & 0
+ & 0\%
+\\
+      \hline
+    \end{tabular}
+    \caption{Eredménytáblázat}
+    \label{tab:}
+  \end{center}
+\end{table}
+
+\paragraph{Diszkusszió}
+Az eredménytáblázatban $\sigma$-val jelöltük a kontrakciós együtthatót.
+Azt kaptuk, hogy maximum 36 $\unitfrac{kg}{m^3}$ eltérés volt az ideális oldattól (a 2:3 és a 3:2 esetben), ez 4.0\%-os kontrakciós együtthatót jelent. Az irodalmi érték az 1:1 térfogatarányú keverékre $4\%$, tehát a 2:3 és 3:2 esetben jól mértünk. Az 1:1 arányú keveréknél viszont ennél kevesebbet mértünk, holott az irodalom szerint a kontrakció grafikonja egy konvex görbe kellene legyen. Úgyhogy lehet, hogy ennél a lépésnél mindkét mérésnél tévedtünk, vagy valószínűbb, hogy az 1:1 oldat nem volt pontos.
+
+\paragraph{A jelenség magyarázata}
+Az etanolban és a hidrogénben is hasonló molekulák közötti hidrogénkötések lépnek fel, ezért a keverékükben is jól ki tudnak alakulni a hidrogénkötések a víz- és etanolmolekulák között is, tehát nagyjából ugyanolyanok lesznek a molekulák közötti kötéstávolságok. A víz- és etanolmolekulák különböző méretűek, ezért el tudnak úgy rendeződni, hogy jobban kitöltik a teret, mint az egyes anyagok külön-külön. Ezt úgy lehetne modellezni, mintha kosárlabdákkal és teniszlabdákkal szeretnénk kitölteni a teret: a különböző méretek miatt nagyobb arányú kitöltést lehet elérni, mint azonos méretű gömbökkel. Ezért csökken tehát a keverék térfogata és lesz nagyobb a sűrűsége.
+
+
+
+\end{document}
