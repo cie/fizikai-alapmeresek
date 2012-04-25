@@ -1,3 +1,3 @@
 require "texlab"
 
-task default: "6-suruseg.pdf"
+task default: "7-viszkozitas.pdf"
