@@ -1,0 +1,326 @@
+<%
+
+  def document *args
+    documentHeader *args
+    env :document do
+      yield
+    end
+  end
+
+  class Numeric #x
+    def mm() self * 0.001 end
+    def g_mol() self * 1000.0 end
+    def percent() self * 0.01 end
+    def min() self * 60 end
+    def s()   self end
+    def kg_m3() self end
+    def g_cm3() self * 1000 end
+    def mPacm3_g() self * 0.001 * 0.001 end
+    def C() self end
+    def g() self * 0.001 end
+  end
+
+  class Fixnum
+    def / other
+      to_f / other
+    end
+  end
+  class Bignum
+    def / other
+      to_f / other
+    end
+  end
+
+  public :table, :row, :column, :dataset, :plot, :data
+
+  $_global = self
+
+  class Hash
+    alias :original_access :[]
+
+    def [] *items
+      return original_access *items if items.count == 1
+
+      case @scope
+      when nil
+        items.mash do |k|
+          [k, self[k] ||= {}]
+        end.scope!(1)
+      when 1
+        mash do |k,v|
+          [k, v[*items]]
+        end.scope!(2)
+      end
+    end
+
+    def scope! n
+      @scope = n
+      self
+    end
+
+    alias :original_modify :[]=
+
+    def []= *items, value
+      return original_modify *items, value if items.count == 1
+
+      if value.is_a? Array and value.count == self.count * items.count
+        value = value.dup
+
+        each do |k,v|
+          items.each do |k2|
+            v[k2] = value.shift
+          end
+        end
+
+      else
+        raise ArgumentError, "wrong number of arguments", caller[1..-1]
+      end
+    end
+
+
+    def table title, attrs = nil
+      if first[1].is_a? Hash
+        attrs ||= first[1].keys
+
+        $_global.table title  do
+          each do |key, item|
+            $_global.row key do
+              attrs.each do |a|
+                next if not a
+                $_global.column a.with_unit do
+                  item[a]
+                end
+              end
+            end
+          end
+        end
+      else
+        attrs ||= keys
+        headId = attrs.shift
+
+        $_global.table title, rowTitle: headId.with_unit do
+          $_global.row self[headId] do
+            attrs.each do |a|
+              next if not a
+              $_global.column a.with_unit do
+                self[a]
+              end
+            end
+          end
+        end
+      end
+    end
+
+    def dataset title, attrs, *args
+      opts = args.extract_options!
+
+      opts[:title] = title
+
+      $_global.dataset *args, opts do
+        each do |key, item|
+          $_global.data *attrs.map{|a|a.to_proc[item]}
+        end
+      end
+    end
+  end
+
+
+  class Array
+
+    def table title, attrs=nil
+      attrs ||= first.keys
+      headId = attrs.shift
+
+      $_global.table title, rowTitle: headId.with_unit do
+        if first.is_a? Hash
+          each do |item|
+            $_global.row item[headId] do
+              attrs.each do |a|
+                $_global.column a.with_unit do
+                  item[a]
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+
+
+  Plusminus.sep!(',')
+
+document usePackages: {
+    babel: "magyar",
+    inputenc: "utf8",
+    geometry: "margin=2cm",
+    rmpage: true
+  } do
+
+    macro(
+      rhog: %q{\rho_{g}},
+      rhof: %q{\rho_{f}},
+      rhov: %q{\rho_{v}},
+      rho: %q{\varrho},
+      dx: %q{d_x},
+      dy: %q{d_y},
+      dz: %q{d_z},
+      mui: %q{\mu_1},
+      muii: %q{\mu_2},
+      muiii: %q{\mu_3},
+      muiv: %q{\mu_4},
+      tf: %{t_f},
+      Re: %{Re},
+      Deltaeta: %q{\Delta\eta},
+    )
+
+    unit(
+      t: "s",
+      [:rhog, :rhof, :rho] => %q{\unitfrac{kg}{m^3}},
+      K: %q{\unitfrac{Pa\cdot m^3}{kg}},
+      [:dx, :dy, :dz, :s, :d, :r] => "m",
+      [:mui, :muii, :muiii, :muiv] => "kg",
+      [:tf] => %q{{}^\circ{}C},
+      [:eta, :Deltaeta] => %q{Pa\cdot{}s},
+      [:v] => %q{\unitfrac{m}{s}},
+      [:Re] => nil
+    )
+
+%>
+
+\paragraph{A mérés célja}
+87\%-os glicerin belső súrlódását (viszkozitását) szeretnénk meghatározni.  A belső súrlódást így értelmezzük: ha egy folyadékban két párhuzamos, egymástól $d$ távolságra lévő, $A$ területű lemezt mozgatunk egymáshoz képest $v$ sebességgel, akkor a folyadék belső súrlódása miatt erő lép fel közöttük, ami egyenesen arányos $A$-val és $v$-vel, és fordítottan arányos $d$-vel. Az arányossági tényező, \[\eta = \frac{Fd}{Av} \] a viszkozitás.
+
+\paragraph{A mérés leírása}
+A viszkozitást kétféle módszerrel határozzuk meg. Először Höppler-féle viszkozi\-méterrel. Ehhez megmérjük, hogy a viszkoziméterben mennyi idő alatt ér le a golyó a két szélső osztás között ($t$), ill.\ megmérjük a folyadék sűrűségét ($\rhof$) areométerrel. Innen az \[\eta = K(\rhog-\rhof)t\] összefüggéssel kaphatjuk meg a viszkozitást, ahol $\rhog$ a viszkoziméter golyójának sűrűsége ($8,19\unitfrac{g}{cm^3}$), $K$ pedig a viszkoziméterre jellemző állandó. A glicerin hőmérsékletét is megmérjük ($\tf$), hogy össze tudjuk hasonlítani a vizskozitást az irodalmi értékkel.
+
+Másodszor a Stokes törvény segítségével mérjük a viszkozitást.
+Ha egy test mozog az álló folyadékhoz képest, akkor a sebességével ellentétes irányban közegellenállási erő hat rá, gömb esetén \[F=6\pi \eta r v.\]
+Ha a golyó lefelé mozog, akkor ezen kívül még a felhajóerő és a nezézségi erő is fog rá hatni, és olyan sebességgel fog mozogni, hogy ez a három erő egyensúlyt tartson: \[mg - F_{fel} - F = 0\] \[ \frac{4r^3\pi}{3}\cdot \rhog g - \frac{4r^3\pi}{3} \cdot \rhof g - 6\pi \eta r v = 0\] 
+\[\eta = \frac29 \frac{(\rhog - \rhof) r^2 g}{v}\]
+Ez viszont csak akkor igaz, ha nem képződnek örvények az áramláskor. Ehhez pedig az kell, hogy a Reynolds-szám egy kritikus érték alatt legyen: \[\Re = \frac{\rhof r v}{\eta} < 0,1 \]
+Tehát ezt is ellenőrizni fogjuk.
+
+A golyók sűrűségét piknométerrel mérjük meg. Ez egy edény, amibe pontosan tudunk adott térfogatú folyadékot tölteni. Megmérjük az edény tömegét üresen ($\mui$), félig telerakva golyókkal ($\muii$), ugyanígy, csak teletöltve vízzel ($\muiii$), és csak vízzel teletöltve ($\muiv$). Ebből a golyók sűrűségét a \[\rhog = \rhov \frac{\muii - \mui}{\muiv - \mui - \muiii + \muii}\] képlettel kaphatjuk meg, ahol $\rhov$ a víz sűrűsége.
+
+
+\paragraph{A mért adatok} $  $ \relax{}
+
+<%
+  glicerin = {}
+  glicerin.cc = 87.pm(0.5).percent
+  glicerin.hoppler = {t: 1.min+56.s, rhof: 1224.pm(0.5).kg_m3, rhog: 8.19.pm(0.005).g_cm3, K: 0.13.pm(0.005).mPacm3_g}
+  glicerin.hoppler.tf = 23.pm(0.5).C
+  glicerin.stokes = {}
+  glicerin.stokes.s = 278.pm(0.5).mm
+
+  glicerin.stokes[*1..7][:dx,  :dy,  :dz,  :t] = [
+                  3.93.mm.pm(0.005.mm), 3.98.mm.pm(0.005.mm), 3.90.mm.pm(0.005.mm),  3.58.s.pm(0.005.s),
+                  2.58.mm.pm(0.005.mm), 2.86.mm.pm(0.005.mm), 2.85.mm.pm(0.005.mm),  6.63.s.pm(0.005.s),
+                  3.95.mm.pm(0.005.mm), 3.97.mm.pm(0.005.mm), 3.97.mm.pm(0.005.mm),  3.52.s.pm(0.005.s),
+                  3.94.mm.pm(0.005.mm), 3.92.mm.pm(0.005.mm), 3.88.mm.pm(0.005.mm),  3.57.s.pm(0.005.s),
+                  1.29.mm.pm(0.005.mm), 1.30.mm.pm(0.005.mm), 1.29.mm.pm(0.005.mm), 27.95.s.pm(0.005.s),
+                  1.28.mm.pm(0.005.mm), 1.26.mm.pm(0.005.mm), 1.27.mm.pm(0.005.mm), 28.05.s.pm(0.005.s),
+                  1.10.mm.pm(0.005.mm), 1.09.mm.pm(0.005.mm), 1.10.mm.pm(0.005.mm), 38.18.s.pm(0.005.s)
+  ]
+
+  piknometer = {mui: 38.5.pm(0.025).g, muii: 70.40.pm(0.025).g, muiii: 125.85.pm(0.025).g, muiv: 99.60.pm(0.025).g}
+
+  g = 9.81
+%>
+
+<%
+
+  glicerin.hoppler.table "A Höppler-viszkoziméterrel és az areométerrel mért adatok"
+
+%>
+<%
+  glicerin.stokes[*1..7].each do |i,k|
+    k.s = glicerin.stokes.s 
+  end
+
+  glicerin.stokes[*1..7].table "A Stokes-törvénnyel mért adatok"
+
+  piknometer.table "A piknométerrel mért adatok"
+
+%>
+
+\paragraph{Kiértékelés}
+
+A viszkoziméteres mérés alapján a viszkozitás $\eta = <%= glicerin.hoppler.instance_eval { self.eta = self.K * ( rhog - rhof ) * t }.to_latex %>\,\unit{<%= $_units.eta %>}$.
+
+A golyók méreteit átlagoljuk, kiszámoljuk a sebességeiket, és a Reynolds-számokat az előző kísérletből megkapott $\eta$-val:
+
+<%
+  glicerin.stokes[*1..7].each do |i,k|
+    k.s = glicerin.stokes.s 
+    k.d=[k.dx,k.dy,k.dz].mean
+    k.r = k.d/2
+    k.v = k.s/k.t
+    k.Re = glicerin.hoppler.rhof * k.r * k.v / glicerin.hoppler.eta 
+  end
+
+
+  glicerin.stokes.jo = glicerin.stokes[*1..7].select{|k,v|v.Re < 0.1}.mash{|k,v|[k,v]}
+  glicerin.stokes[*1..7][:d, :r, :v, :Re].table "A Reynolds számok kiszámítása"
+
+
+%>
+
+Láthatjuk, hogy csak a kisebb méretű (5--7) golyókra teljesül a $\Re < 0,1$ feltétel. Tehát csak ezek eredményeit fogjuk figyelembe venni.
+
+A golyók sűrűsége a piknométeres mérés alapján $\rhog=\unitfrac[<%= piknometer.instance_eval { self.rhog = 1000*(muii - mui)/(muiv-mui-muiii+muii) }.to_latex_pm %>]{kg}{m^3}$.
+Ezek alapján már ki tudjuk számítani a Stokes-törvény alapján a glicerin viszkozitását:
+
+<%
+  glicerin.stokes[*1..7].each do |i,k|
+    k.eta = (2.0/9.0)*(piknometer.rhog.pm(0) - glicerin.hoppler.rhof.pm(0)) * k.r**2 * 9.81/ k.v
+    k.Deltaeta = k.eta.delta.pm_rel(0.1)
+  end
+  glicerin.stokes[*1..7][:eta,nil].table "A viszkozitások"
+%>
+
+Az így kapott $\eta$-k közül az 5--7 golyókra számítom az átlagot, és a szórás háromszorosát veszem hibakorlátnak, így $\unit[(<%= (eta = glicerin.stokes[*5..7].map{|i,k|k.eta}.average).to_latex_pm %>)]{Pa\cdot s}$-t kapok.
+
+\paragraph{Eredménytáblázat} $ $
+
+<%
+  table "Eredménytáblázat" do
+
+    row "" do
+      column "Viszkoziméter" do
+        column :eta do glicerin.hoppler.eta end
+        column :Deltaeta do glicerin.hoppler.eta.delta.pm_rel(0.1) end
+      end
+
+      column "Stokes-törvény" do
+        column :eta do eta end
+        column :Deltaeta do eta.delta.pm_rel(0.1) end
+      end
+
+      column "Irodalmi érték" do
+        column :eta do 0.117.pm(0.0005) end
+      end
+    end
+  end
+
+%>
+Az irodalmi érték forrása:  \verb+http://www.met.reading.ac.uk/~sws04cdw/viscosity_calc.html+, 87.0 $m/m\%$-os glicerinre számolva $23^\circ$C-on.
+
+\paragraph{Diszkusszió}
+
+A viszkoziméterrel kapott eredmény a hibahatáron túl, de nem sokkal többel tér el az irodalmi értéktől. Ennek az eltérésnek lehet az az oka, hogy a glicerin nem pontosan a dobozon feltüntetett tömegszázalékos volt, hanem ennél hígabb. Erre enged következtetni az is, hogy a mért sűrűség ($\unitfrac[1224]{kg}{m^3}$) valamivel kisebb, mint amit fent említett webolalon kiszámolhatunk ($\unitfrac[1227]{kg}{m^3}$).
+
+A Stokes-törvénnyel kapott eredmények viszont teljesen rosszak. Erre nem találtam jobb ma\-gyarázatot, mint hogy esetleg a kisebb golyók sűrűsége jóval kisebb a nagyobb golyókénál. A sűrűségméréskor ugyanis csak a nagyobb golyók sűrűségét vettük figyelembe. Így elképzelhető, hogy a kis (5--7) golyóknál ez okozza az eltérést, a nagy golyóknál pedig az örvényes áramlás, mivel ott a Reynolds-szám nem 0,1, hanem 1 körüli. De valószínűleg nem ez lesz a hiba oka, mert az örvényes áramlás miatt nem kéne ekkora eltérésnek mutatkozni.
+
+<%
+  debug 6*PI*glicerin.stokes[7].eta * glicerin.stokes[7].r * glicerin.stokes[7].v
+  debug 4* glicerin.stokes[7].r ** 3 * PI / 3 * (piknometer.rhog - glicerin.hoppler.rhof) * g
+  debug piknometer.rhog
+  debug glicerin.stokes[7].r
+  debug 4* glicerin.stokes[7].r ** 3 * PI / 3 * (piknometer.rhog) * g
+%>
+
+
+
+<% end %>

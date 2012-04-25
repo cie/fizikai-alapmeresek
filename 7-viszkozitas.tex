@@ -1,0 +1,375 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[final]{graphics}
+\usepackage[pdftex]{graphicx}
+\usepackage[dvips]{color}
+\usepackage{amsfonts}
+\usepackage{subfigure}
+\usepackage{lscape}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{units}
+\usepackage{float}
+\usepackage[table]{xcolor}
+\usepackage{rmpage}
+\usepackage[magyar]{babel}
+\usepackage[margin=2cm]{geometry}
+\newcommand{\hide}[1]{}
+\DeclareGraphicsExtensions{.jpg,.pdf,.mps,.png}
+\begin{document}
+\def\rhog{\ensuremath{\rho_{g}}}\def\rhof{\ensuremath{\rho_{f}}}\def\rhov{\ensuremath{\rho_{v}}}\def\rho{\ensuremath{\varrho}}\def\dx{\ensuremath{d_x}}\def\dy{\ensuremath{d_y}}\def\dz{\ensuremath{d_z}}\def\mui{\ensuremath{\mu_1}}\def\muii{\ensuremath{\mu_2}}\def\muiii{\ensuremath{\mu_3}}\def\muiv{\ensuremath{\mu_4}}\def\tf{\ensuremath{t_f}}\def\Re{\ensuremath{Re}}\def\Deltaeta{\ensuremath{\Delta\eta}}
+\paragraph{A mérés célja}
+87\%-os glicerin belső súrlódását (viszkozitását) szeretnénk meghatározni.  A belső súrlódást így értelmezzük: ha egy folyadékban két párhuzamos, egymástól $d$ távolságra lévő, $A$ területű lemezt mozgatunk egymáshoz képest $v$ sebességgel, akkor a folyadék belső súrlódása miatt erő lép fel közöttük, ami egyenesen arányos $A$-val és $v$-vel, és fordítottan arányos $d$-vel. Az arányossági tényező, \[\eta = \frac{Fd}{Av} \] a viszkozitás.
+
+\paragraph{A mérés leírása}
+A viszkozitást kétféle módszerrel határozzuk meg. Először Höppler-féle viszkozi\-méterrel. Ehhez megmérjük, hogy a viszkoziméterben mennyi idő alatt ér le a golyó a két szélső osztás között ($t$), ill.\ megmérjük a folyadék sűrűségét ($\rhof$) areométerrel. Innen az \[\eta = K(\rhog-\rhof)t\] összefüggéssel kaphatjuk meg a viszkozitást, ahol $\rhog$ a viszkoziméter golyójának sűrűsége ($8,19\unitfrac{g}{cm^3}$), $K$ pedig a viszkoziméterre jellemző állandó. A glicerin hőmérsékletét is megmérjük ($\tf$), hogy össze tudjuk hasonlítani a vizskozitást az irodalmi értékkel.
+
+Másodszor a Stokes törvény segítségével mérjük a viszkozitást.
+Ha egy test mozog az álló folyadékhoz képest, akkor a sebességével ellentétes irányban közegellenállási erő hat rá, gömb esetén \[F=6\pi \eta r v.\]
+Ha a golyó lefelé mozog, akkor ezen kívül még a felhajóerő és a nezézségi erő is fog rá hatni, és olyan sebességgel fog mozogni, hogy ez a három erő egyensúlyt tartson: \[mg - F_{fel} - F = 0\] \[ \frac{4r^3\pi}{3}\cdot \rhog g - \frac{4r^3\pi}{3} \cdot \rhof g - 6\pi \eta r v = 0\] 
+\[\eta = \frac29 \frac{(\rhog - \rhof) r^2 g}{v}\]
+Ez viszont csak akkor igaz, ha nem képződnek örvények az áramláskor. Ehhez pedig az kell, hogy a Reynolds-szám egy kritikus érték alatt legyen: \[\Re = \frac{\rhof r v}{\eta} < 0,1 \]
+Tehát ezt is ellenőrizni fogjuk.
+
+A golyók sűrűségét piknométerrel mérjük meg. Ez egy edény, amibe pontosan tudunk adott térfogatú folyadékot tölteni. Megmérjük az edény tömegét üresen ($\mui$), félig telerakva golyókkal ($\muii$), ugyanígy, csak teletöltve vízzel ($\muiii$), és csak vízzel teletöltve ($\muiv$). Ebből a golyók sűrűségét a \[\rhog = \rhov \frac{\muii - \mui}{\muiv - \mui - \muiii + \muii}\] képlettel kaphatjuk meg, ahol $\rhov$ a víz sűrűsége.
+
+
+\paragraph{A mért adatok} $  $ \relax{}
+
+
+  
+  \begin{table}[H]
+    \begin{center}
+      \begin{tabular}{|
+c|
+c|
+c|
+c|
+c|
+}
+        \hline
+        
+\ensuremath{\unit[\text{\ensuremath{t}}]{(s)}} & 
+\ensuremath{\unit[\text{\ensuremath{\rho_{f}}}]{(\unitfrac{kg}{m^3})}} & \ensuremath{\unit[\text{\ensuremath{\rho_{g}}}]{(\unitfrac{kg}{m^3})}} & \ensuremath{\unit[\text{\ensuremath{K}}]{(\unitfrac{Pa\cdot m^3}{kg})}} & \ensuremath{\unit[\text{\ensuremath{t_f}}]{({}^\circ{}C)}}
+\\
+        \hline\hline
+        
+116
+ & 1224
+ & 8190
+ & \ensuremath{1,3\cdot 10^{-7}}
+ & 23
+\\
+        \hline
+      \end{tabular}
+      \caption{A Höppler-viszkoziméterrel és az areométerrel mért adatok}
+      \label{tab:}
+    \end{center}
+  \end{table}
+  
+  \begin{table}[H]
+    \begin{center}
+      \begin{tabular}{|
+c|
+c|
+c|
+c|
+c|
+c|
+}
+        \hline
+        
+ & 
+\ensuremath{\unit[\text{\ensuremath{d_x}}]{(m)}} & \ensuremath{\unit[\text{\ensuremath{d_y}}]{(m)}} & \ensuremath{\unit[\text{\ensuremath{d_z}}]{(m)}} & \ensuremath{\unit[\text{\ensuremath{t}}]{(s)}} & \ensuremath{\unit[\text{\ensuremath{s}}]{(m)}}
+\\
+        \hline\hline
+        
+1
+ & \ensuremath{3,93\cdot 10^{-3}}
+ & \ensuremath{3,98\cdot 10^{-3}}
+ & \ensuremath{3,90\cdot 10^{-3}}
+ & 3,58
+ & 0,278
+\\
+        \hline
+        
+2
+ & \ensuremath{2,58\cdot 10^{-3}}
+ & \ensuremath{2,86\cdot 10^{-3}}
+ & \ensuremath{2,85\cdot 10^{-3}}
+ & 6,63
+ & 0,278
+\\
+        \hline
+        
+3
+ & \ensuremath{3,95\cdot 10^{-3}}
+ & \ensuremath{3,97\cdot 10^{-3}}
+ & \ensuremath{3,97\cdot 10^{-3}}
+ & 3,52
+ & 0,278
+\\
+        \hline
+        
+4
+ & \ensuremath{3,94\cdot 10^{-3}}
+ & \ensuremath{3,92\cdot 10^{-3}}
+ & \ensuremath{3,88\cdot 10^{-3}}
+ & 3,57
+ & 0,278
+\\
+        \hline
+        
+5
+ & \ensuremath{1,29\cdot 10^{-3}}
+ & \ensuremath{1,30\cdot 10^{-3}}
+ & \ensuremath{1,29\cdot 10^{-3}}
+ & 27,95
+ & 0,278
+\\
+        \hline
+        
+6
+ & \ensuremath{1,28\cdot 10^{-3}}
+ & \ensuremath{1,26\cdot 10^{-3}}
+ & \ensuremath{1,27\cdot 10^{-3}}
+ & 28,05
+ & 0,278
+\\
+        \hline
+        
+7
+ & \ensuremath{1,10\cdot 10^{-3}}
+ & \ensuremath{1,09\cdot 10^{-3}}
+ & \ensuremath{1,10\cdot 10^{-3}}
+ & 38,18
+ & 0,278
+\\
+        \hline
+      \end{tabular}
+      \caption{A Stokes-törvénnyel mért adatok}
+      \label{tab:}
+    \end{center}
+  \end{table}
+  
+  \begin{table}[H]
+    \begin{center}
+      \begin{tabular}{|
+c|
+c|
+c|
+c|
+}
+        \hline
+        
+\ensuremath{\unit[\text{\ensuremath{\mu_1}}]{(kg)}} & 
+\ensuremath{\unit[\text{\ensuremath{\mu_2}}]{(kg)}} & \ensuremath{\unit[\text{\ensuremath{\mu_3}}]{(kg)}} & \ensuremath{\unit[\text{\ensuremath{\mu_4}}]{(kg)}}
+\\
+        \hline\hline
+        
+0,03850
+ & 0,07040
+ & 0,12585
+ & 0,09960
+\\
+        \hline
+      \end{tabular}
+      \caption{A piknométerrel mért adatok}
+      \label{tab:}
+    \end{center}
+  \end{table}
+
+\paragraph{Kiértékelés}
+
+A viszkoziméteres mérés alapján a viszkozitás $\eta = 0,105\,\unit{Pa\cdot{}s}$.
+
+A golyók méreteit átlagoljuk, kiszámoljuk a sebességeiket, és a Reynolds-számokat az előző kísérletből megkapott $\eta$-val:
+
+  
+  \begin{table}[H]
+    \begin{center}
+      \begin{tabular}{|
+c|
+c|
+c|
+c|
+c|
+}
+        \hline
+        
+ & 
+\ensuremath{\unit[\text{\ensuremath{d}}]{(m)}} & \ensuremath{\unit[\text{\ensuremath{r}}]{(m)}} & \ensuremath{\unit[\text{\ensuremath{v}}]{(\unitfrac{m}{s})}} & \ensuremath{Re}
+\\
+        \hline\hline
+        
+1
+ & \ensuremath{3,94\cdot 10^{-3}}
+ & \ensuremath{1,968\cdot 10^{-3}}
+ & 0,0777
+ & 1,8
+\\
+        \hline
+        
+2
+ & \ensuremath{2,76\cdot 10^{-3}}
+ & \ensuremath{1,382\cdot 10^{-3}}
+ & 0,0419
+ & 0,68
+\\
+        \hline
+        
+3
+ & \ensuremath{3,96\cdot 10^{-3}}
+ & \ensuremath{1,982\cdot 10^{-3}}
+ & 0,0790
+ & 1,8
+\\
+        \hline
+        
+4
+ & \ensuremath{3,91\cdot 10^{-3}}
+ & \ensuremath{1,957\cdot 10^{-3}}
+ & 0,0779
+ & 1,8
+\\
+        \hline
+        
+5
+ & \ensuremath{1,29\cdot 10^{-3}}
+ & \ensuremath{6,47\cdot 10^{-4}}
+ & \ensuremath{9,95\cdot 10^{-3}}
+ & 0,075
+\\
+        \hline
+        
+6
+ & \ensuremath{1,27\cdot 10^{-3}}
+ & \ensuremath{6,35\cdot 10^{-4}}
+ & \ensuremath{9,91\cdot 10^{-3}}
+ & 0,073
+\\
+        \hline
+        
+7
+ & \ensuremath{1,10\cdot 10^{-3}}
+ & \ensuremath{5,48\cdot 10^{-4}}
+ & \ensuremath{7,28\cdot 10^{-3}}
+ & 0,047
+\\
+        \hline
+      \end{tabular}
+      \caption{A Reynolds számok kiszámítása}
+      \label{tab:}
+    \end{center}
+  \end{table}
+
+Láthatjuk, hogy csak a kisebb méretű (5--7) golyókra teljesül a $\Re < 0,1$ feltétel. Tehát csak ezek eredményeit fogjuk figyelembe venni.
+
+A golyók sűrűsége a piknométeres mérés alapján $\rhog=\unitfrac[5600 \pm 110]{kg}{m^3}$.
+Ezek alapján már ki tudjuk számítani a Stokes-törvény alapján a glicerin viszkozitását:
+
+  
+  \begin{table}[H]
+    \begin{center}
+      \begin{tabular}{|
+c|
+c|
+}
+        \hline
+        
+ & 
+\ensuremath{\unit[\text{\ensuremath{\eta}}]{(Pa\cdot{}s)}}
+\\
+        \hline\hline
+        
+1
+ & 0,481
+\\
+        \hline
+        
+2
+ & 0,439
+\\
+        \hline
+        
+3
+ & 0,479
+\\
+        \hline
+        
+4
+ & 0,474
+\\
+        \hline
+        
+5
+ & 0,405
+\\
+        \hline
+        
+6
+ & 0,392
+\\
+        \hline
+        
+7
+ & 0,398
+\\
+        \hline
+      \end{tabular}
+      \caption{A viszkozitások}
+      \label{tab:}
+    \end{center}
+  \end{table}
+
+Az így kapott $\eta$-k közül az 5--7 golyókra számítom az átlagot, és a szórás háromszorosát veszem hibakorlátnak, így $\unit[(0,40 \pm 0,020)]{Pa\cdot s}$-t kapok.
+
+\paragraph{Eredménytáblázat} $ $
+
+  
+  \begin{table}[H]
+    \begin{center}
+      \begin{tabular}{|
+c|
+c|
+c|
+c|
+c|
+c|
+}
+        \hline
+        
+~ & 
+\multicolumn{2}{c|}{Viszkoziméter} & \multicolumn{2}{c|}{Stokes-törvény} & \multicolumn{1}{c|}{Irodalmi érték}
+\\\cline{2-3}\cline{4-5}\cline{6-6}
+        
+ & 
+\ensuremath{\eta} & \ensuremath{\Delta\eta} & \ensuremath{\eta} & \ensuremath{\Delta\eta} & \ensuremath{\eta}
+\\
+        \hline\hline
+        
+
+ & 0,105
+ & \ensuremath{4,1\cdot 10^{-3}}
+ & 0,40
+ & 0,020
+ & 0,117
+\\
+        \hline
+      \end{tabular}
+      \caption{Eredménytáblázat}
+      \label{tab:}
+    \end{center}
+  \end{table}
+Az irodalmi érték forrása:  \verb+http://www.met.reading.ac.uk/~sws04cdw/viscosity_calc.html+, 87.0 $m/m\%$-os glicerinre számolva $23^\circ$C-on.
+
+\paragraph{Diszkusszió}
+
+A viszkoziméterrel kapott eredmény a hibahatáron túl, de nem sokkal többel tér el az irodalmi értéktől. Ennek az eltérésnek lehet az az oka, hogy a glicerin nem pontosan a dobozon feltüntetett tömegszázalékos volt, hanem ennél hígabb. Erre enged következtetni az is, hogy a mért sűrűség ($\unitfrac[1224]{kg}{m^3}$) valamivel kisebb, mint amit fent említett webolalon kiszámolhatunk ($\unitfrac[1227]{kg}{m^3}$).
+
+A Stokes-törvénnyel kapott eredmények viszont teljesen rosszak. Erre nem találtam jobb ma\-gyarázatot, mint hogy esetleg a kisebb golyók sűrűsége jóval kisebb a nagyobb golyókénál. A sűrűségméréskor ugyanis csak a nagyobb golyók sűrűségét vettük figyelembe. Így elképzelhető, hogy a kis (5--7) golyóknál ez okozza az eltérést, a nagy golyóknál pedig az örvényes áramlás, mivel ott a Reynolds-szám nem 0,1, hanem 1 körüli. De valószínűleg nem ez lesz a hiba oka, mert az örvényes áramlás miatt nem kéne ekkora eltérésnek mutatkozni.
+
+
+
+
+\end{document}
