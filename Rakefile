@@ -1,3 +1,3 @@
 require "texlab"
 
-task default: "7-viszkozitas.pdf"
+task default: "8-allohullam.pdf"

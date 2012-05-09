@@ -1,0 +1,346 @@
+<%
+
+  def document *args
+    documentHeader *args
+    %>
+    \title{Állóhullám kötélen}
+    \author{Kalló Bernát -- Mérés: 2012.04.25. -- Leadás: 2012.05.02.}
+    \date{}
+    <%
+    env :document do
+      yield
+    end
+  end
+
+  class Numeric #x
+  end
+
+  class Fixnum
+    def / other
+      to_f / other
+    end
+  end
+  class Bignum
+    def / other
+      to_f / other
+    end
+  end
+
+  public :table, :row, :column, :dataset, :plot, :data
+
+  $_global = self
+
+  class Hash
+    alias :original_access :[]
+
+    def [] *items
+      return original_access *items if items.count == 1
+
+      case @scope
+      when nil
+        items.mash do |k|
+          [k, self[k] ||= {}]
+        end.scope!(1)
+      when 1
+        mash do |k,v|
+          [k, v[*items]]
+        end.scope!(2)
+      end
+    end
+
+    def scope! n
+      @scope = n
+      self
+    end
+
+    alias :original_modify :[]=
+
+    def []= *items, value
+      return original_modify *items, value if items.count == 1
+
+      if value.is_a? Array and value.count == self.count * items.count
+        value = value.dup
+
+        each do |k,v|
+          items.each do |k2|
+            v[k2] = value.shift
+          end
+        end
+
+      else
+        raise ArgumentError, "wrong number of arguments", caller[1..-1]
+      end
+    end
+
+
+    def table title, attrs = nil
+      if first[1].is_a? Hash
+        attrs ||= first[1].keys
+
+        $_global.table title  do
+          each do |key, item|
+            $_global.row key do
+              attrs.each do |a|
+                next if not a
+                $_global.column a.with_unit do
+                  item[a]
+                end
+              end
+            end
+          end
+        end
+      else
+        attrs ||= keys
+        headId = attrs.shift
+
+        $_global.table title, rowTitle: headId.with_unit do
+          $_global.row self[headId] do
+            attrs.each do |a|
+              next if not a
+              $_global.column a.with_unit do
+                self[a]
+              end
+            end
+          end
+        end
+      end
+    end
+
+    def dataset title, attrs, *args
+      opts = args.extract_options!
+
+      opts[:title] = title
+
+      $_global.dataset *args, opts do
+        each do |key, item|
+          $_global.data *attrs.map{|a|a.to_proc[item]}
+        end
+      end
+    end
+  end
+
+
+  class Array
+    def average b=nil
+      m = mean
+      if b 
+        m.pm(Math.sqrt(m.delta**2 + (standard_deviation*b)**2)) 
+      else
+        m
+      end
+    end
+
+    def table title, attrs=nil
+      attrs ||= first.keys
+      headId = attrs.shift
+
+      $_global.table title, rowTitle: headId.with_unit do
+        if first.is_a? Hash
+          each do |item|
+            $_global.row item[headId] do
+              attrs.each do |a|
+                $_global.column a.with_unit do
+                  item[a]
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+
+
+  Plusminus.sep!(',')
+
+document usePackages: {
+    babel: "magyar",
+    inputenc: "utf8",
+    geometry: "margin=2cm",
+    rmpage: true
+  } do
+
+    macro(
+      lambdan: %q{\lambda_n},
+      fmin: %q{f_\min},
+      fix: %q{f_i},
+      fmax: %q{f_\max},
+      Deltaf: %q{\Delta{}f}
+    )
+
+    unit(
+      [:fix, :f, :fmin, :fmax, :Deltaf] => %q{Hz},
+      [:n] => nil,
+      [:m] => %q{g}
+    )
+
+
+
+%>
+
+\maketitle
+
+\section{Különböző módusok frekvenciái}
+
+\paragraph{A mérés célja}
+
+Kötélen vizsgálunk állóhullámokat. A kötél egyik végét egy súly feszíti, a másik végén egy állítható frekvenciájú szinuszos rezgéskeltő van.
+
+Az első kísérletünkben állandó súllyal különböző állóhullám-módusokat állítunk be a rezgéskeltő segítségével. Azt szeretnénk belátni, hogy az $f$ frekvencia és a rezgő szakaszok $n$ száma között a \[f=\frac{c}{\lambdan}=\frac{cn}{2L}\] összefüggés áll fenn, ahol $c$ a hullám terjedési sebessége (független $n$-től), $L$ a rezgő kötél hossza, és $\lambdan=\frac{2L}{n}$ az $n$-edik módushoz tartozó hullámhossz (a rezgő szakaszok hosszának duplája).
+
+Megmértem a kötél hosszát is: $L=<%=(L=1.43.pm(0.005)).to_latex%>$ m.
+
+\paragraph{A mérés menete}
+
+$n=2,\dots,6$ szakaszból álló módusokat állítok be a rezgéskeltő frekvenciájának állításával. Minden módusra megnézem, hogy mennyi a legkisebb ill.\ a legnagyobb érték (\fmin és \fmax), amire még elég nagy amplitúdóval látszik az állóhullám.
+
+
+<%
+  adatok = {
+    2 => [13.6.pm(0.05), 13.6.pm(0.05)],
+    3 => [20.4.pm(0.05), 20.6.pm(0.05)],
+    4 => [27.4.pm(0.05), 27.6.pm(0.05)],
+    5 => [34.3.pm(0.05), 34.3.pm(0.05)],
+    6 => [41.1.pm(0.05), 41.7.pm(0.05)],
+  }
+  deltaf = adatok.map{|i,k|k.last-k.first}.mean
+  ujadatok = adatok.mash{|i,k|[i,k.mean.pm(deltaf)]}
+%>
+\paragraph{Kiértékelés}
+
+\fmin{} és \fmax{} átlagával fogok számolni. Hibabecsléshez a különbségük (\Deltaf) átlagát fogom venni, ami <%=deltaf.to_latex%>.
+
+<%
+  table "A mért adatok és számolt értékek",rowTitle: :n do
+    for i,k in adatok
+      fmin, fmax = *k
+      deltafi = fmax-fmin
+      row i do
+        column :fmin.with_unit do fmin end
+        column :fmax.with_unit do fmax end
+        column :Deltaf.with_unit do deltafi end
+        column :f.with_unit do ujadatok[i].to_latex_pm end
+      end
+    end
+  end
+
+%>
+
+Ezután ábrázolom grafikonon $f$-et $n$ függvényében:
+
+<%
+  a,b,corr = fit "a+b*x", via:"a,b" do 
+    dataset do
+      for n,f in ujadatok
+        data n,f
+      end
+    end
+  end
+
+  plot "A frkvencia és a módusszám közti összefüggés", xlabel: :n.with_unit, ylabel: :f.with_unit, xtics:1, xrange:"[0:]", yrange:"[0:]" do
+    dataset with: "yerrorbars" do
+      for n,f in ujadatok
+        data n,f,f.delta
+      end
+    end
+
+    dataset "#{a}+#{b}*x", title:nil
+  end
+%>
+
+A GNUPLOT-tal illesztett egyenes egyenlete $f=<%=a.to_latex%>+<%=b.to_latex%>*n$, korrelációja 0,943, tehát jó közelítéssel origón átmenő egyenest kaptunk. Ez azt jelenti, hogy igazoltuk az $f=\frac{c}{2L}\cdot n$ összefüggést, ebből $c=\unit[<%=b.to_latex%>]{Hz}\cdot 2L=\unitfrac[<%=(c=b*2*L).to_latex%>]{m}{s}$.
+
+
+\section{Különböző húzóerők}
+
+\paragraph{A mérés célja}
+
+A következő kísérletben egy másik kötéllel különböző húzóerőknél megmérjük egy állóhullám frekvenciáját. Ebből ki fogjuk számolni a hullám terjedési sebességét, abból pedig a szál lineáris sűrűségét.
+
+\paragraph{A mérés menete}
+
+Különböző húzóerők mellett úgy állítjuk be a frekvenciát, hogy 3 szakaszos állóhullámok alakuljanak ki ($n$=3). Minden mérésnél úgy próbáljuk beállítani, hogy a maximális amplitúdót érjük el. Három mérést végzünk, és az átlagukat vesszük $f$-nek, a szórásuk háromszorosát pedig hibakorlátnak.
+
+<%
+  adatok = {
+    50 => [82.5, 83.0, 82.5],
+    70 => [97.2, 97.2, 97.7],
+    90 => [110.7, 110.9, 110.6],
+    110=> [122.3, 122.4, 122.2],
+    130=>[133.2, 133.0, 133.1],
+    150=>[143.1, 143.1, 143.0],
+    170=>[152.5, 152.5, 152.4],
+  }
+  adatok.mash!{|i,j|[i,j.map{|k|k.pm(0.05)}]}
+  ujadatok = adatok.mash{|i,j|[i,j.average(3)]}
+%>
+
+<% table "A mért adatok", rowTitle: :m.with_unit do
+  adatok.each do |k,v|
+    row k do
+      column :fix.with_unit do
+        for i in 1..3 do
+          column i do
+            v[i-1]
+          end
+        end
+      end
+      column :f.with_unit do
+        ujadatok[k].to_latex_math_pm
+      end
+    end
+  end
+end %>
+
+\paragraph{Kiértékelés}
+
+A kötélen a terjedési sebesség függ a feszítőerőtől ($F$) és a kötél lineáris sűrűségétől ($\mu$):
+
+\[ v = \sqrt{\frac{F}{\mu}} \]
+
+Mivel $F = mg$, $v=f\lambda$ és $\lambda=\frac{2L}{n}$, a frekvenciára a \[ f^2=\frac{n^2g}{4L^2\mu}m = a\cdot m\] kifejezést kapjuk.
+
+Ábrázoljuk grafikonon $f^2$-et $m$ szerint, és illesszünk rá egyenest:
+
+<%
+  a,b = fit "a*x+b", via: "a,b" do
+    dataset do
+      for m,f in ujadatok do
+        data m,f**2
+      end
+    end
+  end
+
+  plot "$f^2$ -- $m$ függvény",
+    xrange: "[0:]",
+    yrange: "[0:]",
+    xlabel: "$m$ (g)",
+    ylabel: "$\\unit[f^2]{(Hz^2)}$",
+    height: '9cm' do
+    dataset do 
+      for m,f in ujadatok do
+        data m,f**2
+      end
+    end
+    dataset "#{a}*x+#{b}", title:nil
+  end
+
+  n=3.0
+  g=9.81
+  mu = n**2*g/4/L**2/a
+%>
+
+Az  egyenes meredeksége $a=\unitfrac[<%=a.to_latex%>]{Hz^2}{g}$, ebből \[\mu = \frac{n^2g}{4L^2a} = \unit[<%=(mu).to_latex%>]{\frac{g}{m}}.\]
+
+Az eredményt ellenőrizendő, megmértük analitikai mérleggel a kötél egy $L_0 = <%=(L0 = 4.05.pm(0.005)).to_latex%>$ méteres darabját, erre $m_0 =\unit[<%=(m0 = 0.3925.pm(0.00005)).to_latex%>]{g}$-ot kaptunk. Így \[\mu_0 = \frac{m_0}{L_0}= \unit[<%=(m0/L0).to_latex%>]{\frac{g}{m}}.\]
+
+\paragraph{Diszkusszió}
+
+A két eredmény nagyságrendben megegyezik, mégis van a hibahatárnál nagyobb eltérés. Erre nem találtam kielégítő magyarázatot.
+
+
+
+
+
+<% end %>
+%% vim:lbr
