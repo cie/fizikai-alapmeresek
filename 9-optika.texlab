@@ -1,0 +1,381 @@
+<%
+
+  def document *args
+    documentHeader *args
+    %>
+    \title{Optikai alapmérések}
+    \author{Kalló Bernát -- Mérés: 2012.05.09. -- Leadás: 2012.06.08.}
+    \date{}
+    <%
+    env :document do
+      yield
+    end
+  end
+
+  class Numeric #x
+    def cm
+      self / 100
+    end
+    def ms
+      self / 1000
+    end
+  end
+
+  class Fixnum
+    def / other
+      to_f / other
+    end
+  end
+  class Bignum
+    def / other
+      to_f / other
+    end
+  end
+
+  public :table, :row, :column, :dataset, :plot, :data
+
+  $_global = self
+
+  class Hash
+    alias :original_access :[]
+
+    def [] *items
+      return original_access *items if items.count == 1
+
+      case @scope
+      when nil
+        items.mash do |k|
+          [k, self[k] ||= {}]
+        end.scope!(1)
+      when 1
+        mash do |k,v|
+          [k, v[*items]]
+        end.scope!(2)
+      end
+    end
+
+    def scope! n
+      @scope = n
+      self
+    end
+
+    alias :original_modify :[]=
+
+    def []= *items, value
+      return original_modify *items, value if items.count == 1
+
+      if value.is_a? Array and value.count == self.count * items.count
+        value = value.dup
+
+        each do |k,v|
+          items.each do |k2|
+            v[k2] = value.shift
+          end
+        end
+
+      else
+        raise ArgumentError, "wrong number of arguments", caller[1..-1]
+      end
+    end
+
+
+    def table title, attrs = nil
+      if first[1].is_a? Hash
+        attrs ||= first[1].keys
+
+        $_global.table title  do
+          each do |key, item|
+            $_global.row key do
+              attrs.each do |a|
+                next if not a
+                $_global.column a.with_unit do
+                  item[a]
+                end
+              end
+            end
+          end
+        end
+      else
+        attrs ||= keys
+        headId = attrs.shift
+
+        $_global.table title, rowTitle: headId.with_unit do
+          $_global.row self[headId] do
+            attrs.each do |a|
+              next if not a
+              $_global.column a.with_unit do
+                self[a]
+              end
+            end
+          end
+        end
+      end
+    end
+
+    def dataset title, attrs, *args
+      opts = args.extract_options!
+
+      opts[:title] = title
+
+      $_global.dataset *args, opts do
+        each do |key, item|
+          $_global.data *attrs.map{|a|a.to_proc[item]}
+        end
+      end
+    end
+  end
+
+
+  class Array
+    def average b=nil
+      m = mean
+      if b 
+        m.pm(Math.sqrt(m.delta**2 + (standard_deviation*b)**2)) 
+      else
+        m
+      end
+    end
+
+    def table title, attrs=nil
+      attrs ||= first.keys
+      headId = attrs.shift
+
+      $_global.table title, rowTitle: headId.with_unit do
+        if first.is_a? Hash
+          each do |item|
+            $_global.row item[headId] do
+              attrs.each do |a|
+                $_global.column a.with_unit do
+                  item[a]
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+
+
+  Plusminus.sep!(',')
+
+  document usePackages: {
+    babel: "magyar",
+    inputenc: "utf8",
+    geometry: "margin=2cm",
+    rmpage: true
+  } do
+
+    macro(
+      tnagy: %q{t_{\text{nagy}}},
+      tkicsi: %q{t_{\text{kicsi}}},
+      xnagy: %q{x_{\text{nagy}}},
+      xkicsi: %q{x_{\text{kicsi}}},
+      gnagy: %q{g_{\text{nagy}}},
+      gkicsi: %q{g_{\text{kicsi}}},
+      Deltagnagy: %q{\Delta{}g_{\text{nagy}}},
+      Deltagkicsi: %q{\Delta{}g_{\text{kicsi}}},
+      geff: %q{g_\text{eff}},
+    )
+
+    unit(
+      [:h] => %q{m},
+      [:t, :tnagy, :tkicsi, :T] => %q{s},
+      [:x, :xnagy, :xkicsi] => %q{s^2},
+      [:g, :gnagy, :gkicsi, :Deltagkicsi, :Deltagnagy, :geff] => %q{\nicefrac{m}{s^2}},
+      [:alpha, :beta] => %q{{}^\circ},
+    )
+
+
+
+%>
+
+
+\maketitle
+
+\section{Törésmutató meghatározása}
+
+Két közeg határán áthaladó fénysugár megtörik, úgy, hogy a beesési és törési szögek szinuszának aránya \[\frac{\sin\alpha}{\sin\beta} = n_{2,1}\] állandó, a két közeg relatív törésmutatója.
+
+Megmértük egy félkör alakú lencse egyenes oldalán belépő fénysugár törési szögét. Valójában a kilépő fénysugár szögét mértük, de mivel a görbe oldalon való kilépéskor a sugár merőleges a határfelületre, az iránya ott nem változik meg. A mért adatok az alábbi táblázatban láthatók:
+
+<%
+
+  adat1 = {
+    0=> 0,
+    10=>7,
+    20=>13,
+    30=>20,
+    40=>26,
+    50=>31,
+    60=>36,
+    70=>39,
+    80=>42,
+  }.mash{|alpha,beta|[alpha, beta.pm(0.5)]}
+
+  table "Beesési és törési szögek belépéskor", rowTitle: :alpha.with_unit do
+    adat1.each do |alpha,beta|
+      row alpha do
+        column  :beta.with_unit do beta end
+      end
+    end
+  end
+%>
+
+Ezt grafikonon ábrázolva:
+
+<%
+  a,b = fit "a*x+b", via:"a,b" do
+    dataset do
+      adat1.each do |alpha,beta|
+        data sin(radians(beta)), sin(radians(alpha))
+      end
+    end
+  end
+  plot "Beesési ($\\alpha$) és törési ($\\beta$) szögek belépéskor", xlabel: "$\\sin\\beta$", ylabel: "$\\sin\\alpha$", xrange:"[0:1]", yrange:"[0:1]", width:"14cm", height: "14cm" do
+    dataset do
+      adat1.each do |alpha,beta|
+        data sin(radians(beta)), sin(radians(alpha))
+      end
+    end
+    dataset "#{a}*x+#{b}", title:false
+  end
+%>
+
+Az illesztett egyenes meredeksége $n_{2,1} = <%=((n21 = a).pm(a.delta/10)).to_latex_math%>$, tehát ez a műanyagnak a levegőre vonatkoztatott törésmutatója.
+
+Ezután elvégeztük a kísérletet fordítva is, a kilépéskor történő törést mérve.
+<%
+
+  #kilépés
+  adat1 = {
+    0=> 0,
+    10=>14,
+    15=>21,
+    20=>29,
+    25=>37,
+    30=>46,
+    35=>56,
+    40=>69,
+  }.mash{|alpha,beta|[alpha, beta.pm(0.5)]}
+
+  table "Beesési és törési szögek kilépéskor", rowTitle: :alpha.with_unit do
+    adat1.each do |alpha,beta|
+      row alpha do
+        column  :beta.with_unit do beta end
+      end
+    end
+  end
+%>
+
+Grafikonon ábrázolva:
+
+<%
+  a,b = fit "a*x+b", via:"a,b" do
+    dataset do
+      adat1.each do |alpha,beta|
+        data sin(radians(beta)), sin(radians(alpha))
+      end
+    end
+  end
+  plot "Beesési ($\\alpha$) és törési ($\\beta$) szögek kilépéskor", xlabel: "$\\sin\\beta$", ylabel: "$\\sin\\alpha$", xrange:"[0:1]", yrange:"[0:1]", width:"14cm", height: "14cm" do
+    dataset do
+      adat1.each do |alpha,beta|
+        data sin(radians(beta)), sin(radians(alpha))
+      end
+    end
+    dataset "#{a}*x+#{b}", title:false
+  end
+%>
+
+Az illesztett egyenes meredeksége $n_{1,2}=<%=((n12 = a).pm(a.delta/10)).to_latex_math%>$. A kapott két törésmutató jó közelítéssel egymás reciproka, $n_{2,1}\cdot n_{1,2} = <%=n21.to_latex_math%> \cdot  <%=n12.to_latex_math%> = <%=(n12*n21).to_latex_math%>$.
+
+
+
+\section{Törésmutató meghatározása teljes visszaverődés esetén}
+
+Egy prizmán áthaladó fénysugarat vizsgálunk, hogy milyen $\alpha$ beesési szögnél van a teljes visszaverődés határa, vagyik mikor lesz a kilépési szög $90^\circ$. Megmutatható, hogy $\alpha$ alapján a törésmutató a \[ n = \sqrt{\frac{1+2 \cos \phi \sin \alpha + \sin^2 \alpha}{\sin^2 \phi}} \] képlettel meghatározható, ahol $\phi$ a prizma szöge.
+
+<% 
+ alpha = radians(5.0)
+dif_alpha = ((radians((5.0+0.5)))-(radians(5.0)))
+ phi = radians(45.0) 
+dif_phi = ((radians((45.0+0.5)))-(radians(45.0)))
+ %>
+A mérés alapján $\alpha = 5^\circ$, ebből $n=<%=
+  n=sqrt((1+2*cos(phi) * sin(alpha) + sin(alpha)**2 )/(sin(phi)**2))
+dif_n=((sqrt((1+2*cos((phi+dif_phi)) * sin(alpha) + sin(alpha)**2 )/(sin(phi)**2)))-(sqrt((1+2*cos(phi) * sin(alpha) + sin(alpha)**2 )/(sin(phi)**2))))+((sqrt((1+2*cos(phi) * sin((alpha+dif_alpha)) + sin(alpha)**2 )/(sin(phi)**2)))-(sqrt((1+2*cos(phi) * sin(alpha) + sin(alpha)**2 )/(sin(phi)**2))))+((sqrt((1+2*cos(phi) * sin(alpha) + sin((alpha+dif_alpha))**2 )/(sin(phi)**2)))-(sqrt((1+2*cos(phi) * sin(alpha) + sin(alpha)**2 )/(sin(phi)**2))))+((sqrt((1+2*cos(phi) * sin(alpha) + sin(alpha)**2 )/(sin((phi+dif_phi))**2)))-(sqrt((1+2*cos(phi) * sin(alpha) + sin(alpha)**2 )/(sin(phi)**2))))
+debug dif_n
+  n.pm(dif_n).to_latex_math
+%>$.
+
+A teljes visszaverődéshez tartozó határszög
+
+\[n \sin \gamma_h = 1\]
+képletből \[\gamma_h = \sin^{-1} \frac 1n = <%=
+  gammah = 1/n
+dif_gammah = ((1/(n+dif_n))-(1/n))
+  gammah.pm(dif_gammah).to_latex_math
+  %> = <%=
+ gammah_deg = degrees(gammah) 
+dif_gammah_deg = ((degrees((gammah+dif_gammah)))-(degrees(gammah)))
+  gammah_deg.pm(dif_gammah_deg).to_latex_math
+  %> ^\circ.\]
+
+Ahogy a beesési szöget csökkentettük, a piros fény lépett ki legkorábban, tehát ennek volt a legnagyobb a határszöge. Vagyis a piros fényre a legkisebb a törésmutató, ezek szerint a lila fényre a legnagyobb, a lila fény térül el a legjobban.
+
+
+\section{Lencse törőképességének vizsgálata}
+
+Egy három tartályból álló átlátszó műanyag edényt, a tartályokat egyenként megtöltve vízzel, lencseként használunk.
+
+
+\vskip{5cm}
+
+Párhuzamos fénysugarakat engedünk át a lencsén, és az alábbiakat tapasztaljuk.
+
+<%
+  table do
+    row "1" do
+      column 1 do "levegő" end
+      column 2 do "levegő" end
+      column 3 do "levegő" end
+      column "a fénysugarak" do "párhuzamosak" end
+    end
+    row "a" do
+      column 1 do "víz" end
+      column 2 do "levegő" end
+      column 3 do "levegő" end
+      column "a fénysugarak" do "széttartanak" end
+    end
+    row "b" do
+      column 1 do "levegő" end
+      column 2 do "víz" end
+      column 3 do "levegő" end
+      column "a fénysugarak" do "összetartanak" end
+    end
+    row "c" do
+      column 1 do "levegő" end
+      column 2 do "levegő" end
+      column 3 do "víz" end
+      column "a fénysugarak" do "összetartanak" end
+    end
+    row "d" do
+      column 1 do "víz" end
+      column 2 do "levegő" end
+      column 3 do "víz" end
+      column "a fénysugarak" do "enyhén széttartanak" end
+    end
+  end
+%>
+
+Amikor nincs víz a tartályokban, a fény párhuzamosan halad át. Mivel mindhárom tartályban levegő van, a műanyagba belépéskor és kilépéskor azonos a törésmutató. A műanyag falak vékonyak, így a belépési és a kilépési felület nagyjából párhuzamos, tehát befelé haladva törőszög megegyezik kifelé haladva a beesési szöggel, és a törésmutatók egyenlősége miatt a beesési és a kilépési szögek is egyenlőek. 
+
+Amikor valamelyik tartályban víz van, a műanyag két oldalán nem egyenlő a törésmutató. Viszont mivel a műanyag vékony és a falai párhuzamosak, a fénysugárnak a merőlegeshez viszonyított szögének szinusza először a műanyag és levegő, másodszor a víz és a műanyag relatív törésmutatójával változik. De e két törésmutató szorzata egyenlő a víz és a levegő törésmutatójával. Tehát tekinthetjük úgy, mintha a műanyag nem is lenne ott, csak a víz lenne, mint egy lencse.
+
+Az a) esetben a víz egy sima-homoró lencsét alkot, ez szórólencse. A b) esetben domború-domború lencsét, ez gyűjtőlencse. A c) esetben domború-sima lecsét, ez is gyűjtőlencse. A d) esetben két lencsét alkot, egy gyűjtő és egy szórólencsét. Viszont a szórólencse görbülete nagyobb, tehát erősebb, mint a gyűjtőlencse, ezért a két lencséből álló rendszer szétszórja a sugarakat, bár kevébé, mint a szórólencse egyedül az a) esetben.
+
+
+\section{}
+<% end %>
+

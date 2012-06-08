@@ -1,3 +1,3 @@
 require "texlab"
 
-task default: "8-allohullam.pdf"
+task default: "9-optika.pdf"

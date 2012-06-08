@@ -1,0 +1,1607 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[final]{graphics}
+\usepackage[pdftex]{graphicx}
+\usepackage[dvips]{color}
+\usepackage{amsfonts}
+\usepackage{subfigure}
+\usepackage{lscape}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{units}
+\usepackage{float}
+\usepackage[table]{xcolor}
+\usepackage{rmpage}
+\usepackage[magyar]{babel}
+\usepackage[margin=2cm]{geometry}
+\newcommand{\hide}[1]{}
+\DeclareGraphicsExtensions{.jpg,.pdf,.mps,.png}
+    \title{Nehézségi gyorsulás és matematikai inga lengésideje}
+    \author{Kalló Bernát -- Mérés: 2012.05.09. -- Leadás: 2012.06.08.}
+    \date{}
+    \begin{document}
+\def\tnagy{\ensuremath{t_{\text{nagy}}}}\def\tkicsi{\ensuremath{t_{\text{kicsi}}}}\def\xnagy{\ensuremath{x_{\text{nagy}}}}\def\xkicsi{\ensuremath{x_{\text{kicsi}}}}\def\gnagy{\ensuremath{g_{\text{nagy}}}}\def\gkicsi{\ensuremath{g_{\text{kicsi}}}}\def\Deltagnagy{\ensuremath{\Delta{}g_{\text{nagy}}}}\def\Deltagkicsi{\ensuremath{\Delta{}g_{\text{kicsi}}}}\def\geff{\ensuremath{g_\text{eff}}}
+
+\maketitle
+
+\section{Nehézségi gyorsulás mérése}
+
+Szabadon eső testek gyorsulása adott földrajzi helyen a test tömegétől független állandó. Kísérletünkben ezt szeretnénk igazolni és meghatározni az értékét.
+
+A méréshez olyan ejtőszerkezetet használunk, aminek tetején és alján érzékelők vannak (felül egy kioldószerkezet, alul egy érzékelő kapcsoló), és ezek egy elektronikus órára vannak kapcsolva. Ezzel meg tudjuk mérni az esés idejét. Különböző magasságokból megmérve az esést meg tudjuk határozni az összetartozó út-idő párokat. Az út-idő összefüggés feltételezett alakja \[h = \frac g2 t^2, \] ebből egy új, $x=\frac{t^2}{2}$ változó bevezetésével a \[h=gx\] egyenes egyenletét kapjuk. Az ($x,h$) pontokra egyenest illesztve ennek meredeksége lesz $g$. A $(0,0)$ pontot is a mérési pontok közé tesszük, mivel ezt elvi megfontolásból tudjuk.
+
+  
+  \begin{table}[H]
+    \begin{center}
+      \begin{tabular}{|
+c|
+c|
+c|
+c|
+c|
+}
+        \hline
+        
+\ensuremath{\unit[\text{\ensuremath{h}}]{(m)}} & 
+\ensuremath{\unit[\text{\ensuremath{t_{\text{nagy}}}}]{(s)}} & \ensuremath{\unit[\text{\ensuremath{t_{\text{kicsi}}}}]{(s)}} & \ensuremath{\unit[\text{\ensuremath{x_{\text{nagy}}}}]{(s^2)}} & \ensuremath{\unit[\text{\ensuremath{x_{\text{kicsi}}}}]{(s^2)}}
+\\
+        \hline\hline
+        
+\raisebox{-2.0\totalheight}[1ex][1ex]{1,39500}
+ & 0,541
+ & 0,535
+ & 0,1463
+ & 0,1431
+\\
+        
+\raisebox{-2.0\totalheight}[1ex][1ex]{~}
+ & 0,543
+ & 0,539
+ & 0,1474
+ & 0,1453
+\\
+        
+\raisebox{-2.0\totalheight}[1ex][1ex]{~}
+ & 0,536
+ & 0,537
+ & 0,1436
+ & 0,1442
+\\
+        \hline
+        
+\raisebox{-2.0\totalheight}[1ex][1ex]{1,19250}
+ & 0,507
+ & 0,511
+ & 0,1285
+ & 0,1306
+\\
+        
+\raisebox{-2.0\totalheight}[1ex][1ex]{~}
+ & 0,500
+ & 0,504
+ & 0,1250
+ & 0,1270
+\\
+        
+\raisebox{-2.0\totalheight}[1ex][1ex]{~}
+ & 0,498
+ & 0,510
+ & 0,1240
+ & 0,1300
+\\
+        \hline
+        
+\raisebox{-2.0\totalheight}[1ex][1ex]{0,97580}
+ & 0,457
+ & 0,453
+ & 0,1044
+ & 0,1026
+\\
+        
+\raisebox{-2.0\totalheight}[1ex][1ex]{~}
+ & 0,457
+ & 0,450
+ & 0,1044
+ & 0,1013
+\\
+        
+\raisebox{-2.0\totalheight}[1ex][1ex]{~}
+ & 0,458
+ & 0,463
+ & 0,1049
+ & 0,1072
+\\
+        \hline
+        
+\raisebox{-2.0\totalheight}[1ex][1ex]{0,72950}
+ & 0,401
+ & 0,400
+ & 0,0804
+ & 0,0800
+\\
+        
+\raisebox{-2.0\totalheight}[1ex][1ex]{~}
+ & 0,398
+ & 0,411
+ & 0,0792
+ & 0,0845
+\\
+        
+\raisebox{-2.0\totalheight}[1ex][1ex]{~}
+ & 0,400
+ & 0,391
+ & 0,0800
+ & 0,0764
+\\
+        \hline
+        
+\raisebox{-2.0\totalheight}[1ex][1ex]{0,50100}
+ & 0,331
+ & 0,334
+ & 0,0548
+ & 0,0558
+\\
+        
+\raisebox{-2.0\totalheight}[1ex][1ex]{~}
+ & 0,329
+ & 0,347
+ & 0,0541
+ & 0,0602
+\\
+        
+\raisebox{-2.0\totalheight}[1ex][1ex]{~}
+ & 0,330
+ & 0,340
+ & 0,0545
+ & 0,0578
+\\
+        \hline
+        
+\raisebox{-2.0\totalheight}[1ex][1ex]{0}
+ & 0
+ & 0
+ & 0.0
+ & 0.0
+\\
+        
+\raisebox{-2.0\totalheight}[1ex][1ex]{~}
+ & 0
+ & 0
+ & 0.0
+ & 0.0
+\\
+        
+\raisebox{-2.0\totalheight}[1ex][1ex]{~}
+ & 0
+ & 0
+ & 0.0
+ & 0.0
+\\
+        \hline
+      \end{tabular}
+      \caption{A mért adatok}
+      \label{tab:}
+    \end{center}
+  \end{table}
+
+Ezután ábrázoljuk az $(x,h)$ pontokat grafikonon:
+
+  \begin{figure}[H]
+    \begin{center}
+% GNUPLOT: LaTeX picture
+
+\setlength{\unitlength}{0.240900pt}
+
+\ifx\plotpoint\undefined\newsavebox{\plotpoint}\fi
+
+\sbox{\plotpoint}{\rule[-0.200pt]{0.400pt}{0.400pt}}%
+
+\begin{picture}(2007,2007)(0,0)
+
+\sbox{\plotpoint}{\rule[-0.200pt]{0.400pt}{0.400pt}}%
+
+\put(211.0,131.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191,131){\makebox(0,0)[r]{ 0}}
+
+\put(1937.0,131.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(211.0,361.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191,361){\makebox(0,0)[r]{ 0.2}}
+
+\put(1937.0,361.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(211.0,590.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191,590){\makebox(0,0)[r]{ 0.4}}
+
+\put(1937.0,590.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(211.0,820.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191,820){\makebox(0,0)[r]{ 0.6}}
+
+\put(1937.0,820.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(211.0,1049.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191,1049){\makebox(0,0)[r]{ 0.8}}
+
+\put(1937.0,1049.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(211.0,1279.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191,1279){\makebox(0,0)[r]{ 1}}
+
+\put(1937.0,1279.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(211.0,1508.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191,1508){\makebox(0,0)[r]{ 1.2}}
+
+\put(1937.0,1508.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(211.0,1737.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191,1737){\makebox(0,0)[r]{ 1.4}}
+
+\put(1937.0,1737.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(211.0,1967.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191,1967){\makebox(0,0)[r]{ 1.6}}
+
+\put(1937.0,1967.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(211.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(211,90){\makebox(0,0){ 0}}
+
+\put(211.0,1947.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(429.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(429,90){\makebox(0,0){ 0.02}}
+
+\put(429.0,1947.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(648.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(648,90){\makebox(0,0){ 0.04}}
+
+\put(648.0,1947.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(866.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(866,90){\makebox(0,0){ 0.06}}
+
+\put(866.0,1947.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1084.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1084,90){\makebox(0,0){ 0.08}}
+
+\put(1084.0,1947.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1302.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1302,90){\makebox(0,0){ 0.1}}
+
+\put(1302.0,1947.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1521.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1521,90){\makebox(0,0){ 0.12}}
+
+\put(1521.0,1947.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1739.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1739,90){\makebox(0,0){ 0.14}}
+
+\put(1739.0,1947.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1957.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1957,90){\makebox(0,0){ 0.16}}
+
+\put(1957.0,1947.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(211.0,131.0){\rule[-0.200pt]{0.400pt}{442.292pt}}
+
+\put(211.0,131.0){\rule[-0.200pt]{420.611pt}{0.400pt}}
+
+\put(1957.0,131.0){\rule[-0.200pt]{0.400pt}{442.292pt}}
+
+\put(211.0,1967.0){\rule[-0.200pt]{420.611pt}{0.400pt}}
+
+\put(70,1049){\makebox(0,0){\ensuremath{\unit[\text{\ensuremath{h}}]{(m)}}}}
+
+\put(1084,29){\makebox(0,0){\ensuremath{\unit[\text{\ensuremath{x}}]{(s^2)}}}}
+
+\put(1797,1927){\makebox(0,0)[r]{nagy golyó}}
+
+\put(1808,1732){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1820,1732){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1779,1732){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1614,1499){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1575,1499){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1564,1499){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1351,1251){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1351,1251){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1356,1251){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1088,968){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1075,968){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1084,968){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(809,706){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(802,706){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(805,706){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(211,131){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(211,131){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(211,131){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1867,1927){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1797,1886){\makebox(0,0)[r]{kis golyó}}
+
+\put(1773,1732){\makebox(0,0){$+$}}
+
+\put(1796,1732){\makebox(0,0){$+$}}
+
+\put(1784,1732){\makebox(0,0){$+$}}
+
+\put(1636,1499){\makebox(0,0){$+$}}
+
+\put(1597,1499){\makebox(0,0){$+$}}
+
+\put(1630,1499){\makebox(0,0){$+$}}
+
+\put(1331,1251){\makebox(0,0){$+$}}
+
+\put(1316,1251){\makebox(0,0){$+$}}
+
+\put(1381,1251){\makebox(0,0){$+$}}
+
+\put(1084,968){\makebox(0,0){$+$}}
+
+\put(1133,968){\makebox(0,0){$+$}}
+
+\put(1045,968){\makebox(0,0){$+$}}
+
+\put(820,706){\makebox(0,0){$+$}}
+
+\put(868,706){\makebox(0,0){$+$}}
+
+\put(842,706){\makebox(0,0){$+$}}
+
+\put(211,131){\makebox(0,0){$+$}}
+
+\put(211,131){\makebox(0,0){$+$}}
+
+\put(211,131){\makebox(0,0){$+$}}
+
+\put(1867,1886){\makebox(0,0){$+$}}
+
+\sbox{\plotpoint}{\rule[-0.400pt]{0.800pt}{0.800pt}}%
+
+\sbox{\plotpoint}{\rule[-0.200pt]{0.400pt}{0.400pt}}%
+
+\put(1797,1845){\makebox(0,0)[r]{nagy golyó illesztett egyenese}}
+
+\sbox{\plotpoint}{\rule[-0.400pt]{0.800pt}{0.800pt}}%
+
+\put(1817.0,1845.0){\rule[-0.400pt]{24.090pt}{0.800pt}}
+
+\multiput(227.00,133.41)(0.527,0.507){25}{\rule{1.050pt}{0.122pt}}
+
+\multiput(227.00,130.34)(14.821,16.000){2}{\rule{0.525pt}{0.800pt}}
+
+\multiput(244.00,149.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(244.00,146.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(260.00,165.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(260.00,162.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(277.41,180.00)(0.507,0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(274.34,180.00)(16.000,14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(292.00,198.41)(0.527,0.507){25}{\rule{1.050pt}{0.122pt}}
+
+\multiput(292.00,195.34)(14.821,16.000){2}{\rule{0.525pt}{0.800pt}}
+
+\multiput(309.00,214.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(309.00,211.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(326.41,229.00)(0.507,0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(323.34,229.00)(16.000,14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(341.00,247.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(341.00,244.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(357.00,263.41)(0.527,0.507){25}{\rule{1.050pt}{0.122pt}}
+
+\multiput(357.00,260.34)(14.821,16.000){2}{\rule{0.525pt}{0.800pt}}
+
+\multiput(375.41,278.00)(0.507,0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(372.34,278.00)(16.000,14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(390.00,296.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(390.00,293.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(406.00,312.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(406.00,309.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(422.00,328.41)(0.494,0.507){27}{\rule{1.000pt}{0.122pt}}
+
+\multiput(422.00,325.34)(14.924,17.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(439.00,345.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(439.00,342.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(455.00,361.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(455.00,358.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(472.41,376.00)(0.507,0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(469.34,376.00)(16.000,14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(487.00,394.41)(0.527,0.507){25}{\rule{1.050pt}{0.122pt}}
+
+\multiput(487.00,391.34)(14.821,16.000){2}{\rule{0.525pt}{0.800pt}}
+
+\multiput(504.00,410.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(504.00,407.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(521.41,425.00)(0.507,0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(518.34,425.00)(16.000,14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(536.00,443.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(536.00,440.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(552.00,459.41)(0.527,0.507){25}{\rule{1.050pt}{0.122pt}}
+
+\multiput(552.00,456.34)(14.821,16.000){2}{\rule{0.525pt}{0.800pt}}
+
+\multiput(570.41,474.00)(0.507,0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(567.34,474.00)(16.000,14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(585.00,492.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(585.00,489.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(601.00,508.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(601.00,505.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(617.00,524.41)(0.494,0.507){27}{\rule{1.000pt}{0.122pt}}
+
+\multiput(617.00,521.34)(14.924,17.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(634.00,541.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(634.00,538.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(650.00,557.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(650.00,554.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(667.41,572.00)(0.507,0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(664.34,572.00)(16.000,14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(682.00,590.41)(0.527,0.507){25}{\rule{1.050pt}{0.122pt}}
+
+\multiput(682.00,587.34)(14.821,16.000){2}{\rule{0.525pt}{0.800pt}}
+
+\multiput(699.00,606.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(699.00,603.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(715.00,622.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(715.00,619.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(732.41,637.00)(0.507,0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(729.34,637.00)(16.000,14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(747.00,655.41)(0.527,0.507){25}{\rule{1.050pt}{0.122pt}}
+
+\multiput(747.00,652.34)(14.821,16.000){2}{\rule{0.525pt}{0.800pt}}
+
+\multiput(764.00,671.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(764.00,668.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(781.41,686.00)(0.507,0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(778.34,686.00)(16.000,14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(796.00,704.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(796.00,701.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(812.00,720.41)(0.527,0.507){25}{\rule{1.050pt}{0.122pt}}
+
+\multiput(812.00,717.34)(14.821,16.000){2}{\rule{0.525pt}{0.800pt}}
+
+\multiput(830.41,735.00)(0.507,0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(827.34,735.00)(16.000,14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(845.00,753.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(845.00,750.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(861.00,769.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(861.00,766.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(877.00,785.41)(0.494,0.507){27}{\rule{1.000pt}{0.122pt}}
+
+\multiput(877.00,782.34)(14.924,17.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(894.00,802.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(894.00,799.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(910.00,818.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(910.00,815.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(927.41,833.00)(0.507,0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(924.34,833.00)(16.000,14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(942.00,851.41)(0.527,0.507){25}{\rule{1.050pt}{0.122pt}}
+
+\multiput(942.00,848.34)(14.821,16.000){2}{\rule{0.525pt}{0.800pt}}
+
+\multiput(959.00,867.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(959.00,864.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(976.41,882.00)(0.507,0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(973.34,882.00)(16.000,14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(991.00,900.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(991.00,897.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1007.00,916.41)(0.527,0.507){25}{\rule{1.050pt}{0.122pt}}
+
+\multiput(1007.00,913.34)(14.821,16.000){2}{\rule{0.525pt}{0.800pt}}
+
+\multiput(1025.41,931.00)(0.507,0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(1022.34,931.00)(16.000,14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(1040.00,949.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1040.00,946.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1056.00,965.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1056.00,962.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1072.00,981.41)(0.494,0.507){27}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1072.00,978.34)(14.924,17.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1089.00,998.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1089.00,995.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1105.00,1014.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1105.00,1011.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1122.41,1029.00)(0.507,0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(1119.34,1029.00)(16.000,14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(1137.00,1047.41)(0.527,0.507){25}{\rule{1.050pt}{0.122pt}}
+
+\multiput(1137.00,1044.34)(14.821,16.000){2}{\rule{0.525pt}{0.800pt}}
+
+\multiput(1154.00,1063.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1154.00,1060.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1170.00,1079.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1170.00,1076.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1187.41,1094.00)(0.507,0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(1184.34,1094.00)(16.000,14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(1202.00,1112.41)(0.527,0.507){25}{\rule{1.050pt}{0.122pt}}
+
+\multiput(1202.00,1109.34)(14.821,16.000){2}{\rule{0.525pt}{0.800pt}}
+
+\multiput(1219.00,1128.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1219.00,1125.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1236.41,1143.00)(0.507,0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(1233.34,1143.00)(16.000,14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(1251.00,1161.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1251.00,1158.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1267.00,1177.41)(0.527,0.507){25}{\rule{1.050pt}{0.122pt}}
+
+\multiput(1267.00,1174.34)(14.821,16.000){2}{\rule{0.525pt}{0.800pt}}
+
+\multiput(1285.41,1192.00)(0.507,0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(1282.34,1192.00)(16.000,14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(1300.00,1210.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1300.00,1207.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1316.00,1226.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1316.00,1223.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1332.00,1242.41)(0.494,0.507){27}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1332.00,1239.34)(14.924,17.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1349.00,1259.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1349.00,1256.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1365.00,1275.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1365.00,1272.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1382.41,1290.00)(0.507,0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(1379.34,1290.00)(16.000,14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(1397.00,1308.41)(0.527,0.507){25}{\rule{1.050pt}{0.122pt}}
+
+\multiput(1397.00,1305.34)(14.821,16.000){2}{\rule{0.525pt}{0.800pt}}
+
+\multiput(1414.00,1324.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1414.00,1321.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1431.41,1339.00)(0.507,0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(1428.34,1339.00)(16.000,14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(1446.00,1357.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1446.00,1354.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1462.00,1373.41)(0.527,0.507){25}{\rule{1.050pt}{0.122pt}}
+
+\multiput(1462.00,1370.34)(14.821,16.000){2}{\rule{0.525pt}{0.800pt}}
+
+\multiput(1480.41,1388.00)(0.507,0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(1477.34,1388.00)(16.000,14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(1495.00,1406.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1495.00,1403.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1511.00,1422.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1511.00,1419.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1527.00,1438.41)(0.494,0.507){27}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1527.00,1435.34)(14.924,17.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1544.00,1455.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1544.00,1452.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1560.00,1471.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1560.00,1468.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1577.41,1486.00)(0.507,0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(1574.34,1486.00)(16.000,14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(1592.00,1504.41)(0.527,0.507){25}{\rule{1.050pt}{0.122pt}}
+
+\multiput(1592.00,1501.34)(14.821,16.000){2}{\rule{0.525pt}{0.800pt}}
+
+\multiput(1609.00,1520.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1609.00,1517.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1625.00,1536.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1625.00,1533.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1642.41,1551.00)(0.507,0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(1639.34,1551.00)(16.000,14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(1657.00,1569.41)(0.527,0.507){25}{\rule{1.050pt}{0.122pt}}
+
+\multiput(1657.00,1566.34)(14.821,16.000){2}{\rule{0.525pt}{0.800pt}}
+
+\multiput(1674.00,1585.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1674.00,1582.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1691.41,1600.00)(0.507,0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(1688.34,1600.00)(16.000,14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(1706.00,1618.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1706.00,1615.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1722.00,1634.41)(0.527,0.507){25}{\rule{1.050pt}{0.122pt}}
+
+\multiput(1722.00,1631.34)(14.821,16.000){2}{\rule{0.525pt}{0.800pt}}
+
+\multiput(1740.41,1649.00)(0.507,0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(1737.34,1649.00)(16.000,14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(1755.00,1667.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1755.00,1664.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1771.00,1683.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1771.00,1680.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1787.00,1699.41)(0.494,0.507){27}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1787.00,1696.34)(14.924,17.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1804.00,1716.41)(0.494,0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1804.00,1713.34)(13.924,16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\put(227.0,131.0){\usebox{\plotpoint}}
+
+\sbox{\plotpoint}{\rule[-0.500pt]{1.000pt}{1.000pt}}%
+
+\sbox{\plotpoint}{\rule[-0.200pt]{0.400pt}{0.400pt}}%
+
+\put(1797,1804){\makebox(0,0)[r]{kis golyó illesztett egyenese}}
+
+\sbox{\plotpoint}{\rule[-0.500pt]{1.000pt}{1.000pt}}%
+
+\multiput(1817,1804)(20.756,0.000){5}{\usebox{\plotpoint}}
+
+\put(1917,1804){\usebox{\plotpoint}}
+
+\put(238.00,131.00){\usebox{\plotpoint}}
+
+\put(252.87,145.43){\usebox{\plotpoint}}
+
+\put(267.32,160.32){\usebox{\plotpoint}}
+
+\put(282.00,175.00){\usebox{\plotpoint}}
+
+\put(296.68,189.68){\usebox{\plotpoint}}
+
+\put(311.35,204.35){\usebox{\plotpoint}}
+
+\multiput(325,218)(14.676,14.676){2}{\usebox{\plotpoint}}
+
+\put(354.94,248.81){\usebox{\plotpoint}}
+
+\put(369.92,263.16){\usebox{\plotpoint}}
+
+\put(384.39,278.04){\usebox{\plotpoint}}
+
+\put(398.89,292.89){\usebox{\plotpoint}}
+
+\put(413.56,307.56){\usebox{\plotpoint}}
+
+\put(428.24,322.24){\usebox{\plotpoint}}
+
+\put(442.92,336.92){\usebox{\plotpoint}}
+
+\put(457.59,351.59){\usebox{\plotpoint}}
+
+\multiput(471,365)(14.225,15.114){2}{\usebox{\plotpoint}}
+
+\put(501.53,395.68){\usebox{\plotpoint}}
+
+\put(515.91,410.65){\usebox{\plotpoint}}
+
+\put(530.45,425.45){\usebox{\plotpoint}}
+
+\put(545.13,440.13){\usebox{\plotpoint}}
+
+\put(559.80,454.80){\usebox{\plotpoint}}
+
+\put(574.48,469.48){\usebox{\plotpoint}}
+
+\put(589.16,484.16){\usebox{\plotpoint}}
+
+\put(603.75,498.92){\usebox{\plotpoint}}
+
+\multiput(617,513)(15.114,14.225){2}{\usebox{\plotpoint}}
+
+\put(647.42,543.26){\usebox{\plotpoint}}
+
+\put(662.02,558.02){\usebox{\plotpoint}}
+
+\put(676.69,572.69){\usebox{\plotpoint}}
+
+\put(691.37,587.37){\usebox{\plotpoint}}
+
+\put(706.04,602.04){\usebox{\plotpoint}}
+
+\put(720.72,616.72){\usebox{\plotpoint}}
+
+\put(735.26,631.53){\usebox{\plotpoint}}
+
+\put(749.64,646.49){\usebox{\plotpoint}}
+
+\multiput(764,660)(14.225,15.114){2}{\usebox{\plotpoint}}
+
+\put(793.58,690.58){\usebox{\plotpoint}}
+
+\put(808.26,705.26){\usebox{\plotpoint}}
+
+\put(822.93,719.93){\usebox{\plotpoint}}
+
+\put(837.61,734.61){\usebox{\plotpoint}}
+
+\put(852.29,749.29){\usebox{\plotpoint}}
+
+\put(866.78,764.14){\usebox{\plotpoint}}
+
+\put(881.25,779.00){\usebox{\plotpoint}}
+
+\put(896.23,793.37){\usebox{\plotpoint}}
+
+\multiput(910,808)(14.676,14.676){2}{\usebox{\plotpoint}}
+
+\put(939.82,837.82){\usebox{\plotpoint}}
+
+\put(954.50,852.50){\usebox{\plotpoint}}
+
+\put(969.17,867.17){\usebox{\plotpoint}}
+
+\put(983.85,881.85){\usebox{\plotpoint}}
+
+\put(998.29,896.75){\usebox{\plotpoint}}
+
+\put(1012.87,911.52){\usebox{\plotpoint}}
+
+\put(1027.75,925.98){\usebox{\plotpoint}}
+
+\put(1042.03,941.03){\usebox{\plotpoint}}
+
+\multiput(1056,955)(14.676,14.676){2}{\usebox{\plotpoint}}
+
+\put(1086.06,985.06){\usebox{\plotpoint}}
+
+\put(1100.74,999.74){\usebox{\plotpoint}}
+
+\put(1115.41,1014.41){\usebox{\plotpoint}}
+
+\put(1129.81,1029.36){\usebox{\plotpoint}}
+
+\put(1144.48,1044.04){\usebox{\plotpoint}}
+
+\put(1159.26,1058.59){\usebox{\plotpoint}}
+
+\put(1173.60,1073.60){\usebox{\plotpoint}}
+
+\put(1188.27,1088.27){\usebox{\plotpoint}}
+
+\multiput(1202,1102)(14.676,14.676){2}{\usebox{\plotpoint}}
+
+\put(1232.30,1132.30){\usebox{\plotpoint}}
+
+\put(1246.98,1146.98){\usebox{\plotpoint}}
+
+\put(1261.33,1161.97){\usebox{\plotpoint}}
+
+\put(1276.09,1176.55){\usebox{\plotpoint}}
+
+\put(1290.78,1191.20){\usebox{\plotpoint}}
+
+\put(1305.16,1206.16){\usebox{\plotpoint}}
+
+\put(1319.84,1220.84){\usebox{\plotpoint}}
+
+\put(1334.51,1235.51){\usebox{\plotpoint}}
+
+\multiput(1349,1250)(14.676,14.676){2}{\usebox{\plotpoint}}
+
+\put(1378.54,1279.54){\usebox{\plotpoint}}
+
+\put(1392.84,1294.58){\usebox{\plotpoint}}
+
+\put(1407.70,1309.07){\usebox{\plotpoint}}
+
+\put(1422.29,1323.81){\usebox{\plotpoint}}
+
+\put(1436.73,1338.73){\usebox{\plotpoint}}
+
+\put(1451.40,1353.40){\usebox{\plotpoint}}
+
+\put(1466.08,1368.08){\usebox{\plotpoint}}
+
+\put(1480.76,1382.76){\usebox{\plotpoint}}
+
+\multiput(1495,1397)(14.676,14.676){2}{\usebox{\plotpoint}}
+
+\put(1524.36,1427.20){\usebox{\plotpoint}}
+
+\put(1539.31,1441.59){\usebox{\plotpoint}}
+
+\put(1553.81,1456.42){\usebox{\plotpoint}}
+
+\put(1568.29,1471.29){\usebox{\plotpoint}}
+
+\put(1582.97,1485.97){\usebox{\plotpoint}}
+
+\put(1597.64,1500.64){\usebox{\plotpoint}}
+
+\put(1612.32,1515.32){\usebox{\plotpoint}}
+
+\put(1627.00,1530.00){\usebox{\plotpoint}}
+
+\multiput(1641,1544)(14.225,15.114){2}{\usebox{\plotpoint}}
+
+\put(1670.92,1574.10){\usebox{\plotpoint}}
+
+\put(1685.69,1588.69){\usebox{\plotpoint}}
+
+\put(1700.04,1603.67){\usebox{\plotpoint}}
+
+\put(1714.53,1618.53){\usebox{\plotpoint}}
+
+\put(1729.21,1633.21){\usebox{\plotpoint}}
+
+\put(1743.88,1647.88){\usebox{\plotpoint}}
+
+\put(1758.56,1662.56){\usebox{\plotpoint}}
+
+\put(1773.17,1677.30){\usebox{\plotpoint}}
+
+\multiput(1787,1692)(15.114,14.225){2}{\usebox{\plotpoint}}
+
+\put(1817.25,1721.25){\usebox{\plotpoint}}
+
+\put(1820,1724){\usebox{\plotpoint}}
+
+\sbox{\plotpoint}{\rule[-0.200pt]{0.400pt}{0.400pt}}%
+
+\put(211.0,131.0){\rule[-0.200pt]{0.400pt}{442.292pt}}
+
+\put(211.0,131.0){\rule[-0.200pt]{420.611pt}{0.400pt}}
+
+\put(1957.0,131.0){\rule[-0.200pt]{0.400pt}{442.292pt}}
+
+\put(211.0,1967.0){\rule[-0.200pt]{420.611pt}{0.400pt}}
+
+\end{picture}
+    \end{center}
+\caption{Az $x-h$ grafikon}  \end{figure}
+
+A GNUPLOT programmal egyenest illesztettünk a mérési pontokra, ezzel megkaptuk a meredekségeket. A GNUPLOT megadta az illesztés hibáját is:
+
+  
+  \begin{table}[H]
+    \begin{center}
+      \begin{tabular}{|
+c|
+c|
+c|
+c|
+c|
+}
+        \hline
+        
+ & 
+\ensuremath{\unit[\text{\ensuremath{g_{\text{nagy}}}}]{(\nicefrac{m}{s^2})}} & \ensuremath{\unit[\text{\ensuremath{\Delta{}g_{\text{nagy}}}}]{(\nicefrac{m}{s^2})}} & \ensuremath{\unit[\text{\ensuremath{g_{\text{kicsi}}}}]{(\nicefrac{m}{s^2})}} & \ensuremath{\unit[\text{\ensuremath{\Delta{}g_{\text{kicsi}}}}]{(\nicefrac{m}{s^2})}}
+\\
+        \hline\hline
+        
+
+ & 9,55
+ & 0,08
+ & 9,58
+ & 0,16
+\\
+        \hline
+      \end{tabular}
+      \caption{Eredmények}
+      \label{tab:}
+    \end{center}
+  \end{table}
+
+
+Látható egyrészt, hogy az két érték a hibahatáron belül megegyezik. Másrészt azt is láthatjuk, hogy az irodalmi (9,81) értéktől a hibahatáron túl eltérnek.
+
+  \begin{figure}[H]
+    \begin{center}
+% GNUPLOT: LaTeX picture
+
+\setlength{\unitlength}{0.240900pt}
+
+\ifx\plotpoint\undefined\newsavebox{\plotpoint}\fi
+
+\sbox{\plotpoint}{\rule[-0.200pt]{0.400pt}{0.400pt}}%
+
+\begin{picture}(2007,826)(0,0)
+
+\sbox{\plotpoint}{\rule[-0.200pt]{0.400pt}{0.400pt}}%
+
+\put(190.0,40.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(170,40){\makebox(0,0)[r]{ 9.4}}
+
+\put(1937.0,40.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(190.0,123.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(170,123){\makebox(0,0)[r]{ 9.45}}
+
+\put(1937.0,123.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(190.0,206.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(170,206){\makebox(0,0)[r]{ 9.5}}
+
+\put(1937.0,206.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(190.0,289.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(170,289){\makebox(0,0)[r]{ 9.55}}
+
+\put(1937.0,289.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(190.0,372.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(170,372){\makebox(0,0)[r]{ 9.6}}
+
+\put(1937.0,372.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(190.0,454.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(170,454){\makebox(0,0)[r]{ 9.65}}
+
+\put(1937.0,454.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(190.0,537.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(170,537){\makebox(0,0)[r]{ 9.7}}
+
+\put(1937.0,537.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(190.0,620.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(170,620){\makebox(0,0)[r]{ 9.75}}
+
+\put(1937.0,620.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(190.0,703.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(170,703){\makebox(0,0)[r]{ 9.8}}
+
+\put(1937.0,703.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(190.0,786.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(170,786){\makebox(0,0)[r]{ 9.85}}
+
+\put(1937.0,786.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(190.0,40.0){\rule[-0.200pt]{0.400pt}{179.711pt}}
+
+\put(190.0,40.0){\rule[-0.200pt]{425.670pt}{0.400pt}}
+
+\put(1957.0,40.0){\rule[-0.200pt]{0.400pt}{179.711pt}}
+
+\put(190.0,786.0){\rule[-0.200pt]{425.670pt}{0.400pt}}
+
+\put(367.0,40.0){\rule[-0.200pt]{0.400pt}{60.466pt}}
+
+\put(367.0,291.0){\rule[-0.200pt]{127.677pt}{0.400pt}}
+
+\put(897.0,40.0){\rule[-0.200pt]{0.400pt}{60.466pt}}
+
+\put(367.0,40.0){\rule[-0.200pt]{127.677pt}{0.400pt}}
+
+\put(1250.0,40.0){\rule[-0.200pt]{0.400pt}{72.752pt}}
+
+\put(1250.0,342.0){\rule[-0.200pt]{127.677pt}{0.400pt}}
+
+\put(1780.0,40.0){\rule[-0.200pt]{0.400pt}{72.752pt}}
+
+\put(1250.0,40.0){\rule[-0.200pt]{127.677pt}{0.400pt}}
+
+\put(632.0,152.0){\rule[-0.200pt]{0.400pt}{67.211pt}}
+
+\put(622.0,152.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(622.0,431.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(1515.0,73.0){\rule[-0.200pt]{0.400pt}{129.604pt}}
+
+\put(1505.0,73.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(1505.0,611.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(190,720){\usebox{\plotpoint}}
+
+\put(190.0,720.0){\rule[-0.200pt]{425.670pt}{0.400pt}}
+
+\sbox{\plotpoint}{\rule[-0.400pt]{0.800pt}{0.800pt}}%
+
+\sbox{\plotpoint}{\rule[-0.200pt]{0.400pt}{0.400pt}}%
+
+\put(632,81){\makebox(0,0){nagy}}
+
+\put(1515,81){\makebox(0,0){kicsi}}
+
+\put(1780,741){\makebox(0,0){irodalmi érték}}
+
+\put(190.0,40.0){\rule[-0.200pt]{0.400pt}{179.711pt}}
+
+\put(190.0,40.0){\rule[-0.200pt]{425.670pt}{0.400pt}}
+
+\put(1957.0,40.0){\rule[-0.200pt]{0.400pt}{179.711pt}}
+
+\put(190.0,786.0){\rule[-0.200pt]{425.670pt}{0.400pt}}
+
+\end{picture}
+    \end{center}
+  \end{figure}
+
+
+Az eltérést magyarázhatjuk a mérőeszközök sziszetmatikus hibájával. A kioldószerkezet szerintem elég pontos, viszont az alsó érzékelő kapcsoló nem azonnal zárt, mikor a golyó a tetejéhez ért, hanem még valamennyi utat meg kellett tennie. $h$-t viszont a kapcsoló tetejétől mértük. Tehát lehet, hogy $h$ értékeihez még hozzá kéne adni valamennyit -- vagy a (0,0) pont helyett egy negatív ordinátájú értéket kéne fölvenni, a valódi érzékelés pontját. Ezt viszont nem tudjuk. 
+
+Ha a (0,0) pontot töröljük a mérési eredményekből és úgy illesztünk egyenest, 9,82 és 10,08 jön ki a nagy, ill.\ a kis golyónál. A $h$ eltérése ekkor \ensuremath{-0,04}, ill.\ \ensuremath{-0,08} m, tehát ez túl nagy ahhoz, hogy csak az érzékelő holtjátékát jelentse. Mégis, így pontosabban megkaptuk az irodalmi értékeket. Lehet, hogy az érzékelő  rugója közben lassítja a golyót, és ez is valamennyire beleszámít az eredménybe. Az új illesztéssel kapott eredmények:
+
+  \begin{figure}[H]
+    \begin{center}
+% GNUPLOT: LaTeX picture
+
+\setlength{\unitlength}{0.240900pt}
+
+\ifx\plotpoint\undefined\newsavebox{\plotpoint}\fi
+
+\sbox{\plotpoint}{\rule[-0.200pt]{0.400pt}{0.400pt}}%
+
+\begin{picture}(2007,826)(0,0)
+
+\sbox{\plotpoint}{\rule[-0.200pt]{0.400pt}{0.400pt}}%
+
+\put(190.0,40.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(170,40){\makebox(0,0)[r]{ 9.4}}
+
+\put(1937.0,40.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(190.0,115.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(170,115){\makebox(0,0)[r]{ 9.5}}
+
+\put(1937.0,115.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(190.0,189.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(170,189){\makebox(0,0)[r]{ 9.6}}
+
+\put(1937.0,189.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(190.0,264.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(170,264){\makebox(0,0)[r]{ 9.7}}
+
+\put(1937.0,264.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(190.0,338.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(170,338){\makebox(0,0)[r]{ 9.8}}
+
+\put(1937.0,338.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(190.0,413.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(170,413){\makebox(0,0)[r]{ 9.9}}
+
+\put(1937.0,413.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(190.0,488.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(170,488){\makebox(0,0)[r]{ 10}}
+
+\put(1937.0,488.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(190.0,562.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(170,562){\makebox(0,0)[r]{ 10.1}}
+
+\put(1937.0,562.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(190.0,637.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(170,637){\makebox(0,0)[r]{ 10.2}}
+
+\put(1937.0,637.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(190.0,711.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(170,711){\makebox(0,0)[r]{ 10.3}}
+
+\put(1937.0,711.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(190.0,786.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(170,786){\makebox(0,0)[r]{ 10.4}}
+
+\put(1937.0,786.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(190.0,40.0){\rule[-0.200pt]{0.400pt}{179.711pt}}
+
+\put(190.0,40.0){\rule[-0.200pt]{425.670pt}{0.400pt}}
+
+\put(1957.0,40.0){\rule[-0.200pt]{0.400pt}{179.711pt}}
+
+\put(190.0,786.0){\rule[-0.200pt]{425.670pt}{0.400pt}}
+
+\put(367.0,40.0){\rule[-0.200pt]{0.400pt}{75.402pt}}
+
+\put(367.0,353.0){\rule[-0.200pt]{127.677pt}{0.400pt}}
+
+\put(897.0,40.0){\rule[-0.200pt]{0.400pt}{75.402pt}}
+
+\put(367.0,40.0){\rule[-0.200pt]{127.677pt}{0.400pt}}
+
+\put(1250.0,40.0){\rule[-0.200pt]{0.400pt}{122.377pt}}
+
+\put(1250.0,548.0){\rule[-0.200pt]{127.677pt}{0.400pt}}
+
+\put(1780.0,40.0){\rule[-0.200pt]{0.400pt}{122.377pt}}
+
+\put(1250.0,40.0){\rule[-0.200pt]{127.677pt}{0.400pt}}
+
+\put(632.0,264.0){\rule[-0.200pt]{0.400pt}{42.880pt}}
+
+\put(622.0,264.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(622.0,442.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(1515.0,364.0){\rule[-0.200pt]{0.400pt}{88.410pt}}
+
+\put(1505.0,364.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(1505.0,731.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(190,346){\usebox{\plotpoint}}
+
+\put(190.0,346.0){\rule[-0.200pt]{425.670pt}{0.400pt}}
+
+\sbox{\plotpoint}{\rule[-0.400pt]{0.800pt}{0.800pt}}%
+
+\sbox{\plotpoint}{\rule[-0.200pt]{0.400pt}{0.400pt}}%
+
+\put(632,59){\makebox(0,0){nagy}}
+
+\put(1515,59){\makebox(0,0){kicsi}}
+
+\put(1780,356){\makebox(0,0){irodalmi érték}}
+
+\put(190.0,40.0){\rule[-0.200pt]{0.400pt}{179.711pt}}
+
+\put(190.0,40.0){\rule[-0.200pt]{425.670pt}{0.400pt}}
+
+\put(1957.0,40.0){\rule[-0.200pt]{0.400pt}{179.711pt}}
+
+\put(190.0,786.0){\rule[-0.200pt]{425.670pt}{0.400pt}}
+
+\end{picture}
+    \end{center}
+  \end{figure}
+
+
+\section{Matematikai inga lengésideje}
+
+A matematkiai inga lengésideje \[T = 2\pi\sqrt{\frac lg}\]. Kísérletünkben az ingát ferde, a vízszintessel $\alpha$ szöget bezáró tengely körül hagyjuk forogni, így a gravitációs gyorsulásnak csak a tengelyre merőleges $\geff = g \cos \alpha$ komponense lesz effektív.
+
+$\alpha$ különböző értékeire megmértük a lengésidőt:
+
+  
+  \begin{table}[H]
+    \begin{center}
+      \begin{tabular}{|
+c|
+c|
+}
+        \hline
+        
+\ensuremath{\unit[\text{\ensuremath{\alpha}}]{({}^\circ)}} & 
+\ensuremath{\unit[\text{\ensuremath{T}}]{(s)}}
+\\
+        \hline\hline
+        
+0
+ & 1,159
+\\
+        \hline
+        
+10
+ & 1,164
+\\
+        \hline
+        
+20
+ & 1,192
+\\
+        \hline
+        
+30
+ & 1,239
+\\
+        \hline
+        
+40
+ & 1,317
+\\
+        \hline
+        
+50
+ & 1,434
+\\
+        \hline
+        
+60
+ & 1,627
+\\
+        \hline
+        
+70
+ & 1,935
+\\
+        \hline
+        
+80
+ & 2,540
+\\
+        \hline
+      \end{tabular}
+      \caption{Mért adatok}
+      \label{tab:}
+    \end{center}
+  \end{table}
+
+Ha ábrázoljuk $T$-t $\geff = g \cos \alpha$ függvényében, ezt kapjuk:
+
+  \begin{figure}[H]
+    \begin{center}
+% GNUPLOT: LaTeX picture
+
+\setlength{\unitlength}{0.240900pt}
+
+\ifx\plotpoint\undefined\newsavebox{\plotpoint}\fi
+
+\sbox{\plotpoint}{\rule[-0.200pt]{0.400pt}{0.400pt}}%
+
+\begin{picture}(2007,944)(0,0)
+
+\sbox{\plotpoint}{\rule[-0.200pt]{0.400pt}{0.400pt}}%
+
+\put(211.0,131.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191,131){\makebox(0,0)[r]{ 0}}
+
+\put(1937.0,131.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(211.0,260.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191,260){\makebox(0,0)[r]{ 0.5}}
+
+\put(1937.0,260.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(211.0,389.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191,389){\makebox(0,0)[r]{ 1}}
+
+\put(1937.0,389.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(211.0,518.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191,518){\makebox(0,0)[r]{ 1.5}}
+
+\put(1937.0,518.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(211.0,646.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191,646){\makebox(0,0)[r]{ 2}}
+
+\put(1937.0,646.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(211.0,775.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191,775){\makebox(0,0)[r]{ 2.5}}
+
+\put(1937.0,775.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(211.0,904.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191,904){\makebox(0,0)[r]{ 3}}
+
+\put(1937.0,904.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(211.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(211,90){\makebox(0,0){ 0}}
+
+\put(211.0,884.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(386.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(386,90){\makebox(0,0){ 1}}
+
+\put(386.0,884.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(560.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(560,90){\makebox(0,0){ 2}}
+
+\put(560.0,884.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(735.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(735,90){\makebox(0,0){ 3}}
+
+\put(735.0,884.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(909.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(909,90){\makebox(0,0){ 4}}
+
+\put(909.0,884.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1084.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1084,90){\makebox(0,0){ 5}}
+
+\put(1084.0,884.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1259.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1259,90){\makebox(0,0){ 6}}
+
+\put(1259.0,884.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1433.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1433,90){\makebox(0,0){ 7}}
+
+\put(1433.0,884.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1608.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1608,90){\makebox(0,0){ 8}}
+
+\put(1608.0,884.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1782.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1782,90){\makebox(0,0){ 9}}
+
+\put(1782.0,884.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1957.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1957,90){\makebox(0,0){ 10}}
+
+\put(1957.0,884.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(211.0,131.0){\rule[-0.200pt]{0.400pt}{186.216pt}}
+
+\put(211.0,131.0){\rule[-0.200pt]{420.611pt}{0.400pt}}
+
+\put(1957.0,131.0){\rule[-0.200pt]{0.400pt}{186.216pt}}
+
+\put(211.0,904.0){\rule[-0.200pt]{420.611pt}{0.400pt}}
+
+\put(70,517){\makebox(0,0){\ensuremath{\unit[\text{\ensuremath{T}}]{(s)}}}}
+
+\put(1084,29){\makebox(0,0){\ensuremath{\unit[\text{\ensuremath{g_\text{eff}}}]{(\nicefrac{m}{s^2})}}}}
+
+\put(1924,430){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1898,431){\makebox(0,0){$+$}}
+
+\sbox{\plotpoint}{\rule[-0.400pt]{0.800pt}{0.800pt}}%
+
+\put(1821,438){\raisebox{-.8pt}{\makebox(0,0){$\Box$}}}
+
+\sbox{\plotpoint}{\rule[-0.500pt]{1.000pt}{1.000pt}}%
+
+\put(1694,450){\makebox(0,0){$\times$}}
+
+\sbox{\plotpoint}{\rule[-0.600pt]{1.200pt}{1.200pt}}%
+
+\put(1523,470){\makebox(0,0){$\triangle$}}
+
+\sbox{\plotpoint}{\rule[-0.500pt]{1.000pt}{1.000pt}}%
+
+\put(1312,500){\makebox(0,0){$\star$}}
+
+\sbox{\plotpoint}{\rule[-0.200pt]{0.400pt}{0.400pt}}%
+
+\put(1067,550){\circle{12}}
+
+\put(797,630){\circle{18}}
+
+\sbox{\plotpoint}{\rule[-0.400pt]{0.800pt}{0.800pt}}%
+
+\put(508,785){\circle{24}}
+
+\sbox{\plotpoint}{\rule[-0.200pt]{0.400pt}{0.400pt}}%
+
+\put(211.0,131.0){\rule[-0.200pt]{0.400pt}{186.216pt}}
+
+\put(211.0,131.0){\rule[-0.200pt]{420.611pt}{0.400pt}}
+
+\put(1957.0,131.0){\rule[-0.200pt]{0.400pt}{186.216pt}}
+
+\put(211.0,904.0){\rule[-0.200pt]{420.611pt}{0.400pt}}
+
+\end{picture}
+    \end{center}
+  \end{figure}
+
+
+Azt látjuk, hogy a pontok egy $\frac{1}{\sqrt{x}}$ alakú görbére illeszkednek, ahogy ez várható is volt a képletből.
+
+\end{document}
+
+
+
+

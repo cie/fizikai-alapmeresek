@@ -1,0 +1,741 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[final]{graphics}
+\usepackage[pdftex]{graphicx}
+\usepackage[dvips]{color}
+\usepackage{amsfonts}
+\usepackage{subfigure}
+\usepackage{lscape}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{units}
+\usepackage{float}
+\usepackage[table]{xcolor}
+\usepackage{rmpage}
+\usepackage[magyar]{babel}
+\usepackage[margin=2cm]{geometry}
+\newcommand{\hide}[1]{}
+\DeclareGraphicsExtensions{.jpg,.pdf,.mps,.png}
+    \title{Optikai alapmérések}
+    \author{Kalló Bernát -- Mérés: 2012.05.09. -- Leadás: 2012.06.08.}
+    \date{}
+    \begin{document}
+\def\tnagy{\ensuremath{t_{\text{nagy}}}}\def\tkicsi{\ensuremath{t_{\text{kicsi}}}}\def\xnagy{\ensuremath{x_{\text{nagy}}}}\def\xkicsi{\ensuremath{x_{\text{kicsi}}}}\def\gnagy{\ensuremath{g_{\text{nagy}}}}\def\gkicsi{\ensuremath{g_{\text{kicsi}}}}\def\Deltagnagy{\ensuremath{\Delta{}g_{\text{nagy}}}}\def\Deltagkicsi{\ensuremath{\Delta{}g_{\text{kicsi}}}}\def\geff{\ensuremath{g_\text{eff}}}
+
+\maketitle
+
+\section{Törésmutató meghatározása}
+
+Két közeg határán áthaladó fénysugár megtörik, úgy, hogy a beesési és törési szögek szinuszának aránya \[\frac{\sin\alpha}{\sin\beta} = n_{2,1}\] állandó, a két közeg relatív törésmutatója.
+
+Megmértük egy félkör alakú lencse egyenes oldalán belépő fénysugár törési szögét. Valójában a kilépő fénysugár szögét mértük, de mivel a görbe oldalon való kilépéskor a sugár merőleges a határfelületre, az iránya ott nem változik meg. A mért adatok az alábbi táblázatban láthatók:
+
+  
+  \begin{table}[H]
+    \begin{center}
+      \begin{tabular}{|
+c|
+c|
+}
+        \hline
+        
+\ensuremath{\unit[\text{\ensuremath{\alpha}}]{({}^\circ)}} & 
+\ensuremath{\unit[\text{\ensuremath{\beta}}]{({}^\circ)}}
+\\
+        \hline\hline
+        
+0
+ & 0
+\\
+        \hline
+        
+10
+ & 7
+\\
+        \hline
+        
+20
+ & 13
+\\
+        \hline
+        
+30
+ & 20
+\\
+        \hline
+        
+40
+ & 26
+\\
+        \hline
+        
+50
+ & 31
+\\
+        \hline
+        
+60
+ & 36
+\\
+        \hline
+        
+70
+ & 39
+\\
+        \hline
+        
+80
+ & 42
+\\
+        \hline
+      \end{tabular}
+      \caption{Beesési és törési szögek belépéskor}
+      \label{tab:}
+    \end{center}
+  \end{table}
+
+Ezt grafikonon ábrázolva:
+
+  \begin{figure}[H]
+    \begin{center}
+% GNUPLOT: LaTeX picture
+
+\setlength{\unitlength}{0.240900pt}
+
+\ifx\plotpoint\undefined\newsavebox{\plotpoint}\fi
+
+\sbox{\plotpoint}{\rule[-0.200pt]{0.400pt}{0.400pt}}%
+
+\begin{picture}(1653,1653)(0,0)
+
+\sbox{\plotpoint}{\rule[-0.200pt]{0.400pt}{0.400pt}}%
+
+\put(211.0,131.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191,131){\makebox(0,0)[r]{ 0}}
+
+\put(1583.0,131.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(211.0,427.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191,427){\makebox(0,0)[r]{ 0.2}}
+
+\put(1583.0,427.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(211.0,724.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191,724){\makebox(0,0)[r]{ 0.4}}
+
+\put(1583.0,724.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(211.0,1020.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191,1020){\makebox(0,0)[r]{ 0.6}}
+
+\put(1583.0,1020.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(211.0,1317.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191,1317){\makebox(0,0)[r]{ 0.8}}
+
+\put(1583.0,1317.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(211.0,1613.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191,1613){\makebox(0,0)[r]{ 1}}
+
+\put(1583.0,1613.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(211.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(211,90){\makebox(0,0){ 0}}
+
+\put(211.0,1593.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(489.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(489,90){\makebox(0,0){ 0.2}}
+
+\put(489.0,1593.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(768.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(768,90){\makebox(0,0){ 0.4}}
+
+\put(768.0,1593.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1046.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1046,90){\makebox(0,0){ 0.6}}
+
+\put(1046.0,1593.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1325.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1325,90){\makebox(0,0){ 0.8}}
+
+\put(1325.0,1593.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1603.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1603,90){\makebox(0,0){ 1}}
+
+\put(1603.0,1593.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(211.0,131.0){\rule[-0.200pt]{0.400pt}{357.014pt}}
+
+\put(211.0,131.0){\rule[-0.200pt]{335.333pt}{0.400pt}}
+
+\put(1603.0,131.0){\rule[-0.200pt]{0.400pt}{357.014pt}}
+
+\put(211.0,1613.0){\rule[-0.200pt]{335.333pt}{0.400pt}}
+
+\put(70,872){\makebox(0,0){$\sin\alpha$}}
+
+\put(907,29){\makebox(0,0){$\sin\beta$}}
+
+\put(211,131){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(381,388){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(524,638){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(687,872){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(821,1084){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(928,1266){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1029,1414){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1087,1524){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1142,1590){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\multiput(212,131)(11.312,17.402){2}{\usebox{\plotpoint}}
+
+\put(234.18,166.08){\usebox{\plotpoint}}
+
+\put(245.17,183.69){\usebox{\plotpoint}}
+
+\put(256.31,201.20){\usebox{\plotpoint}}
+
+\multiput(267,218)(11.143,17.511){2}{\usebox{\plotpoint}}
+
+\put(289.74,253.73){\usebox{\plotpoint}}
+
+\put(300.88,271.24){\usebox{\plotpoint}}
+
+\multiput(309,284)(10.792,17.729){2}{\usebox{\plotpoint}}
+
+\put(334.39,323.71){\usebox{\plotpoint}}
+
+\put(345.70,341.11){\usebox{\plotpoint}}
+
+\put(356.85,358.62){\usebox{\plotpoint}}
+
+\multiput(366,373)(11.143,17.511){2}{\usebox{\plotpoint}}
+
+\put(390.28,411.15){\usebox{\plotpoint}}
+
+\put(401.19,428.80){\usebox{\plotpoint}}
+
+\put(412.11,446.45){\usebox{\plotpoint}}
+
+\multiput(422,462)(11.143,17.511){2}{\usebox{\plotpoint}}
+
+\put(445.54,498.99){\usebox{\plotpoint}}
+
+\put(456.68,516.50){\usebox{\plotpoint}}
+
+\put(467.82,534.01){\usebox{\plotpoint}}
+
+\multiput(478,550)(10.792,17.729){2}{\usebox{\plotpoint}}
+
+\put(500.80,586.82){\usebox{\plotpoint}}
+
+\put(511.94,604.33){\usebox{\plotpoint}}
+
+\put(523.08,621.84){\usebox{\plotpoint}}
+
+\multiput(534,639)(11.143,17.511){2}{\usebox{\plotpoint}}
+
+\put(556.93,674.10){\usebox{\plotpoint}}
+
+\put(568.19,691.53){\usebox{\plotpoint}}
+
+\multiput(577,706)(11.143,17.511){2}{\usebox{\plotpoint}}
+
+\put(601.33,744.24){\usebox{\plotpoint}}
+
+\put(612.48,761.75){\usebox{\plotpoint}}
+
+\put(623.62,779.26){\usebox{\plotpoint}}
+
+\multiput(633,794)(10.792,17.729){2}{\usebox{\plotpoint}}
+
+\put(656.59,832.07){\usebox{\plotpoint}}
+
+\put(667.74,849.58){\usebox{\plotpoint}}
+
+\put(678.88,867.10){\usebox{\plotpoint}}
+
+\multiput(689,883)(11.143,17.511){2}{\usebox{\plotpoint}}
+
+\put(712.31,919.63){\usebox{\plotpoint}}
+
+\put(723.25,937.26){\usebox{\plotpoint}}
+
+\put(734.14,954.93){\usebox{\plotpoint}}
+
+\multiput(745,972)(11.143,17.511){2}{\usebox{\plotpoint}}
+
+\put(767.57,1007.46){\usebox{\plotpoint}}
+
+\put(778.71,1024.97){\usebox{\plotpoint}}
+
+\multiput(787,1038)(11.692,17.149){2}{\usebox{\plotpoint}}
+
+\put(812.50,1077.26){\usebox{\plotpoint}}
+
+\put(823.53,1094.84){\usebox{\plotpoint}}
+
+\put(834.68,1112.35){\usebox{\plotpoint}}
+
+\multiput(844,1127)(11.143,17.511){2}{\usebox{\plotpoint}}
+
+\put(868.11,1164.88){\usebox{\plotpoint}}
+
+\put(879.25,1182.39){\usebox{\plotpoint}}
+
+\put(890.25,1199.99){\usebox{\plotpoint}}
+
+\multiput(900,1216)(11.143,17.511){2}{\usebox{\plotpoint}}
+
+\put(923.36,1252.72){\usebox{\plotpoint}}
+
+\put(934.51,1270.23){\usebox{\plotpoint}}
+
+\put(945.65,1287.74){\usebox{\plotpoint}}
+
+\multiput(956,1304)(11.143,17.511){2}{\usebox{\plotpoint}}
+
+\put(978.79,1340.45){\usebox{\plotpoint}}
+
+\put(989.77,1358.06){\usebox{\plotpoint}}
+
+\put(1000.91,1375.57){\usebox{\plotpoint}}
+
+\multiput(1012,1393)(11.692,17.149){2}{\usebox{\plotpoint}}
+
+\put(1035.04,1427.64){\usebox{\plotpoint}}
+
+\put(1046.19,1445.15){\usebox{\plotpoint}}
+
+\multiput(1055,1459)(10.792,17.729){2}{\usebox{\plotpoint}}
+
+\put(1079.16,1497.97){\usebox{\plotpoint}}
+
+\put(1090.30,1515.48){\usebox{\plotpoint}}
+
+\put(1101.45,1532.99){\usebox{\plotpoint}}
+
+\multiput(1111,1548)(11.143,17.511){2}{\usebox{\plotpoint}}
+
+\put(1134.88,1585.52){\usebox{\plotpoint}}
+
+\put(1145.88,1603.12){\usebox{\plotpoint}}
+
+\put(1152,1613){\usebox{\plotpoint}}
+
+\put(211.0,131.0){\rule[-0.200pt]{0.400pt}{357.014pt}}
+
+\put(211.0,131.0){\rule[-0.200pt]{335.333pt}{0.400pt}}
+
+\put(1603.0,131.0){\rule[-0.200pt]{0.400pt}{357.014pt}}
+
+\put(211.0,1613.0){\rule[-0.200pt]{335.333pt}{0.400pt}}
+
+\end{picture}
+    \end{center}
+\caption{Beesési ($\alpha$) és törési ($\beta$) szögek belépéskor}  \end{figure}
+
+Az illesztett egyenes meredeksége $n_{2,1} = \ensuremath{1,481}$, tehát ez a műanyagnak a levegőre vonatkoztatott törésmutatója.
+
+Ezután elvégeztük a kísérletet fordítva is, a kilépéskor történő törést mérve.
+  
+  \begin{table}[H]
+    \begin{center}
+      \begin{tabular}{|
+c|
+c|
+}
+        \hline
+        
+\ensuremath{\unit[\text{\ensuremath{\alpha}}]{({}^\circ)}} & 
+\ensuremath{\unit[\text{\ensuremath{\beta}}]{({}^\circ)}}
+\\
+        \hline\hline
+        
+0
+ & 0
+\\
+        \hline
+        
+10
+ & 14
+\\
+        \hline
+        
+15
+ & 21
+\\
+        \hline
+        
+20
+ & 29
+\\
+        \hline
+        
+25
+ & 37
+\\
+        \hline
+        
+30
+ & 46
+\\
+        \hline
+        
+35
+ & 56
+\\
+        \hline
+        
+40
+ & 69
+\\
+        \hline
+      \end{tabular}
+      \caption{Beesési és törési szögek kilépéskor}
+      \label{tab:}
+    \end{center}
+  \end{table}
+
+Grafikonon ábrázolva:
+
+  \begin{figure}[H]
+    \begin{center}
+% GNUPLOT: LaTeX picture
+
+\setlength{\unitlength}{0.240900pt}
+
+\ifx\plotpoint\undefined\newsavebox{\plotpoint}\fi
+
+\sbox{\plotpoint}{\rule[-0.200pt]{0.400pt}{0.400pt}}%
+
+\begin{picture}(1653,1653)(0,0)
+
+\sbox{\plotpoint}{\rule[-0.200pt]{0.400pt}{0.400pt}}%
+
+\put(211.0,131.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191,131){\makebox(0,0)[r]{ 0}}
+
+\put(1583.0,131.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(211.0,427.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191,427){\makebox(0,0)[r]{ 0.2}}
+
+\put(1583.0,427.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(211.0,724.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191,724){\makebox(0,0)[r]{ 0.4}}
+
+\put(1583.0,724.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(211.0,1020.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191,1020){\makebox(0,0)[r]{ 0.6}}
+
+\put(1583.0,1020.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(211.0,1317.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191,1317){\makebox(0,0)[r]{ 0.8}}
+
+\put(1583.0,1317.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(211.0,1613.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191,1613){\makebox(0,0)[r]{ 1}}
+
+\put(1583.0,1613.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(211.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(211,90){\makebox(0,0){ 0}}
+
+\put(211.0,1593.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(489.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(489,90){\makebox(0,0){ 0.2}}
+
+\put(489.0,1593.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(768.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(768,90){\makebox(0,0){ 0.4}}
+
+\put(768.0,1593.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1046.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1046,90){\makebox(0,0){ 0.6}}
+
+\put(1046.0,1593.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1325.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1325,90){\makebox(0,0){ 0.8}}
+
+\put(1325.0,1593.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1603.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1603,90){\makebox(0,0){ 1}}
+
+\put(1603.0,1593.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(211.0,131.0){\rule[-0.200pt]{0.400pt}{357.014pt}}
+
+\put(211.0,131.0){\rule[-0.200pt]{335.333pt}{0.400pt}}
+
+\put(1603.0,131.0){\rule[-0.200pt]{0.400pt}{357.014pt}}
+
+\put(211.0,1613.0){\rule[-0.200pt]{335.333pt}{0.400pt}}
+
+\put(70,872){\makebox(0,0){$\sin\alpha$}}
+
+\put(907,29){\makebox(0,0){$\sin\beta$}}
+
+\put(211,131){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(548,388){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(710,515){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(886,638){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1049,757){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1212,872){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1365,981){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1511,1084){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(211,141){\usebox{\plotpoint}}
+
+\put(211.00,141.00){\usebox{\plotpoint}}
+
+\put(227.79,153.19){\usebox{\plotpoint}}
+
+\put(244.29,165.78){\usebox{\plotpoint}}
+
+\put(261.18,177.84){\usebox{\plotpoint}}
+
+\put(278.07,189.91){\usebox{\plotpoint}}
+
+\put(294.49,202.60){\usebox{\plotpoint}}
+
+\put(311.36,214.69){\usebox{\plotpoint}}
+
+\put(328.37,226.58){\usebox{\plotpoint}}
+
+\put(345.22,238.67){\usebox{\plotpoint}}
+
+\put(361.87,251.05){\usebox{\plotpoint}}
+
+\put(378.76,263.11){\usebox{\plotpoint}}
+
+\put(395.59,275.25){\usebox{\plotpoint}}
+
+\put(412.05,287.89){\usebox{\plotpoint}}
+
+\put(428.94,299.96){\usebox{\plotpoint}}
+
+\put(445.50,312.46){\usebox{\plotpoint}}
+
+\put(462.23,324.74){\usebox{\plotpoint}}
+
+\put(479.12,336.80){\usebox{\plotpoint}}
+
+\put(495.88,349.04){\usebox{\plotpoint}}
+
+\put(512.41,361.58){\usebox{\plotpoint}}
+
+\put(529.30,373.64){\usebox{\plotpoint}}
+
+\put(546.19,385.71){\usebox{\plotpoint}}
+
+\put(562.94,397.96){\usebox{\plotpoint}}
+
+\put(579.83,410.02){\usebox{\plotpoint}}
+
+\put(596.72,422.09){\usebox{\plotpoint}}
+
+\put(613.32,434.54){\usebox{\plotpoint}}
+
+\put(630.01,446.87){\usebox{\plotpoint}}
+
+\put(646.90,458.93){\usebox{\plotpoint}}
+
+\put(663.30,471.65){\usebox{\plotpoint}}
+
+\put(680.19,483.71){\usebox{\plotpoint}}
+
+\put(697.08,495.77){\usebox{\plotpoint}}
+
+\put(713.60,508.33){\usebox{\plotpoint}}
+
+\put(730.37,520.55){\usebox{\plotpoint}}
+
+\put(747.26,532.62){\usebox{\plotpoint}}
+
+\put(763.98,544.91){\usebox{\plotpoint}}
+
+\put(780.55,557.40){\usebox{\plotpoint}}
+
+\put(797.68,569.12){\usebox{\plotpoint}}
+
+\put(814.24,581.61){\usebox{\plotpoint}}
+
+\put(831.06,593.76){\usebox{\plotpoint}}
+
+\put(847.95,605.82){\usebox{\plotpoint}}
+
+\put(864.61,618.20){\usebox{\plotpoint}}
+
+\put(881.24,630.60){\usebox{\plotpoint}}
+
+\put(898.13,642.67){\usebox{\plotpoint}}
+
+\put(914.99,654.78){\usebox{\plotpoint}}
+
+\put(931.42,667.45){\usebox{\plotpoint}}
+
+\put(948.31,679.51){\usebox{\plotpoint}}
+
+\put(965.20,691.57){\usebox{\plotpoint}}
+
+\put(981.69,704.18){\usebox{\plotpoint}}
+
+\put(998.49,716.35){\usebox{\plotpoint}}
+
+\put(1015.35,728.46){\usebox{\plotpoint}}
+
+\put(1032.14,740.67){\usebox{\plotpoint}}
+
+\put(1049.03,752.73){\usebox{\plotpoint}}
+
+\put(1065.92,764.80){\usebox{\plotpoint}}
+
+\put(1082.34,777.48){\usebox{\plotpoint}}
+
+\put(1099.21,789.58){\usebox{\plotpoint}}
+
+\put(1116.10,801.64){\usebox{\plotpoint}}
+
+\put(1132.72,814.06){\usebox{\plotpoint}}
+
+\put(1149.39,826.42){\usebox{\plotpoint}}
+
+\put(1166.28,838.48){\usebox{\plotpoint}}
+
+\put(1183.09,850.64){\usebox{\plotpoint}}
+
+\put(1199.57,863.26){\usebox{\plotpoint}}
+
+\put(1216.46,875.33){\usebox{\plotpoint}}
+
+\put(1233.00,887.86){\usebox{\plotpoint}}
+
+\put(1249.75,900.11){\usebox{\plotpoint}}
+
+\put(1266.97,911.69){\usebox{\plotpoint}}
+
+\put(1283.73,923.93){\usebox{\plotpoint}}
+
+\put(1300.26,936.47){\usebox{\plotpoint}}
+
+\put(1317.15,948.53){\usebox{\plotpoint}}
+
+\put(1334.04,960.60){\usebox{\plotpoint}}
+
+\put(1350.44,973.31){\usebox{\plotpoint}}
+
+\put(1367.33,985.38){\usebox{\plotpoint}}
+
+\put(1384.01,997.72){\usebox{\plotpoint}}
+
+\put(1400.62,1010.16){\usebox{\plotpoint}}
+
+\put(1417.51,1022.22){\usebox{\plotpoint}}
+
+\put(1434.38,1034.30){\usebox{\plotpoint}}
+
+\put(1450.80,1047.00){\usebox{\plotpoint}}
+
+\put(1467.69,1059.06){\usebox{\plotpoint}}
+
+\put(1484.77,1070.85){\usebox{\plotpoint}}
+
+\put(1501.43,1083.20){\usebox{\plotpoint}}
+
+\put(1518.20,1095.43){\usebox{\plotpoint}}
+
+\put(1535.09,1107.49){\usebox{\plotpoint}}
+
+\put(1551.81,1119.78){\usebox{\plotpoint}}
+
+\put(1568.38,1132.27){\usebox{\plotpoint}}
+
+\put(1585.27,1144.33){\usebox{\plotpoint}}
+
+\put(1601.71,1156.99){\usebox{\plotpoint}}
+
+\put(1603,1158){\usebox{\plotpoint}}
+
+\put(211.0,131.0){\rule[-0.200pt]{0.400pt}{357.014pt}}
+
+\put(211.0,131.0){\rule[-0.200pt]{335.333pt}{0.400pt}}
+
+\put(1603.0,131.0){\rule[-0.200pt]{0.400pt}{357.014pt}}
+
+\put(211.0,1613.0){\rule[-0.200pt]{335.333pt}{0.400pt}}
+
+\end{picture}
+    \end{center}
+\caption{Beesési ($\alpha$) és törési ($\beta$) szögek kilépéskor}  \end{figure}
+
+Az illesztett egyenes meredeksége $n_{1,2}=\ensuremath{0,686}$. A kapott két törésmutató jó közelítéssel egymás reciproka, $n_{2,1}\cdot n_{1,2} = \ensuremath{1,48} \cdot  \ensuremath{0,69} = \ensuremath{1,02}$.
+
+
+
+\section{Törésmutató meghatározása teljes visszaverődés esetén}
+
+Egy prizmán áthaladó fénysugarat vizsgálunk, hogy milyen $\alpha$ beesési szögnél van a teljes visszaverődés határa, vagyik mikor lesz a kilépési szög $90^\circ$. Megmutatható, hogy $\alpha$ alapján a törésmutató a \[ n = \sqrt{\frac{1+2 \cos \phi \sin \alpha + \sin^2 \alpha}{\sin^2 \phi}} \] képlettel meghatározható, ahol $\phi$ a prizma szöge.
+
+A mérés alapján $\alpha = 5^\circ$, ebből $n=\ensuremath{1,504}$.
+
+A teljes visszaverődéshez tartozó határszög
+
+\[n \sin \gamma_h = 1\]
+képletből \[\gamma_h = \sin^{-1} \frac 1n = \ensuremath{0,665} = \ensuremath{38,1} ^\circ\]
+
+\end{document}
+

@@ -1,0 +1,440 @@
+<%
+
+  def document *args
+    documentHeader *args
+    %>
+    \title{Nehézségi gyorsulás és matematikai inga lengésideje}
+    \author{Kalló Bernát -- Mérés: 2012.05.09. -- Leadás: 2012.06.08.}
+    \date{}
+    <%
+    env :document do
+      yield
+    end
+  end
+
+  class Numeric #x
+    def cm
+      self / 100
+    end
+    def ms
+      self / 1000
+    end
+  end
+
+  class Fixnum
+    def / other
+      to_f / other
+    end
+  end
+  class Bignum
+    def / other
+      to_f / other
+    end
+  end
+
+  public :table, :row, :column, :dataset, :plot, :data
+
+  $_global = self
+
+  class Hash
+    alias :original_access :[]
+
+    def [] *items
+      return original_access *items if items.count == 1
+
+      case @scope
+      when nil
+        items.mash do |k|
+          [k, self[k] ||= {}]
+        end.scope!(1)
+      when 1
+        mash do |k,v|
+          [k, v[*items]]
+        end.scope!(2)
+      end
+    end
+
+    def scope! n
+      @scope = n
+      self
+    end
+
+    alias :original_modify :[]=
+
+    def []= *items, value
+      return original_modify *items, value if items.count == 1
+
+      if value.is_a? Array and value.count == self.count * items.count
+        value = value.dup
+
+        each do |k,v|
+          items.each do |k2|
+            v[k2] = value.shift
+          end
+        end
+
+      else
+        raise ArgumentError, "wrong number of arguments", caller[1..-1]
+      end
+    end
+
+
+    def table title, attrs = nil
+      if first[1].is_a? Hash
+        attrs ||= first[1].keys
+
+        $_global.table title  do
+          each do |key, item|
+            $_global.row key do
+              attrs.each do |a|
+                next if not a
+                $_global.column a.with_unit do
+                  item[a]
+                end
+              end
+            end
+          end
+        end
+      else
+        attrs ||= keys
+        headId = attrs.shift
+
+        $_global.table title, rowTitle: headId.with_unit do
+          $_global.row self[headId] do
+            attrs.each do |a|
+              next if not a
+              $_global.column a.with_unit do
+                self[a]
+              end
+            end
+          end
+        end
+      end
+    end
+
+    def dataset title, attrs, *args
+      opts = args.extract_options!
+
+      opts[:title] = title
+
+      $_global.dataset *args, opts do
+        each do |key, item|
+          $_global.data *attrs.map{|a|a.to_proc[item]}
+        end
+      end
+    end
+  end
+
+
+  class Array
+    def average b=nil
+      m = mean
+      if b 
+        m.pm(Math.sqrt(m.delta**2 + (standard_deviation*b)**2)) 
+      else
+        m
+      end
+    end
+
+    def table title, attrs=nil
+      attrs ||= first.keys
+      headId = attrs.shift
+
+      $_global.table title, rowTitle: headId.with_unit do
+        if first.is_a? Hash
+          each do |item|
+            $_global.row item[headId] do
+              attrs.each do |a|
+                $_global.column a.with_unit do
+                  item[a]
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+
+
+  Plusminus.sep!(',')
+
+  document usePackages: {
+    babel: "magyar",
+    inputenc: "utf8",
+    geometry: "margin=2cm",
+    rmpage: true
+  } do
+
+    macro(
+      tnagy: %q{t_{\text{nagy}}},
+      tkicsi: %q{t_{\text{kicsi}}},
+      xnagy: %q{x_{\text{nagy}}},
+      xkicsi: %q{x_{\text{kicsi}}},
+      gnagy: %q{g_{\text{nagy}}},
+      gkicsi: %q{g_{\text{kicsi}}},
+      Deltagnagy: %q{\Delta{}g_{\text{nagy}}},
+      Deltagkicsi: %q{\Delta{}g_{\text{kicsi}}},
+      geff: %q{g_\text{eff}},
+    )
+
+    unit(
+      [:h] => %q{m},
+      [:t, :tnagy, :tkicsi, :T] => %q{s},
+      [:x, :xnagy, :xkicsi] => %q{s^2},
+      [:g, :gnagy, :gkicsi, :Deltagkicsi, :Deltagnagy, :geff] => %q{\nicefrac{m}{s^2}},
+      [:alpha] => %q{{}^\circ},
+    )
+
+
+
+%>
+
+
+\maketitle
+
+\section{Nehézségi gyorsulás mérése}
+
+Szabadon eső testek gyorsulása adott földrajzi helyen a test tömegétől független állandó. Kísérletünkben ezt szeretnénk igazolni és meghatározni az értékét.
+
+A méréshez olyan ejtőszerkezetet használunk, aminek tetején és alján érzékelők vannak (felül egy kioldószerkezet, alul egy érzékelő kapcsoló), és ezek egy elektronikus órára vannak kapcsolva. Ezzel meg tudjuk mérni az esés idejét. Különböző magasságokból megmérve az esést meg tudjuk határozni az összetartozó út-idő párokat. Az út-idő összefüggés feltételezett alakja \[h = \frac g2 t^2, \] ebből egy új, $x=\frac{t^2}{2}$ változó bevezetésével a \[h=gx\] egyenes egyenletét kapjuk. Az ($x,h$) pontokra egyenest illesztve ennek meredeksége lesz $g$. A $(0,0)$ pontot is a mérési pontok közé tesszük, mivel ezt elvi megfontolásból tudjuk.
+
+<%
+nagy = {
+  139.5 => [0.541, 0.543, 0.536],
+  119.25=> [0.507, 0.500, 0.498],
+   97.58=> [0.457, 0.457, 0.458],
+   72.95=> [0.401, 0.398, 0.400],
+   50.10=> [0.331, 0.329, 0.330],
+  0.0   => [0.000, 0.000, 0.000],
+}
+kicsi = {
+  139.5 => [0.535, 0.539, 0.537],
+  119.25=> [0.511, 0.504, 0.510],
+   97.58=> [0.453, 0.450, 0.463],
+   72.95=> [0.400, 0.411, 0.391],
+   50.10=> [0.334, 0.347, 0.340],
+  0.0   => [0.000, 0.000, 0.000],
+}
+
+nagy =  nagy .mash{|h,ts|[h.pm(0.0025).cm, ts.map{|t| t.pm(0.0005)}]}
+kicsi = kicsi.mash{|h,ts|[h.pm(0.0025).cm, ts.map{|t| t.pm(0.0005)}]}
+
+def x t
+  t ** 2 / 2 
+end
+
+table "A mért adatok", rowTitle: :h.with_unit do
+  nagy.keys.each do |h|
+    row h do
+      column :tnagy.with_unit do nagy[h] end
+      column :tkicsi.with_unit do kicsi[h] end
+      column :xnagy.with_unit do nagy[h].map{|t|x(t)} end
+      column :xkicsi.with_unit do kicsi[h].map{|t|x(t)} end
+    end
+  end
+end
+
+%>
+
+Ezután ábrázoljuk az $(x,h)$ pontokat grafikonon:
+
+<%
+
+  gnagy,bnagy = fit "g*x+b", via: "g,b" do
+    dataset do
+      nagy.each do |h, ts|
+        ts.each do |t|
+          data x(t), h
+        end
+      end
+    end
+  end
+
+  gkicsi,bkicsi = fit "g*x+b", via: "g,b" do
+    dataset do
+      kicsi.each do |h, ts|
+        ts.each do |t|
+          data x(t), h
+        end
+      end
+    end
+  end
+
+  plot "Az $x-h$ grafikon", xlabel: :x.with_unit, ylabel: :h.with_unit, yrange: "[0:1.60]", width: "17cm", height: "17cm" do
+    dataset title: "nagy golyó" do
+      nagy.each do |h, ts|
+        ts.each do |t|
+          data x(t), h
+        end
+      end
+    end
+    dataset title: "kis golyó" do
+      kicsi.each do |h, ts|
+        ts.each do |t|
+          data x(t), h
+        end
+      end
+    end
+    dataset "#{gnagy}*x+#{bnagy}", title: "nagy golyó illesztett egyenese"
+    dataset "#{gkicsi}*x+#{bkicsi}", title: "kis golyó illesztett egyenese"
+  end
+
+
+%>
+
+A GNUPLOT programmal egyenest illesztettünk a mérési pontokra, ezzel megkaptuk a meredekségeket. A GNUPLOT megadta az illesztés hibáját is:
+
+<%
+  table "Eredmények" do
+    row "" do
+      column :gnagy.with_unit do
+        gnagy.pm(0.005)
+      end
+      column :Deltagnagy.with_unit do
+        gnagy.delta.pm_rel(0.12)
+      end
+      column :gkicsi.with_unit do
+        gkicsi.pm(0.005)
+      end
+      column :Deltagkicsi.with_unit do
+        gkicsi.delta.pm_rel(0.12)
+      end
+    end
+  end
+
+%>
+
+
+Látható egyrészt, hogy az két érték a hibahatáron belül megegyezik. Másrészt azt is láthatjuk, hogy az irodalmi (9,81) értéktől a hibahatáron túl eltérnek.
+
+<%
+  plot boxwidth: "0.6", xrange: "[0:2]", xtics: false, 
+    yrange: "[:]", height: "7cm" do
+    dataset with: "boxerrorbars",  do
+      data 0.5, gnagy, gnagy.delta
+      data 1.5, gkicsi, gkicsi.delta
+    end
+    dataset "9.81", with: "lines linestyle 1", title: false
+    dataset with: "labels" do
+      data 0.5, 9.425, "nagy"
+      data 1.5, 9.425, "kicsi"
+      data 1.8, 9.823, "irodalmi érték"
+    end
+  end
+
+
+%>
+
+
+Az eltérést magyarázhatjuk a mérőeszközök sziszetmatikus hibájával. A kioldószerkezet szerintem elég pontos, viszont az alsó érzékelő kapcsoló nem azonnal zárt, mikor a golyó a tetejéhez ért, hanem még valamennyi utat meg kellett tennie. $h$-t viszont a kapcsoló tetejétől mértük. Tehát lehet, hogy $h$ értékeihez még hozzá kéne adni valamennyit -- vagy a (0,0) pont helyett egy negatív ordinátájú értéket kéne fölvenni, a valódi érzékelés pontját. Ezt viszont nem tudjuk. 
+
+Ha a (0,0) pontot töröljük a mérési eredményekből és úgy illesztünk egyenest, <%=
+
+nagy.delete_if{|h,v|h == 0}
+kicsi.delete_if{|h,v|h == 0}
+debug nagy
+
+
+  gnagy,bnagy = fit "g*x+b", via: "g,b" do
+    dataset do
+      nagy.each do |h, ts|
+        ts.each do |t|
+          data x(t), h
+        end
+      end
+    end
+  end
+  gkicsi,bkicsi = fit "g*x+b", via: "g,b" do
+    dataset do
+      kicsi.each do |h, ts|
+        ts.each do |t|
+          data x(t), h
+        end
+      end
+    end
+  end
+
+gnagy.pm(0.005).to_latex
+%> és <%= 
+gkicsi.pm(0.005).to_latex
+%> jön ki a nagy, ill.\ a kis golyónál. A $h$ eltérése ekkor <%= bnagy.to_latex_math %>, ill.\ <%=bkicsi.to_latex_math%> m, tehát ez túl nagy ahhoz, hogy csak az érzékelő holtjátékát jelentse. Mégis, így pontosabban megkaptuk az irodalmi értékeket. Lehet, hogy az érzékelő  rugója közben lassítja a golyót, és ez is valamennyire beleszámít az eredménybe. Az új illesztéssel kapott eredmények:
+
+<%
+  plot boxwidth: "0.6", xrange: "[0:2]", xtics: false, 
+    yrange: "[:]", height: "7cm" do
+    dataset with: "boxerrorbars",  do
+      data 0.5, gnagy, gnagy.delta
+      data 1.5, gkicsi, gkicsi.delta
+    end
+    dataset "9.81", with: "lines linestyle 1", title: false
+    dataset with: "labels" do
+      data 0.5, 9.425, "nagy"
+      data 1.5, 9.425, "kicsi"
+      data 1.8, 9.823, "irodalmi érték"
+    end
+  end
+
+
+%>
+
+
+\section{Matematikai inga lengésideje}
+
+A matematkiai inga lengésideje \[T = 2\pi\sqrt{\frac lg}\]. Kísérletünkben az ingát ferde, a vízszintessel $\alpha$ szöget bezáró tengely körül hagyjuk forogni, így a gravitációs gyorsulásnak csak a tengelyre merőleges $\geff = g \cos \alpha$ komponense lesz effektív.
+
+$\alpha$ különböző értékeire megmértük a lengésidőt:
+
+<%
+  T = {
+    0=> 1159,
+    10=>1164,
+    20=>1192,
+    30=>1239,
+    40=>1317,
+    50=>1434,
+    60=>1627,
+    70=>1935,
+    80=>2540,
+  }.mash{|alpha,t|[alpha, t.pm(0.5).ms]}
+
+  table "Mért adatok", rowTitle: :alpha.with_unit do
+    for alpha, t in T
+      row alpha do
+        column :T.with_unit do
+          t
+        end
+      end
+    end
+  end
+
+
+%>
+
+Ha ábrázoljuk $T$-t $\geff = g \cos \alpha$ függvényében, ezt kapjuk:
+
+<%
+  def geff alpha
+    9.81.pm(0.005) * cos(radians(alpha))
+  end
+
+
+  plot xlabel: :geff.with_unit, ylabel: :T.with_unit, xrange: "[0:]", yrange: "[0:]", height: "8cm" do
+    for alpha, t in T
+      dataset do
+        data geff(alpha), t
+      end
+    end
+  end
+
+
+%>
+
+
+Azt látjuk, hogy a pontok egy $\frac{1}{\sqrt{x}}$ alakú görbére illeszkednek, ahogy ez várható is volt a képletből.
+
+<% end %>
+
+
+
+
