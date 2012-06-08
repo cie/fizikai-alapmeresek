@@ -20,7 +20,7 @@
     \author{Kalló Bernát -- Mérés: 2012.05.09. -- Leadás: 2012.06.08.}
     \date{}
     \begin{document}
-\def\tnagy{\ensuremath{t_{\text{nagy}}}}\def\tkicsi{\ensuremath{t_{\text{kicsi}}}}\def\xnagy{\ensuremath{x_{\text{nagy}}}}\def\xkicsi{\ensuremath{x_{\text{kicsi}}}}\def\gnagy{\ensuremath{g_{\text{nagy}}}}\def\gkicsi{\ensuremath{g_{\text{kicsi}}}}\def\Deltagnagy{\ensuremath{\Delta{}g_{\text{nagy}}}}\def\Deltagkicsi{\ensuremath{\Delta{}g_{\text{kicsi}}}}\def\geff{\ensuremath{g_\text{eff}}}
+\def\t1{\ensuremath{t_1}}\def\t2{\ensuremath{t_2}}\def\k1{\ensuremath{k_1}}\def\k2{\ensuremath{k_2}}\def\t11{\ensuremath{\nicefrac{1}{t_1}}}\def\t21{\ensuremath{\nicefrac{1}{t_2}}}\def\k11{\ensuremath{\nicefrac{1}{k_1}}}\def\k21{\ensuremath{\nicefrac{1}{k_2}}}\def\tx1{\ensuremath{\nicefrac{1}{t}}}\def\kx1{\ensuremath{\nicefrac{1}{k}}}\def\dmin1{\ensuremath{d_{min,1}}}\def\dmin2{\ensuremath{d_{min,2}}}\def\y1{\ensuremath{y_{1}}}\def\y2{\ensuremath{y_{2}}}\def\a1{\ensuremath{a_{1}}}\def\a2{\ensuremath{a_{2}}}\def\deltaa1{\ensuremath{\delta{}a_{1}}}\def\deltaa2{\ensuremath{\delta{}a_{2}}}
 
 \maketitle
 
@@ -735,7 +735,886 @@ A mérés alapján $\alpha = 5^\circ$, ebből $n=\ensuremath{1,504}$.
 A teljes visszaverődéshez tartozó határszög
 
 \[n \sin \gamma_h = 1\]
-képletből \[\gamma_h = \sin^{-1} \frac 1n = \ensuremath{0,665} = \ensuremath{38,1} ^\circ\]
+képletből \[\gamma_h = \sin^{-1} \frac 1n = \ensuremath{0,665} = \ensuremath{38,1} ^\circ.\]
+
+Ahogy a beesési szöget csökkentettük, a piros fény lépett ki legkorábban, tehát ennek volt a legnagyobb a határszöge. Vagyis a piros fényre a legkisebb a törésmutató, ezek szerint a lila fényre a legnagyobb, a lila fény térül el a legjobban.
+
+
+\section{Lencse törőképességének vizsgálata}
+
+Egy három tartályból álló átlátszó műanyag edényt, a tartályokat egyenként megtöltve vízzel, lencseként használunk.
+
+
+\vskip 50mm
+
+Párhuzamos fénysugarakat engedünk át a lencsén, és az alábbiakat tapasztaljuk.
+
+  
+  \begin{table}[H]
+    \begin{center}
+      \begin{tabular}{|
+c|
+c|
+c|
+c|
+c|
+}
+        \hline
+        
+ & 
+1 & 2 & 3 & a fénysugarak
+\\
+        \hline\hline
+        
+1
+ & levegő
+ & levegő
+ & levegő
+ & párhuzamosak
+\\
+        \hline
+        
+a
+ & víz
+ & levegő
+ & levegő
+ & széttartanak
+\\
+        \hline
+        
+b
+ & levegő
+ & víz
+ & levegő
+ & összetartanak
+\\
+        \hline
+        
+c
+ & levegő
+ & levegő
+ & víz
+ & összetartanak
+\\
+        \hline
+        
+d
+ & víz
+ & levegő
+ & víz
+ & enyhén széttartanak
+\\
+        \hline
+      \end{tabular}
+      \caption{A fénysugarak}
+      \label{tab:}
+    \end{center}
+  \end{table}
+
+Amikor nincs víz a tartályokban, a fény párhuzamosan halad át. Mivel mindhárom tartályban levegő van, a műanyagba belépéskor és kilépéskor azonos a törésmutató. A műanyag falak vékonyak, így a belépési és a kilépési felület nagyjából párhuzamos, tehát befelé haladva törőszög megegyezik kifelé haladva a beesési szöggel, és a törésmutatók egyenlősége miatt a beesési és a kilépési szögek is egyenlőek. 
+
+Amikor valamelyik tartályban víz van, a műanyag két oldalán nem egyenlő a törésmutató. Viszont mivel a műanyag vékony és a falai párhuzamosak, a fénysugárnak a merőlegeshez viszonyított szögének szinusza először a műanyag és levegő, másodszor a víz és a műanyag relatív törésmutatójával változik. De e két törésmutató szorzata egyenlő a víz és a levegő törésmutatójával. Tehát tekinthetjük úgy, mintha a műanyag nem is lenne ott, csak a víz lenne, mint egy lencse.
+
+Az a) esetben a víz egy sima-homoró lencsét alkot, ez szórólencse. A b) esetben domború-domború lencsét, ez gyűjtőlencse. A c) esetben domború-sima lecsét, ez is gyűjtőlencse. A d) esetben két lencsét alkot, egy gyűjtő és egy szórólencsét. Viszont a szórólencse görbülete nagyobb, tehát erősebb, mint a gyűjtőlencse, ezért a két lencséből álló rendszer szétszórja a sugarakat, bár kevébé, mint a szórólencse egyedül az a) esetben.
+
+
+\section{Gyűjtőlencse fókusztávolsága}
+
+Egy fényforrás és egy ernyő közé gyűjtőlencsét helyezünk. Megkeressük azt a két pozícióját a lencsének, amiben az ernyőre vetülő kép éles. Amikor a fényforráshoz van közelebb a lencse, a kép fordított állású és nagyított. Amikor az ernyőhöz van közel a lencse, a kép fordított állású és kicsinyített.
+
+Különböző fényforrás-ernyő távolságokkal ($l$) is megmérjük a két lehetséges tárgy-és képtávolságot:
+
+  
+  \begin{table}[H]
+    \begin{center}
+      \begin{tabular}{|
+c|
+c|
+c|
+c|
+c|
+}
+        \hline
+        
+\ensuremath{\unit[\text{\ensuremath{l}}]{(m)}} & 
+\ensuremath{\unit[\text{\ensuremath{t_1}}]{(m)}} & \ensuremath{\unit[\text{\ensuremath{k_1}}]{(m)}} & \ensuremath{\unit[\text{\ensuremath{t_2}}]{(m)}} & \ensuremath{\unit[\text{\ensuremath{k_2}}]{(m)}}
+\\
+        \hline\hline
+        
+1.0
+ & 0,122
+ & 0,878
+ & 0,880
+ & 0,120
+\\
+        \hline
+        
+0.9
+ & 0,124
+ & 0,776
+ & 0,780
+ & 0,120
+\\
+        \hline
+        
+0.8
+ & 0,125
+ & 0,675
+ & 0,674
+ & 0,126
+\\
+        \hline
+        
+0.7
+ & 0,131
+ & 0,569
+ & 0,571
+ & 0,129
+\\
+        \hline
+        
+0.6
+ & 0,137
+ & 0,463
+ & 0,464
+ & 0,136
+\\
+        \hline
+        
+0.5
+ & 0,148
+ & 0,352
+ & 0,349
+ & 0,151
+\\
+        \hline
+      \end{tabular}
+      \caption{A mért adatok}
+      \label{tab:}
+    \end{center}
+  \end{table}
+
+Kiszámítjuk a reciprok értékeket:
+
+  
+  \begin{table}[H]
+    \begin{center}
+      \begin{tabular}{|
+c|
+c|
+c|
+c|
+c|
+}
+        \hline
+        
+\ensuremath{\unit[\text{\ensuremath{l}}]{(m)}} & 
+\ensuremath{\unit[\text{\ensuremath{\nicefrac{1}{t_1}}}]{(m^{-1})}} & \ensuremath{\unit[\text{\ensuremath{\nicefrac{1}{k_1}}}]{(m^{-1})}} & \ensuremath{\unit[\text{\ensuremath{\nicefrac{1}{t_2}}}]{(m^{-1})}} & \ensuremath{\unit[\text{\ensuremath{\nicefrac{1}{k_2}}}]{(m^{-1})}}
+\\
+        \hline\hline
+        
+1.0
+ & 8,20
+ & 1,139
+ & 1,136
+ & 8,33
+\\
+        \hline
+        
+0.9
+ & 8,06
+ & 1,289
+ & 1,282
+ & 8,33
+\\
+        \hline
+        
+0.8
+ & 8,00
+ & 1,481
+ & 1,484
+ & 7,94
+\\
+        \hline
+        
+0.7
+ & 7,63
+ & 1,757
+ & 1,751
+ & 7,75
+\\
+        \hline
+        
+0.6
+ & 7,30
+ & 2,160
+ & 2,155
+ & 7,35
+\\
+        \hline
+        
+0.5
+ & 6,76
+ & 2,841
+ & 2,865
+ & 6,62
+\\
+        \hline
+      \end{tabular}
+      \caption{A mért adatok}
+      \label{tab:}
+    \end{center}
+  \end{table}
+
+És ábrázoljuk őket grafikonon:
+
+  \begin{figure}[H]
+    \begin{center}
+% GNUPLOT: LaTeX picture
+
+\setlength{\unitlength}{0.240900pt}
+
+\ifx\plotpoint\undefined\newsavebox{\plotpoint}\fi
+
+\sbox{\plotpoint}{\rule[-0.200pt]{0.400pt}{0.400pt}}%
+
+\begin{picture}(1771,1771)(0,0)
+
+\sbox{\plotpoint}{\rule[-0.200pt]{0.400pt}{0.400pt}}%
+
+\put(191.0,131.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(171,131){\makebox(0,0)[r]{ 0}}
+
+\put(1701.0,131.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191.0,451.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(171,451){\makebox(0,0)[r]{ 2}}
+
+\put(1701.0,451.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191.0,771.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(171,771){\makebox(0,0)[r]{ 4}}
+
+\put(1701.0,771.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191.0,1091.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(171,1091){\makebox(0,0)[r]{ 6}}
+
+\put(1701.0,1091.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191.0,1411.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(171,1411){\makebox(0,0)[r]{ 8}}
+
+\put(1701.0,1411.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191.0,1731.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(171,1731){\makebox(0,0)[r]{ 10}}
+
+\put(1701.0,1731.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
+
+\put(191.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(191,90){\makebox(0,0){ 0}}
+
+\put(191.0,1711.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(497.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(497,90){\makebox(0,0){ 2}}
+
+\put(497.0,1711.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(803.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(803,90){\makebox(0,0){ 4}}
+
+\put(803.0,1711.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1109.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1109,90){\makebox(0,0){ 6}}
+
+\put(1109.0,1711.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1415.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1415,90){\makebox(0,0){ 8}}
+
+\put(1415.0,1711.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1721.0,131.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(1721,90){\makebox(0,0){ 10}}
+
+\put(1721.0,1711.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
+
+\put(191.0,131.0){\rule[-0.200pt]{0.400pt}{385.440pt}}
+
+\put(191.0,131.0){\rule[-0.200pt]{368.577pt}{0.400pt}}
+
+\put(1721.0,131.0){\rule[-0.200pt]{0.400pt}{385.440pt}}
+
+\put(191.0,1731.0){\rule[-0.200pt]{368.577pt}{0.400pt}}
+
+\put(70,931){\makebox(0,0){\ensuremath{\unit[\text{\ensuremath{\nicefrac{1}{k}}}]{(m^{-1})}}}}
+
+\put(956,29){\makebox(0,0){\ensuremath{\unit[\text{\ensuremath{\nicefrac{1}{t}}}]{(m^{-1})}}}}
+
+\put(1561,1691){\makebox(0,0)[r]{1.}}
+
+\put(1445,313){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1425,337){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1415,368){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1359,412){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1308,477){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1225,586){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1631,1691){\raisebox{-.8pt}{\makebox(0,0){$\Diamond$}}}
+
+\put(1561,1650){\makebox(0,0)[r]{2.}}
+
+\put(365,1464){\makebox(0,0){$+$}}
+
+\put(387,1464){\makebox(0,0){$+$}}
+
+\put(418,1401){\makebox(0,0){$+$}}
+
+\put(459,1371){\makebox(0,0){$+$}}
+
+\put(521,1307){\makebox(0,0){$+$}}
+
+\put(629,1191){\makebox(0,0){$+$}}
+
+\put(1631,1650){\makebox(0,0){$+$}}
+
+\sbox{\plotpoint}{\rule[-0.400pt]{0.800pt}{0.800pt}}%
+
+\put(191,1656){\usebox{\plotpoint}}
+
+\multiput(192.41,1651.41)(0.508,-0.564){23}{\rule{0.122pt}{1.107pt}}
+
+\multiput(189.34,1653.70)(15.000,-14.703){2}{\rule{0.800pt}{0.553pt}}
+
+\multiput(206.00,1637.09)(0.494,-0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(206.00,1637.34)(13.924,-16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(223.41,1618.63)(0.508,-0.529){23}{\rule{0.122pt}{1.053pt}}
+
+\multiput(220.34,1620.81)(15.000,-13.814){2}{\rule{0.800pt}{0.527pt}}
+
+\multiput(238.41,1602.64)(0.507,-0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(235.34,1604.82)(16.000,-14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(254.41,1585.63)(0.508,-0.529){23}{\rule{0.122pt}{1.053pt}}
+
+\multiput(251.34,1587.81)(15.000,-13.814){2}{\rule{0.800pt}{0.527pt}}
+
+\multiput(269.41,1569.64)(0.507,-0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(266.34,1571.82)(16.000,-14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(285.41,1552.63)(0.508,-0.529){23}{\rule{0.122pt}{1.053pt}}
+
+\multiput(282.34,1554.81)(15.000,-13.814){2}{\rule{0.800pt}{0.527pt}}
+
+\multiput(299.00,1539.09)(0.494,-0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(299.00,1539.34)(13.924,-16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(316.41,1520.41)(0.508,-0.564){23}{\rule{0.122pt}{1.107pt}}
+
+\multiput(313.34,1522.70)(15.000,-14.703){2}{\rule{0.800pt}{0.553pt}}
+
+\multiput(330.00,1506.09)(0.494,-0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(330.00,1506.34)(13.924,-16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(347.41,1487.63)(0.508,-0.529){23}{\rule{0.122pt}{1.053pt}}
+
+\multiput(344.34,1489.81)(15.000,-13.814){2}{\rule{0.800pt}{0.527pt}}
+
+\multiput(362.41,1471.41)(0.508,-0.564){23}{\rule{0.122pt}{1.107pt}}
+
+\multiput(359.34,1473.70)(15.000,-14.703){2}{\rule{0.800pt}{0.553pt}}
+
+\multiput(376.00,1457.09)(0.494,-0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(376.00,1457.34)(13.924,-16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(393.41,1438.63)(0.508,-0.529){23}{\rule{0.122pt}{1.053pt}}
+
+\multiput(390.34,1440.81)(15.000,-13.814){2}{\rule{0.800pt}{0.527pt}}
+
+\multiput(408.41,1422.64)(0.507,-0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(405.34,1424.82)(16.000,-14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(424.41,1405.63)(0.508,-0.529){23}{\rule{0.122pt}{1.053pt}}
+
+\multiput(421.34,1407.81)(15.000,-13.814){2}{\rule{0.800pt}{0.527pt}}
+
+\multiput(439.41,1389.64)(0.507,-0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(436.34,1391.82)(16.000,-14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(455.41,1372.63)(0.508,-0.529){23}{\rule{0.122pt}{1.053pt}}
+
+\multiput(452.34,1374.81)(15.000,-13.814){2}{\rule{0.800pt}{0.527pt}}
+
+\multiput(469.00,1359.09)(0.494,-0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(469.00,1359.34)(13.924,-16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(486.41,1340.41)(0.508,-0.564){23}{\rule{0.122pt}{1.107pt}}
+
+\multiput(483.34,1342.70)(15.000,-14.703){2}{\rule{0.800pt}{0.553pt}}
+
+\multiput(500.00,1326.09)(0.494,-0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(500.00,1326.34)(13.924,-16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(517.41,1307.63)(0.508,-0.529){23}{\rule{0.122pt}{1.053pt}}
+
+\multiput(514.34,1309.81)(15.000,-13.814){2}{\rule{0.800pt}{0.527pt}}
+
+\multiput(532.41,1291.41)(0.508,-0.564){23}{\rule{0.122pt}{1.107pt}}
+
+\multiput(529.34,1293.70)(15.000,-14.703){2}{\rule{0.800pt}{0.553pt}}
+
+\multiput(546.00,1277.09)(0.494,-0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(546.00,1277.34)(13.924,-16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(563.41,1258.41)(0.508,-0.564){23}{\rule{0.122pt}{1.107pt}}
+
+\multiput(560.34,1260.70)(15.000,-14.703){2}{\rule{0.800pt}{0.553pt}}
+
+\multiput(577.00,1244.09)(0.494,-0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(577.00,1244.34)(13.924,-16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(594.41,1225.63)(0.508,-0.529){23}{\rule{0.122pt}{1.053pt}}
+
+\multiput(591.34,1227.81)(15.000,-13.814){2}{\rule{0.800pt}{0.527pt}}
+
+\multiput(609.41,1209.64)(0.507,-0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(606.34,1211.82)(16.000,-14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(625.41,1192.63)(0.508,-0.529){23}{\rule{0.122pt}{1.053pt}}
+
+\multiput(622.34,1194.81)(15.000,-13.814){2}{\rule{0.800pt}{0.527pt}}
+
+\multiput(639.00,1179.09)(0.494,-0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(639.00,1179.34)(13.924,-16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(656.41,1160.41)(0.508,-0.564){23}{\rule{0.122pt}{1.107pt}}
+
+\multiput(653.34,1162.70)(15.000,-14.703){2}{\rule{0.800pt}{0.553pt}}
+
+\multiput(670.00,1146.09)(0.494,-0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(670.00,1146.34)(13.924,-16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(687.41,1127.41)(0.508,-0.564){23}{\rule{0.122pt}{1.107pt}}
+
+\multiput(684.34,1129.70)(15.000,-14.703){2}{\rule{0.800pt}{0.553pt}}
+
+\multiput(702.41,1110.63)(0.508,-0.529){23}{\rule{0.122pt}{1.053pt}}
+
+\multiput(699.34,1112.81)(15.000,-13.814){2}{\rule{0.800pt}{0.527pt}}
+
+\multiput(716.00,1097.09)(0.494,-0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(716.00,1097.34)(13.924,-16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(733.41,1078.41)(0.508,-0.564){23}{\rule{0.122pt}{1.107pt}}
+
+\multiput(730.34,1080.70)(15.000,-14.703){2}{\rule{0.800pt}{0.553pt}}
+
+\multiput(747.00,1064.09)(0.494,-0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(747.00,1064.34)(13.924,-16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(764.41,1045.63)(0.508,-0.529){23}{\rule{0.122pt}{1.053pt}}
+
+\multiput(761.34,1047.81)(15.000,-13.814){2}{\rule{0.800pt}{0.527pt}}
+
+\multiput(779.41,1029.64)(0.507,-0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(776.34,1031.82)(16.000,-14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(795.41,1012.63)(0.508,-0.529){23}{\rule{0.122pt}{1.053pt}}
+
+\multiput(792.34,1014.81)(15.000,-13.814){2}{\rule{0.800pt}{0.527pt}}
+
+\multiput(809.00,999.09)(0.494,-0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(809.00,999.34)(13.924,-16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(826.41,980.41)(0.508,-0.564){23}{\rule{0.122pt}{1.107pt}}
+
+\multiput(823.34,982.70)(15.000,-14.703){2}{\rule{0.800pt}{0.553pt}}
+
+\multiput(840.00,966.09)(0.494,-0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(840.00,966.34)(13.924,-16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(857.41,947.41)(0.508,-0.564){23}{\rule{0.122pt}{1.107pt}}
+
+\multiput(854.34,949.70)(15.000,-14.703){2}{\rule{0.800pt}{0.553pt}}
+
+\multiput(872.41,930.63)(0.508,-0.529){23}{\rule{0.122pt}{1.053pt}}
+
+\multiput(869.34,932.81)(15.000,-13.814){2}{\rule{0.800pt}{0.527pt}}
+
+\multiput(886.00,917.09)(0.494,-0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(886.00,917.34)(13.924,-16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(903.41,898.41)(0.508,-0.564){23}{\rule{0.122pt}{1.107pt}}
+
+\multiput(900.34,900.70)(15.000,-14.703){2}{\rule{0.800pt}{0.553pt}}
+
+\multiput(917.00,884.09)(0.494,-0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(917.00,884.34)(13.924,-16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(934.41,865.63)(0.508,-0.529){23}{\rule{0.122pt}{1.053pt}}
+
+\multiput(931.34,867.81)(15.000,-13.814){2}{\rule{0.800pt}{0.527pt}}
+
+\multiput(949.41,849.64)(0.507,-0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(946.34,851.82)(16.000,-14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(965.41,832.63)(0.508,-0.529){23}{\rule{0.122pt}{1.053pt}}
+
+\multiput(962.34,834.81)(15.000,-13.814){2}{\rule{0.800pt}{0.527pt}}
+
+\multiput(980.41,816.64)(0.507,-0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(977.34,818.82)(16.000,-14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(996.41,799.63)(0.508,-0.529){23}{\rule{0.122pt}{1.053pt}}
+
+\multiput(993.34,801.81)(15.000,-13.814){2}{\rule{0.800pt}{0.527pt}}
+
+\multiput(1010.00,786.09)(0.494,-0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1010.00,786.34)(13.924,-16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1027.41,767.41)(0.508,-0.564){23}{\rule{0.122pt}{1.107pt}}
+
+\multiput(1024.34,769.70)(15.000,-14.703){2}{\rule{0.800pt}{0.553pt}}
+
+\multiput(1042.41,750.63)(0.508,-0.529){23}{\rule{0.122pt}{1.053pt}}
+
+\multiput(1039.34,752.81)(15.000,-13.814){2}{\rule{0.800pt}{0.527pt}}
+
+\multiput(1056.00,737.09)(0.494,-0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1056.00,737.34)(13.924,-16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1073.41,718.41)(0.508,-0.564){23}{\rule{0.122pt}{1.107pt}}
+
+\multiput(1070.34,720.70)(15.000,-14.703){2}{\rule{0.800pt}{0.553pt}}
+
+\multiput(1087.00,704.09)(0.494,-0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1087.00,704.34)(13.924,-16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1104.41,685.63)(0.508,-0.529){23}{\rule{0.122pt}{1.053pt}}
+
+\multiput(1101.34,687.81)(15.000,-13.814){2}{\rule{0.800pt}{0.527pt}}
+
+\multiput(1119.41,669.64)(0.507,-0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(1116.34,671.82)(16.000,-14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(1135.41,652.63)(0.508,-0.529){23}{\rule{0.122pt}{1.053pt}}
+
+\multiput(1132.34,654.81)(15.000,-13.814){2}{\rule{0.800pt}{0.527pt}}
+
+\multiput(1150.41,636.64)(0.507,-0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(1147.34,638.82)(16.000,-14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(1166.41,619.63)(0.508,-0.529){23}{\rule{0.122pt}{1.053pt}}
+
+\multiput(1163.34,621.81)(15.000,-13.814){2}{\rule{0.800pt}{0.527pt}}
+
+\multiput(1180.00,606.09)(0.494,-0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1180.00,606.34)(13.924,-16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1197.41,587.41)(0.508,-0.564){23}{\rule{0.122pt}{1.107pt}}
+
+\multiput(1194.34,589.70)(15.000,-14.703){2}{\rule{0.800pt}{0.553pt}}
+
+\multiput(1212.41,570.63)(0.508,-0.529){23}{\rule{0.122pt}{1.053pt}}
+
+\multiput(1209.34,572.81)(15.000,-13.814){2}{\rule{0.800pt}{0.527pt}}
+
+\multiput(1226.00,557.09)(0.494,-0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1226.00,557.34)(13.924,-16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1243.41,538.41)(0.508,-0.564){23}{\rule{0.122pt}{1.107pt}}
+
+\multiput(1240.34,540.70)(15.000,-14.703){2}{\rule{0.800pt}{0.553pt}}
+
+\multiput(1257.00,524.09)(0.494,-0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1257.00,524.34)(13.924,-16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1274.41,505.41)(0.508,-0.564){23}{\rule{0.122pt}{1.107pt}}
+
+\multiput(1271.34,507.70)(15.000,-14.703){2}{\rule{0.800pt}{0.553pt}}
+
+\multiput(1288.00,491.09)(0.494,-0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1288.00,491.34)(13.924,-16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1305.41,472.63)(0.508,-0.529){23}{\rule{0.122pt}{1.053pt}}
+
+\multiput(1302.34,474.81)(15.000,-13.814){2}{\rule{0.800pt}{0.527pt}}
+
+\multiput(1320.41,456.64)(0.507,-0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(1317.34,458.82)(16.000,-14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(1336.41,439.63)(0.508,-0.529){23}{\rule{0.122pt}{1.053pt}}
+
+\multiput(1333.34,441.81)(15.000,-13.814){2}{\rule{0.800pt}{0.527pt}}
+
+\multiput(1350.00,426.09)(0.494,-0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1350.00,426.34)(13.924,-16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1367.41,407.41)(0.508,-0.564){23}{\rule{0.122pt}{1.107pt}}
+
+\multiput(1364.34,409.70)(15.000,-14.703){2}{\rule{0.800pt}{0.553pt}}
+
+\multiput(1382.41,390.63)(0.508,-0.529){23}{\rule{0.122pt}{1.053pt}}
+
+\multiput(1379.34,392.81)(15.000,-13.814){2}{\rule{0.800pt}{0.527pt}}
+
+\multiput(1397.41,374.64)(0.507,-0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(1394.34,376.82)(16.000,-14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(1413.41,357.63)(0.508,-0.529){23}{\rule{0.122pt}{1.053pt}}
+
+\multiput(1410.34,359.81)(15.000,-13.814){2}{\rule{0.800pt}{0.527pt}}
+
+\multiput(1427.00,344.09)(0.494,-0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1427.00,344.34)(13.924,-16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1444.41,325.41)(0.508,-0.564){23}{\rule{0.122pt}{1.107pt}}
+
+\multiput(1441.34,327.70)(15.000,-14.703){2}{\rule{0.800pt}{0.553pt}}
+
+\multiput(1458.00,311.09)(0.494,-0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1458.00,311.34)(13.924,-16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1475.41,292.63)(0.508,-0.529){23}{\rule{0.122pt}{1.053pt}}
+
+\multiput(1472.34,294.81)(15.000,-13.814){2}{\rule{0.800pt}{0.527pt}}
+
+\multiput(1490.41,276.64)(0.507,-0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(1487.34,278.82)(16.000,-14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(1506.41,259.63)(0.508,-0.529){23}{\rule{0.122pt}{1.053pt}}
+
+\multiput(1503.34,261.81)(15.000,-13.814){2}{\rule{0.800pt}{0.527pt}}
+
+\multiput(1520.00,246.09)(0.494,-0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1520.00,246.34)(13.924,-16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1537.41,227.41)(0.508,-0.564){23}{\rule{0.122pt}{1.107pt}}
+
+\multiput(1534.34,229.70)(15.000,-14.703){2}{\rule{0.800pt}{0.553pt}}
+
+\multiput(1552.41,210.63)(0.508,-0.529){23}{\rule{0.122pt}{1.053pt}}
+
+\multiput(1549.34,212.81)(15.000,-13.814){2}{\rule{0.800pt}{0.527pt}}
+
+\multiput(1567.41,194.64)(0.507,-0.527){25}{\rule{0.122pt}{1.050pt}}
+
+\multiput(1564.34,196.82)(16.000,-14.821){2}{\rule{0.800pt}{0.525pt}}
+
+\multiput(1583.41,177.63)(0.508,-0.529){23}{\rule{0.122pt}{1.053pt}}
+
+\multiput(1580.34,179.81)(15.000,-13.814){2}{\rule{0.800pt}{0.527pt}}
+
+\multiput(1597.00,164.09)(0.494,-0.507){25}{\rule{1.000pt}{0.122pt}}
+
+\multiput(1597.00,164.34)(13.924,-16.000){2}{\rule{0.500pt}{0.800pt}}
+
+\multiput(1614.41,145.41)(0.508,-0.564){23}{\rule{0.122pt}{1.107pt}}
+
+\multiput(1611.34,147.70)(15.000,-14.703){2}{\rule{0.800pt}{0.553pt}}
+
+\put(1628,130.34){\rule{0.482pt}{0.800pt}}
+
+\multiput(1628.00,131.34)(1.000,-2.000){2}{\rule{0.241pt}{0.800pt}}
+
+\sbox{\plotpoint}{\rule[-0.200pt]{0.400pt}{0.400pt}}%
+
+\put(191.0,131.0){\rule[-0.200pt]{0.400pt}{385.440pt}}
+
+\put(191.0,131.0){\rule[-0.200pt]{368.577pt}{0.400pt}}
+
+\put(1721.0,131.0){\rule[-0.200pt]{0.400pt}{385.440pt}}
+
+\put(191.0,1731.0){\rule[-0.200pt]{368.577pt}{0.400pt}}
+
+\end{picture}
+    \end{center}
+  \end{figure}
+
+Az illesztett egyenes tengelymetszetei 9,41 (x tengely) és 9,53 (y tengely), átlaguk, ezek reciproka pedig 0,1063 és 0,1049 (m). Tehát ezek a fókusztávolságra kapott értékek. A hiteles érték 0,10 m.
+
+
+
+\section{Szórólencse képalkotása}
+
+
+A fényforrástól $t=20\unit{cm}$-re elhelyezünk egy szórólencsét. Ha belenézünk, kicsinyített egyenes képet látunk, a tárgytávolságnál közelebb. A szórólencse képe virtuális, ernyővel nem tudjuk felfogni. Viszont egy gyűjtőlencsével az így kapott virtuális képet tárgyként felhasználva valódi képet készíthetünk róla.
+
+Elhelyezzük tehát a gyűjtőlencsét a szórólencse mögé, és emögé egy ernyőt teszünk. Az ernyő és a gyűjtőlencse közötti távolság $k' = 0,380$ m, a  gyűjtőlencse és a szórólencse  közötti távolság $d = 0,300$ m, és így éles a kép.  
+
+
+Ha eltávolítjuk a szórólencsét, a kép újra homályossá válik. Ahhoz, hogy éles legyen, a fényforrást közelebb kell húznunk a gyűjtőlencséhez, $t' = 0,391$ m távolságra.  Ebből tehát tudjuk, hogy a szórólencse virtuális képe is ebben a pozícióban kellett, hogy legyen ahhoz, hogy éles képet alkosson róla a gyűjtőlencse. Eszerint a szórólencse virtuális képe $k = t'-d = 0,091$ m-re volt a szórólencsétől. Eszerint a szórólencse fókusztávolsága $f = 1/(1/t-1/k) = -0,167$ m (névlegesen -0,150 m). A szórólencse nagyítása $k/t=0,46$.
+
+
+\section{Elhajlás résen}
+
+Ha a fény résen halad keresztül, elhajlás (diffrakció) jön létre. Az ernyőn a fény foltokban jelenik meg:
+
+\vskip 14mm
+
+A minimumhelyekre az \[ a \sin \theta = n \lambda\] összefüggés teljesül, ahol $a$ a rés szélessége, $\theta$ a minimumhely szöge és $n$ pozitív egész szám, $\lambda$ a hullámhossz. Mivel a szögek kicsik, $\sin\theta$ közelíthető $\tan  \theta$-val, vagyis a minimumhely középponttól való távolságának és a rés-ernyő távolságnak hányadosával $(y/D)$.
+
+Különböző réseknél megmérjük a két első ($n=1$) minimumhely közti távolságot, ill.\ a két második minimumhely közöttit is. A rés-ernyő távolság $D=1108$ mm. 
+
+  
+  \begin{table}[H]
+    \begin{center}
+      \begin{tabular}{|
+c|
+c|
+c|
+}
+        \hline
+        
+rés (mm) & 
+\ensuremath{\unit[\text{\ensuremath{d_{min,1}}}]{(mm)}} & \ensuremath{\unit[\text{\ensuremath{d_{min,2}}}]{(mm)}}
+\\
+        \hline\hline
+        
+0.04
+ & 38
+ & 78
+\\
+        \hline
+        
+0.08
+ & 19
+ & 39
+\\
+        \hline
+        
+0.16
+ & 9
+ & 18
+\\
+        \hline
+      \end{tabular}
+      \caption{A mért adatok}
+      \label{tab:}
+    \end{center}
+  \end{table}
+
+Kiszámoljuk a távolságot a középponttól ($d_{min}$ fele), majd a hullámhossz (670 nm) ismeretében kiszámoljuk a rés méretét az \[a=(n\lambda D )/ y \] képlet alapján, és ezt összevetjük az eredetivel. Hibaszámítást is végzünk, a szorzás és osztás hibaterjedési képletei alapján.
+
+  
+  \begin{table}[H]
+    \begin{center}
+      \begin{tabular}{|
+c|
+c|
+c|
+c|
+c|
+c|
+c|
+}
+        \hline
+        
+$a$ (mm) & 
+\ensuremath{\unit[\text{\ensuremath{y_{1}}}]{(mm)}} & \ensuremath{\unit[\text{\ensuremath{a_{1}}}]{(mm)}} & \ensuremath{\delta{}a_{1}} & \ensuremath{\unit[\text{\ensuremath{y_{2}}}]{(mm)}} & \ensuremath{\unit[\text{\ensuremath{a_{2}}}]{(mm)}} & \ensuremath{\delta{}a_{2}}
+\\
+        \hline\hline
+        
+0.04
+ & 19,0
+ & 0,039
+ & 0,01
+ & 39,0
+ & 0,0381
+ & 0,008
+\\
+        \hline
+        
+0.08
+ & 9,5
+ & 0,078
+ & 0,03
+ & 19,5
+ & 0,076
+ & 0,01
+\\
+        \hline
+        
+0.16
+ & 4,5
+ & 0,16
+ & 0,06
+ & 9,0
+ & 0,165
+ & 0,03
+\\
+        \hline
+      \end{tabular}
+      \caption{Kiértékelés}
+      \label{tab:}
+    \end{center}
+  \end{table}
+
+
+Láthatjuk hogy a kapott értékek ($a_1,a_2$) többnyire a hibahatáron belül megközelítik az hitelesített értékeket ($a$).
+
+Láthatjuk továbbá, hogy ahogy növeljük a rést, az elhajlás mértéke, és ezzel a minimumok távolsága is, csökken.
 
 \end{document}
 

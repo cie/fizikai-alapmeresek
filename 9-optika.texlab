@@ -167,23 +167,33 @@
   } do
 
     macro(
-      tnagy: %q{t_{\text{nagy}}},
-      tkicsi: %q{t_{\text{kicsi}}},
-      xnagy: %q{x_{\text{nagy}}},
-      xkicsi: %q{x_{\text{kicsi}}},
-      gnagy: %q{g_{\text{nagy}}},
-      gkicsi: %q{g_{\text{kicsi}}},
-      Deltagnagy: %q{\Delta{}g_{\text{nagy}}},
-      Deltagkicsi: %q{\Delta{}g_{\text{kicsi}}},
-      geff: %q{g_\text{eff}},
+      t1: %q{t_1},
+      t2: %q{t_2},
+      k1: %q{k_1},
+      k2: %q{k_2},
+      t11: %q{\nicefrac{1}{t_1}},
+      t21: %q{\nicefrac{1}{t_2}},
+      k11: %q{\nicefrac{1}{k_1}},
+      k21: %q{\nicefrac{1}{k_2}},
+      tx1: %q{\nicefrac{1}{t}},
+      kx1: %q{\nicefrac{1}{k}},
+      dmin1: %q{d_{min,1}},
+      dmin2: %q{d_{min,2}},
+      y1: %q{y_{1}},
+      y2: %q{y_{2}},
+      a1: %q{a_{1}},
+      a2: %q{a_{2}},
+      deltaa1: %q{\delta{}a_{1}},
+      deltaa2: %q{\delta{}a_{2}},
     )
 
     unit(
-      [:h] => %q{m},
-      [:t, :tnagy, :tkicsi, :T] => %q{s},
-      [:x, :xnagy, :xkicsi] => %q{s^2},
-      [:g, :gnagy, :gkicsi, :Deltagkicsi, :Deltagnagy, :geff] => %q{\nicefrac{m}{s^2}},
       [:alpha, :beta] => %q{{}^\circ},
+      [:l, :t1,:t2,:k1,:k2] => %q{m},
+      [:tx1, :kx1, :l1, :t11,:t21,:k11,:k21] => %q{m^{-1}},
+      [:dmin1, :dmin2, :y1, :y2, :a1, :a2] => %q{mm},
+      [:deltaa1, :deltaa2] => nil,
+
     )
 
 
@@ -330,12 +340,12 @@ Ahogy a beesési szöget csökkentettük, a piros fény lépett ki legkorábban,
 Egy három tartályból álló átlátszó műanyag edényt, a tartályokat egyenként megtöltve vízzel, lencseként használunk.
 
 
-\vskip{5cm}
+\vskip 50mm
 
 Párhuzamos fénysugarakat engedünk át a lencsén, és az alábbiakat tapasztaljuk.
 
 <%
-  table do
+  table "A fénysugarak" do
     row "1" do
       column 1 do "levegő" end
       column 2 do "levegő" end
@@ -376,6 +386,165 @@ Amikor valamelyik tartályban víz van, a műanyag két oldalán nem egyenlő a 
 Az a) esetben a víz egy sima-homoró lencsét alkot, ez szórólencse. A b) esetben domború-domború lencsét, ez gyűjtőlencse. A c) esetben domború-sima lecsét, ez is gyűjtőlencse. A d) esetben két lencsét alkot, egy gyűjtő és egy szórólencsét. Viszont a szórólencse görbülete nagyobb, tehát erősebb, mint a gyűjtőlencse, ezért a két lencséből álló rendszer szétszórja a sugarakat, bár kevébé, mint a szórólencse egyedül az a) esetben.
 
 
-\section{}
+\section{Gyűjtőlencse fókusztávolsága}
+
+Egy fényforrás és egy ernyő közé gyűjtőlencsét helyezünk. Megkeressük azt a két pozícióját a lencsének, amiben az ernyőre vetülő kép éles. Amikor a fényforráshoz van közelebb a lencse, a kép fordított állású és nagyított. Amikor az ernyőhöz van közel a lencse, a kép fordított állású és kicsinyített.
+
+Különböző fényforrás-ernyő távolságokkal ($l$) is megmérjük a két lehetséges tárgy-és képtávolságot:
+
+<%
+  adat4 = {
+    100 => [12.2, 88],
+    90 => [22.4, 88],
+    80 => [32.5, 87.4],
+    70 => [43.1, 87.1],
+    60 => [53.7, 86.4],
+    50 => [64.8, 84.9]
+  }.mash{|l,vs|
+    l = l.cm
+    xt = 100.0.cm-l
+    x1 = vs[0].pm(0.05).cm
+    x2 = vs[1].pm(0.05).cm
+    xe = 100.0.cm
+    [l, {
+      t1: x1-xt,
+      k1: xe-x1,
+      t2: x2-xt,
+      k2: xe-x2,
+    }]
+  }
+
+
+  table "A mért adatok", rowTitle: :l.with_unit do
+    adat4.each do |l,vs|
+      row l do
+        vs.each do |k,v|
+          column k.with_unit do v end
+        end
+      end
+    end
+  end
+
+%>
+
+Kiszámítjuk a reciprok értékeket:
+
+<%
+  table "A mért adatok", rowTitle: :l.with_unit do
+    adat4.each do |l,vs|
+      row l do
+        vs.each do |k,v|
+          column :"#{k}1".with_unit do 1/v end
+        end
+      end
+    end
+  end
+
+%>
+
+És ábrázoljuk őket grafikonon:
+
+<%
+
+  a,b = fit "a*x+b", via: "a,b" do
+    dataset do
+      adat4.each do |l,vs|
+        data 1/vs[:t1], 1/vs[:k1]
+        data 1/vs[:t2], 1/vs[:k2]
+      end
+    end
+  end
+
+  plot xlabel: :tx1.with_unit, ylabel: :kx1.with_unit, width: "15cm", height: "15cm", xrange:"[0:10]", yrange:'[0:10]' do
+    dataset :title => "1." do
+      adat4.each do |l,vs|
+        data 1/vs[:t1], 1/vs[:k1]
+      end
+    end
+    dataset :title => "2." do
+      adat4.each do |l,vs|
+        data 1/vs[:t2], 1/vs[:k2]
+      end
+    end
+    dataset "#{a}*x+#{b}", :title => false
+  end
+
+%>
+
+Az illesztett egyenes tengelymetszetei <%=(c = -b/a).pm(0.005).to_latex%> (x tengely) és <%=b.to_latex%> (y tengely), átlaguk, ezek reciproka pedig <%= (f = 1/c).pm(0.00005).to_latex%> és <%= (g = 1/b).to_latex%> (m). Tehát ezek a fókusztávolságra kapott értékek. A hiteles érték 0,10 m.
+
+
+
+\section{Szórólencse képalkotása}
+
+<%
+  t=0.2
+%>
+
+A fényforrástól $t=20\unit{cm}$-re elhelyezünk egy szórólencsét. Ha belenézünk, kicsinyített egyenes képet látunk, a tárgytávolságnál közelebb. A szórólencse képe virtuális, ernyővel nem tudjuk felfogni. Viszont egy gyűjtőlencsével az így kapott virtuális képet tárgyként felhasználva valódi képet készíthetünk róla.
+
+Elhelyezzük tehát a gyűjtőlencsét a szórólencse mögé, és emögé egy ernyőt teszünk. Az ernyő és a gyűjtőlencse közötti távolság $k' = <%=(k1 = (98.0 - 60.0).pm(0.05).cm ).to_latex %>$ m, a  gyűjtőlencse és a szórólencse  közötti távolság $d = <%=(d = (60.0 - 30.0).pm(0.05).cm ).to_latex %>$ m, és így éles a kép.  
+
+
+Ha eltávolítjuk a szórólencsét, a kép újra homályossá válik. Ahhoz, hogy éles legyen, a fényforrást közelebb kell húznunk a gyűjtőlencséhez, $t' = <%=(t1 = (60.0 - 20.9).pm(0.05).cm ).to_latex %>$ m távolságra.  Ebből tehát tudjuk, hogy a szórólencse virtuális képe is ebben a pozícióban kellett, hogy legyen ahhoz, hogy éles képet alkosson róla a gyűjtőlencse. Eszerint a szórólencse virtuális képe $k = t'-d = <%=(k = (t1-d) ).to_latex %>$ m-re volt a szórólencsétől. Eszerint a szórólencse fókusztávolsága $f = 1/(1/t-1/k) = <%= (1/(1/t-1/k)).to_latex %>$ m (névlegesen -0,150 m). A szórólencse nagyítása $k/t=<%= (k/t).to_latex %>$.
+
+
+\section{Elhajlás résen}
+
+Ha a fény résen halad keresztül, elhajlás (diffrakció) jön létre. Az ernyőn a fény foltokban jelenik meg:
+
+\vskip 14mm
+
+A minimumhelyekre az \[ a \sin \theta = n \lambda\] összefüggés teljesül, ahol $a$ a rés szélessége, $\theta$ a minimumhely szöge és $n$ pozitív egész szám, $\lambda$ a hullámhossz. Mivel a szögek kicsik, $\sin\theta$ közelíthető $\tan  \theta$-val, vagyis a minimumhely középponttól való távolságának és a rés-ernyő távolságnak hányadosával $(y/D)$.
+
+Különböző réseknél megmérjük a két első ($n=1$) minimumhely közti távolságot, ill.\ a két második minimumhely közöttit is. A rés-ernyő távolság $D=<%=(D=1108.pm(0.5)).to_latex%>$ mm. 
+
+<%
+  adat6 = {
+    0.04 => [38,78],
+    0.08 => [19, 39],
+    0.16 => [9, 18],
+  }.mash{|k,vs|
+    [k, vs.map{|v|v.pm(0.5)}]
+  }
+
+  table "A mért adatok", rowTitle: "rés (mm)" do
+    adat6.each do |k,vs|
+      row k do
+        column :dmin1.with_unit do vs[0] end
+        column :dmin2.with_unit do vs[1] end
+      end
+    end
+  end
+%>
+
+Kiszámoljuk a távolságot a középponttól ($d_{min}$ fele), majd a hullámhossz (670 nm)<% lambda = 670.pm(0.5)*1e-6 %> ismeretében kiszámoljuk a rés méretét az \[a=(n\lambda D )/ y \] képlet alapján, és ezt összevetjük az eredetivel. Hibaszámítást is végzünk.
+
+<%
+  table "Kiértékelés" , rowTitle: "$a$ (mm)".latex! do
+    adat6.each do |k,vs|
+      row k do
+        y1=vs[0]/2
+        column :y1.with_unit do y1 end
+        a1 = 1*lambda*D/y1
+        column :a1.with_unit do a1 end
+        column :deltaa1.with_unit do (a1.delta/a1).mode!(:sig,1) end
+
+        y2=vs[1]/2
+        column :y2.with_unit do y2 end
+        a2 = 2*lambda*D/y2
+        column :a2.with_unit do a2 end
+        column :deltaa2.with_unit do (a2.delta/a2).mode!(:sig,1) end
+      end
+    end
+  end
+
+%>
+
+
+Láthatjuk hogy a kapott értékek ($a_1,a_2$) többnyire a hibahatáron belül megközelítik az hitelesített értékeket ($a$).
+
+Láthatjuk továbbá, hogy ahogy növeljük a rést, az elhajlás mértéke, és ezzel a minimumok távolsága is, csökken.
+
 <% end %>
 
